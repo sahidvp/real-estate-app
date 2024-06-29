@@ -67,7 +67,7 @@ class OnboardingPage extends StatelessWidget {
                           },
                           icon: const Icon(
                             Icons.arrow_back_outlined,
-                            color: Colors.black,
+                            color: Color.fromARGB(255, 82, 70, 70),
                           ),
                         )
                       else
