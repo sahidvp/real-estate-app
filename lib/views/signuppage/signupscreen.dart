@@ -65,6 +65,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:real_estate/commonwidgdets/backbutton.dart';
 import 'package:real_estate/commonwidgdets/formfields.dart';
 import 'package:real_estate/commonwidgdets/richtext.dart';
 
@@ -94,23 +95,7 @@ class SignupScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  decoration: BoxDecoration(
-                    color: AppColors.fieldcolor,
-                    shape: BoxShape.circle,
-                  ),
-                  child: IconButton(
-                    onPressed: () {
-                      Get.back();
-                    },
-                    icon: Icon(
-                      Icons.arrow_back_ios,
-                      color: Colors.black,
-                      size: MediaQueryUtil.backbuttonheight(context) * .40,
-                    ),
-                    splashRadius: 50,
-                  ),
-                ),
+                ArrowButton(),
                 SizedBox(height: sb * 2),
                 RichTexts(textspans: Logintext.signupText),
                 SizedBox(height: sb),

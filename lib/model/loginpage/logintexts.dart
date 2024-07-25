@@ -12,4 +12,6 @@ class Logintext {
     TextSpan(text: "Create your ", style: AppTextStyles.bodytext3),
     TextSpan(text: "account", style: AppTextStyles.bodyText4),
   ];
+
+ 
 }

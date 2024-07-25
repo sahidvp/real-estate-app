@@ -1,5 +1,3 @@
-
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -12,10 +10,12 @@ import 'package:real_estate/views/emailverifcation.dart';
 import 'package:real_estate/views/widgets/snackbar/errorsnckbar.dart';
 import 'package:real_estate/views/widgets/snackbar/successsnackbar.dart';
 
+import '../views/Loginpage/otpverify.dart';
+
 class AuthController extends GetxController {
   FirebaseAuth auth = FirebaseAuth.instance;
   FirebaseFirestore db = FirebaseFirestore.instance;
-  
+
   final TextEditingController fullNameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -27,7 +27,6 @@ class AuthController extends GetxController {
   TextEditingController phoneNumber = TextEditingController();
   TextEditingController otp = TextEditingController();
 
-  
   final RxBool isFullNameFocused = false.obs;
   final RxBool isEmailFocused = false.obs;
   final RxBool isPasswordFocused = false.obs;
@@ -73,7 +72,6 @@ class AuthController extends GetxController {
       return null;
     }
 
-    
     try {
       UserCredential userCredential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: userEmail, password: password);
@@ -224,7 +222,6 @@ class AuthController extends GetxController {
               chatWith: [],
             ));
           }
-          
 
           // Navigate to BottomNavBar
           Get.offAll(() => BottomNavbar());
@@ -237,9 +234,95 @@ class AuthController extends GetxController {
     }
   }
 
+  // sentOtp() async {
+  //   try {
+  //     //check if a user with the given phone number already exists
+      
+  //     QuerySnapshot snapshot = await db
+  //         .collection('users')
+  //         .where('phoneNumber', isEqualTo: '+91${phoneNumber.text}')
+  //         .get();
 
+  //     if (snapshot.docs.isNotEmpty) {
+  //       // If a user with the given phone number already exists, retrieve their name from the database
+  //       userWithNumExists = true;
+  //       // DocumentSnapshot userDoc = snapshot.docs.first;
+  //       // String userName = userDoc['name'];
 
- 
+  //       successSnackbar('Success', 'OTP sent to + 91 ${phoneNumber.text}');
+
+  //       await auth.verifyPhoneNumber(
+  //           phoneNumber: "+91${phoneNumber.text}",
+  //           verificationCompleted: (PhoneAuthCredential credential) async {
+  //             // Handle automatic verification
+  //           },
+  //           verificationFailed: (FirebaseAuthException e) {
+  //             // Handle verification failure
+  //             if (e.code == 'invalid-phone-number') {
+  //               errorSnackBar(
+  //                   'Error', 'The provided phone number is not valid.');
+  //             } else {
+  //               errorSnackBar('Error', 'An error occurred. ${e.toString()}');
+  //             }
+  //           },
+  //           codeSent: (String verificationId, [int? resendToken]) {
+  //             verifyId = verificationId;
+  //             // Handle code sent
+  //             successSnackbar(
+  //                 'Success', 'OTP sent to + 91 ${phoneNumber.text}');
+  //             Get.to(() => OtpVerificationPage());
+  //           },
+  //           codeAutoRetrievalTimeout: (String verificationId) {
+  //             // Handle auto-retrieval timeout
+  //           });
+  //     } else {
+  //       // If a user with the given phone number does not exist, proceed with sending the OTP and verifying it as before
+  //       userWithNumExists = false;
+  //       await auth.verifyPhoneNumber(
+  //           phoneNumber: "+91${phoneNumber.text}",
+  //           verificationCompleted: (PhoneAuthCredential credential) async {
+  //             User? user = auth.currentUser;
+  //             if (user == null) {
+  //               // Create a new user
+  //               UserCredential userCredential =
+  //                   await auth.signInWithCredential(credential);
+  //               User? newUser = userCredential.user;
+  //               if (newUser != null) {
+  //                 // Add the new user to the Firestore database
+  //                 await db.collection('users').doc(newUser.uid).set({
+  //                   'phoneNumber': newUser.phoneNumber,
+  //                   'name': fullNameController.text, // Add the user's name here
+  //                   'createdAt': Timestamp.now(),
+  //                   'id': auth.currentUser!.uid,
+  //                   'notificationToken': notificationToken,
+  //                 });
+  //               }
+  //             }
+  //           },
+  //           verificationFailed: (FirebaseAuthException e) {
+  //             // Handle verification failure
+  //             if (e.code == 'invalid-phone-number') {
+  //               errorSnackBar(
+  //                   'Error', 'The provided phone number is not valid.');
+  //             } else {
+  //               errorSnackBar('Error', 'An error occurred. ${e.toString()}');
+  //             }
+  //           },
+  //           codeSent: (String verificationId, [int? resendToken]) {
+  //             verifyId = verificationId;
+  //             // Handle code sent
+  //             successSnackbar(
+  //                 'Success', 'OTP sent to + 91 ${phoneNumber.text}');
+  //             Get.to(() => OtpVerificationPage());
+  //           },
+  //           codeAutoRetrievalTimeout: (String verificationId) {
+  //             // Handle auto-retrieval timeout
+  //           });
+  //     }
+  //   } catch (e) {
+  //     errorSnackBar('Error', e.toString());
+  //   }
+  // }
 
   sentOtp() async {
     try {
@@ -254,6 +337,7 @@ class AuthController extends GetxController {
         userWithNumExists = true;
         // DocumentSnapshot userDoc = snapshot.docs.first;
         // String userName = userDoc['name'];
+        
 
         successSnackbar('Success', 'OTP sent to + 91 ${phoneNumber.text}');
 
@@ -276,7 +360,7 @@ class AuthController extends GetxController {
               // Handle code sent
               successSnackbar(
                   'Success', 'OTP sent to + 91 ${phoneNumber.text}');
-              // Get.to(() => OtpVerificationPage());
+              Get.to(() => OtpVerificationPage());
             },
             codeAutoRetrievalTimeout: (String verificationId) {
               // Handle auto-retrieval timeout
@@ -319,7 +403,7 @@ class AuthController extends GetxController {
               // Handle code sent
               successSnackbar(
                   'Success', 'OTP sent to + 91 ${phoneNumber.text}');
-              // Get.to(() => OtpVerificationPage());
+              Get.to(() => OtpVerificationPage());
             },
             codeAutoRetrievalTimeout: (String verificationId) {
               // Handle auto-retrieval timeout
@@ -338,10 +422,10 @@ class AuthController extends GetxController {
       if (user.user != null) {
         successSnackbar("Success", "OTP verified");
         if (auth.currentUser!.displayName != null) {
-          // Get.offAll(() => BottomNavBar());
+           Get.offAll(() => BottomNavbar());
         } else {
           // Get.to(() => UserNameNumSignUp());
-          saveUserNameNum();
+         // saveUserNameNum();
         }
       } else {
         errorSnackBar("Error", "OTP not verified");

@@ -54,5 +54,10 @@ class AppTextStyles {
       TextStyle(fontSize: 12, color: AppColors.textPrimarytwo,
       fontWeight: FontWeight.w400);
 
+
+       static const TextStyle minitext2 =
+      TextStyle(fontSize: 15, color: AppColors.textPrimary,
+      fontWeight: FontWeight.w400);
+
   // Add more text styles as needed
 }

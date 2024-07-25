@@ -5,5 +5,5 @@ import 'package:real_estate/utils/colors.dart';
 
 successSnackbar(String title, String despription) {
   Get.snackbar(title, despription,
-      snackPosition: SnackPosition.BOTTOM, backgroundColor: AppColors.textPrimarytwo,colorText: Colors.black);
+      snackPosition: SnackPosition.BOTTOM, backgroundColor: Colors.white,colorText: Colors.green);
 }

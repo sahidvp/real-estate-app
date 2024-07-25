@@ -43,7 +43,11 @@ class Loginscreen extends StatelessWidget {
               controller: controller,
               buttonname: "Login",
               onPressed: () async {
-                await controller.signIn();
+              if (controller.formKey.currentState!.validate()){
+                  await controller.signIn();
+
+              }
+                
               },
             ),
             SizedBox(
@@ -85,9 +89,14 @@ class Loginscreen extends StatelessWidget {
               children: [
                 Iconcontainer(
                     imageicon: Imagepath.googleicon,
+                    isgoogle: true,
+                   
                    ),
                 Iconcontainer(
                   imageicon: Imagepath.mobilemage,
+                  isgoogle: false,
+
+                
                 
                 )
               ],
