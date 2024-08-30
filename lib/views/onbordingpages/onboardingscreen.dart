@@ -5,7 +5,7 @@ import 'package:real_estate/model/onbordingpage/images.dart';
 import 'package:real_estate/model/onbordingpage/pageview.dart';
 import 'package:real_estate/model/onbordingpage/text.dart';
 import 'package:real_estate/views/Loginpage/loginscreen.dart';
-import 'package:real_estate/views/bottomnavbar/bottom.dart';
+import 'package:real_estate/views/bottom_navbar/bottom_nav.dart';
 
 class OnboardingScreen extends GetView {
   final PageController _pageController = PageController();

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:real_estate/controller/logincontroller.dart';
 import 'package:real_estate/views/onbordingpages/onboardingscreen.dart';
 import 'package:real_estate/utils/colors.dart';
 import 'package:real_estate/utils/imagespath.dart';
@@ -9,8 +10,10 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Future.delayed(const Duration(seconds: 3), () {
-      Get.off(()=> OnboardingScreen());
+    final AuthController authController = Get.put(AuthController());
+    Future.delayed(const Duration(seconds: 3), () async {
+      Get.off(() => OnboardingScreen());
+      await authController.getUserData();
     });
     return Scaffold(
       body: Stack(
@@ -44,7 +47,7 @@ class SplashScreen extends StatelessWidget {
               width: 200,
               height: 200,
               child: Image.asset(
-               Imagepath.homelogo,
+                Imagepath.homelogo,
                 fit: BoxFit.cover,
               ),
             ),

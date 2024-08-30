@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:real_estate/controller/logincontroller.dart';
 import 'package:real_estate/utils/colors.dart';
 import 'package:real_estate/utils/media_query.dart';
-import 'package:real_estate/views/Loginpage/loginwithmobile.dart';
+import 'package:real_estate/views/Loginpage/loginwithmobile/loginwithmobile.dart';
 
 class Iconcontainer extends StatelessWidget {
   final String imageicon;

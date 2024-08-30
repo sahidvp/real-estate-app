@@ -16,7 +16,7 @@ class AppColors {
   static const Color textPrimarytwo = Color.fromARGB(255, 54, 45, 120);
 
   static const Color textSecondary = Colors.white;
-  static const Color fieldcolor =  Color(0xFFF5F4F8);
+  static final Color fieldcolor = Colors.grey.shade200;
 
   static const Color iconPrimary = Colors.black;
   static const Color iconSecondary = Color.fromARGB(255, 200, 197, 197);
@@ -32,32 +32,40 @@ class AppTextStyles {
     color: Colors.black,
   );
   static const TextStyle headline6 = TextStyle(
-      fontSize: 20,
+      fontSize: 17,
       fontWeight: FontWeight.bold,
       color: AppColors.textSecondary);
 
-
-  static const TextStyle bodyText2 =
-      TextStyle(fontSize: 15, color: AppColors.textPrimary,fontWeight: FontWeight.w500,decoration: TextDecoration.underline);
+  static const TextStyle bodyText2 = TextStyle(
+      fontSize: 15,
+      color: AppColors.textPrimary,
+      fontWeight: FontWeight.w500,
+      decoration: TextDecoration.underline);
 
   static const TextStyle bodytext3 = TextStyle(
       fontSize: 25,
       fontWeight: FontWeight.w500,
       color: AppColors.textPrimarytwo);
 
-      
-  static const TextStyle bodyText4 =
-      TextStyle(fontSize: 28, color: AppColors.textPrimary,
-      fontWeight: FontWeight.bold);
+  static const TextStyle bodyText4 = TextStyle(
+      fontSize: 28, color: AppColors.textPrimary, fontWeight: FontWeight.bold);
 
-      static const TextStyle minitext =
-      TextStyle(fontSize: 12, color: AppColors.textPrimarytwo,
+  static const TextStyle minitext = TextStyle(
+      fontSize: 12,
+      color: AppColors.textPrimarytwo,
       fontWeight: FontWeight.w400);
 
-
-       static const TextStyle minitext2 =
-      TextStyle(fontSize: 15, color: AppColors.textPrimary,
-      fontWeight: FontWeight.w400);
+  static const TextStyle minitext2 = TextStyle(
+      fontSize: 15, color: AppColors.textPrimary, fontWeight: FontWeight.w400);
+  static const TextStyle mainHeading = TextStyle(
+      fontWeight: FontWeight.w700, color: AppColors.textPrimary, fontSize: 20);
+  static const TextStyle subHeading = TextStyle(
+    fontWeight: FontWeight.w500,
+    color: AppColors.iconPrimary,
+    fontSize: 16,
+  );
+  static const TextStyle minitext3 =
+      TextStyle(fontSize: 15, color: Colors.black, fontWeight: FontWeight.w500);
 
   // Add more text styles as needed
 }

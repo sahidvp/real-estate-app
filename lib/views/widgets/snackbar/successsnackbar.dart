@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:real_estate/utils/colors.dart';
+
 
 
 successSnackbar(String title, String despription) {

@@ -1,22 +1,30 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:image_cropper/image_cropper.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:real_estate/model/authentication/usermodel.dart';
-import 'package:real_estate/views/bottomnavbar/bottom.dart';
+import 'package:real_estate/utils/colors.dart';
+import 'package:real_estate/views/Loginpage/loginwithmobile/save_username.dart';
+import 'package:real_estate/views/bottom_navbar/bottom_nav.dart';
 import 'package:real_estate/views/emailverifcation.dart';
 import 'package:real_estate/views/widgets/snackbar/errorsnckbar.dart';
 import 'package:real_estate/views/widgets/snackbar/successsnackbar.dart';
 
-import '../views/Loginpage/otpverify.dart';
+import '../views/Loginpage/loginwithmobile/otpverify.dart';
 
 class AuthController extends GetxController {
   FirebaseAuth auth = FirebaseAuth.instance;
   FirebaseFirestore db = FirebaseFirestore.instance;
 
   final TextEditingController fullNameController = TextEditingController();
+
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
@@ -32,10 +40,15 @@ class AuthController extends GetxController {
   final RxBool isPasswordFocused = false.obs;
   final RxBool isConfirmPasswordFocused = false.obs;
   final formKey = GlobalKey<FormState>();
+  final signupformKey = GlobalKey<FormState>();
+  final mobileformKey = GlobalKey<FormState>();
+  final usernameformKey = GlobalKey<FormState>();
   // RxBool to manage password visibility
   final RxBool isPasswordVisible = false.obs;
   final isTextTapped = false.obs;
-
+  //var image = Rx<File?>(null);
+  //var imgUrl = Rx<String?>(null);
+  File? image;
   String? imgUrl;
   String verifyId = "";
   bool userWithNumExists = false;
@@ -47,6 +60,35 @@ class AuthController extends GetxController {
   String userId = "";
   String? notificationToken;
   //create account with email and password
+
+  var otpDigits = List.generate(6, (index) => ''.obs);
+  var isSubmitting = false.obs;
+
+  // OTP Handling
+  void setOtpDigit(int index, String value) {
+    otpDigits[index].value = value;
+  }
+
+  String get completeOtp => otpDigits.map((e) => e.value).join();
+
+  // Future<void> verifyOtp() async {
+  //   isSubmitting.value = true;
+  //   await Future.delayed(Duration(seconds: 2)); // Simulate network call
+  //   isSubmitting.value = false;
+  //   if (completeOtp == "123456") { // Example check
+  //     Get.snackbar('Success', 'OTP Verified');
+  //   } else {
+  //     Get.snackbar('Error', 'Invalid OTP');
+  //   }
+  // }
+
+  // Future<void> resendOtp() async {
+  //   isSubmitting.value = true;
+  //   await Future.delayed(Duration(seconds: 2)); // Simulate network call
+  //   isSubmitting.value = false;
+  //   Get.snackbar('Success', 'OTP Resent');
+  // }
+
   Future<User?> signUp({
     required String userName,
     required String userEmail,
@@ -57,17 +99,17 @@ class AuthController extends GetxController {
     loading.value = true;
 
     if (userName.isEmpty || userEmail.isEmpty) {
-      errorSnackBar("Error", "Please enter your name and email");
+      errorSnackBar(message: "Please enter your name and email");
       loading.value = false;
       return null;
     }
     // Check if password and confirmPassword match
     if (password != confirmPassword) {
-      errorSnackBar("Error", "Passwords do not match.");
+      errorSnackBar(message: "Passwords do not match.");
       loading.value = false;
       return null;
     } else if (password.isEmpty) {
-      errorSnackBar("Error", "Please enter a password");
+      errorSnackBar(title: "", message: "Please enter a password");
       loading.value = false;
       return null;
     }
@@ -103,9 +145,10 @@ class AuthController extends GetxController {
     } on FirebaseAuthException catch (e) {
       loading.value = false;
       if (e.code == 'weak-password') {
-        errorSnackBar('Error', 'The password provided is too weak.');
+        errorSnackBar(message: 'The password provided is too weak.');
       } else if (e.code == 'email-already-in-use') {
-        errorSnackBar('Error', 'The account already exists for that email.');
+        errorSnackBar(
+            title: '', message: 'The account already exists for that email.');
       }
       return null;
     } catch (e) {
@@ -125,7 +168,7 @@ class AuthController extends GetxController {
       successSnackbar('Success', 'Password reset link sent to your email.');
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        errorSnackBar('Error', 'No user found for that email.');
+        errorSnackBar(message: 'No user found for that email.');
       }
     }
   }
@@ -158,12 +201,12 @@ class AuthController extends GetxController {
   //sign in
   signIn() async {
     if (logemailController.text.isEmpty) {
-      errorSnackBar("Error", "Please enter your email");
+      errorSnackBar(title: "Error", message: "Please enter your email");
       return null;
     }
     // Check if password and confirmPassword match
     if (logpasswordController.text.isEmpty) {
-      errorSnackBar("Error", "Please enter a password");
+      errorSnackBar(title: "Error", message: "Please enter a password");
       //  loading.value = true;
       return null;
     }
@@ -176,7 +219,7 @@ class AuthController extends GetxController {
       Get.offAll(() => BottomNavbar());
       loading.value = false;
     } catch (e) {
-      errorSnackBar("error", "$e");
+      errorSnackBar(message: "Incorrect user details");
       loading.value = false;
     }
   }
@@ -228,7 +271,7 @@ class AuthController extends GetxController {
         }
       }
     } catch (e) {
-      errorSnackBar("Error", "$e");
+      errorSnackBar(title: "Error", message: "$e");
       // print("---------------------------------");
       // print(e.toString());
     }
@@ -237,7 +280,7 @@ class AuthController extends GetxController {
   // sentOtp() async {
   //   try {
   //     //check if a user with the given phone number already exists
-      
+
   //     QuerySnapshot snapshot = await db
   //         .collection('users')
   //         .where('phoneNumber', isEqualTo: '+91${phoneNumber.text}')
@@ -337,7 +380,6 @@ class AuthController extends GetxController {
         userWithNumExists = true;
         // DocumentSnapshot userDoc = snapshot.docs.first;
         // String userName = userDoc['name'];
-        
 
         successSnackbar('Success', 'OTP sent to + 91 ${phoneNumber.text}');
 
@@ -350,9 +392,11 @@ class AuthController extends GetxController {
               // Handle verification failure
               if (e.code == 'invalid-phone-number') {
                 errorSnackBar(
-                    'Error', 'The provided phone number is not valid.');
+                    message: 'The provided phone number is not valid.');
               } else {
-                errorSnackBar('Error', 'An error occurred. ${e.toString()}');
+                errorSnackBar(
+                    title: 'Error',
+                    message: 'An error occurred. ${e.toString()}');
               }
             },
             codeSent: (String verificationId, [int? resendToken]) {
@@ -393,9 +437,9 @@ class AuthController extends GetxController {
               // Handle verification failure
               if (e.code == 'invalid-phone-number') {
                 errorSnackBar(
-                    'Error', 'The provided phone number is not valid.');
+                    message: 'The provided phone number is not valid.');
               } else {
-                errorSnackBar('Error', 'An error occurred. ${e.toString()}');
+                errorSnackBar(message: 'An error occurred. ${e.toString()}');
               }
             },
             codeSent: (String verificationId, [int? resendToken]) {
@@ -410,36 +454,40 @@ class AuthController extends GetxController {
             });
       }
     } catch (e) {
-      errorSnackBar('Error', e.toString());
+      errorSnackBar(title: 'Error', message: e.toString());
     }
   }
 
   verifyOtp() async {
     final cred = PhoneAuthProvider.credential(
-        verificationId: verifyId, smsCode: otp.text);
+        verificationId: verifyId, smsCode: completeOtp);
     try {
       final user = await auth.signInWithCredential(cred);
       if (user.user != null) {
         successSnackbar("Success", "OTP verified");
+        //
+        // Get.offAll(() => BottomNavbar());
+
         if (auth.currentUser!.displayName != null) {
-           Get.offAll(() => BottomNavbar());
+          //
+          Get.offAll(() => BottomNavbar());
         } else {
-          // Get.to(() => UserNameNumSignUp());
-         // saveUserNameNum();
+          Get.offAll(() => SaveUsername());
+          //saveUserNameNum();
         }
       } else {
-        errorSnackBar("Error", "OTP not verified");
+        errorSnackBar(message: "OTP not verified");
       }
     } on FirebaseAuthException catch (e) {
-      errorSnackBar("Error", e.toString());
+      errorSnackBar(title: "Error", message: e.toString());
     } catch (e) {
-      errorSnackBar("Error", e.toString());
+      errorSnackBar(title: "Error", message: e.toString());
     }
   }
 
   saveUserNameNum() async {
     if (fullNameController.text.isEmpty) {
-      errorSnackBar("Error", "Please enter a username");
+      errorSnackBar(title: "", message: "Please enter a username");
       return;
     }
     if (auth.currentUser!.displayName == null) {
@@ -452,26 +500,80 @@ class AuthController extends GetxController {
         chatWith: [],
       ));
       successSnackbar("Success", "username has been saved");
-      // Get.offAll(() => BottomNavBar());
+      Get.offAll(() => BottomNavbar());
     }
   }
 
-  // uploadImageToFirebase(File imageFile) async {
-  //   try {
-  //     final ref = FirebaseStorage.instance
-  //         .ref()
-  //         .child("images")
-  //         .child("${DateTime.now().millisecondsSinceEpoch}");
-  //     // isLoading.value = true;
-  //     final result = await ref.putFile(imageFile);
-  //     final fileUrl = await result.ref.getDownloadURL();
-  //     imgUrl = fileUrl;
-  //     print(imgUrl);
-  //     successSnackbar("Success", 'Image successfully saved');
-  //   } catch (e) {
-  //     errorSnackBar("error", 'Error in uploading image $e');
-  //   }
-  // }
+  Future<void> selectAndUploadImage() async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      // final croppedFile = await cropImage(File(pickedFile.path)) as File;
+
+      image = File(pickedFile.path);
+
+      await uploadImageToFirebase(image!);
+    } else {
+      errorSnackBar(message: "Image not selected");
+    }
+  }
+
+  Future<void> takePictureAndUpload() async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: ImageSource.camera);
+
+    if (pickedFile != null) {
+      print("Picture taken");
+
+      image = File(pickedFile.path);
+
+      await uploadImageToFirebase(image!);
+    } else {
+      print("No picture taken");
+      errorSnackBar(message: "Picture not taken");
+    }
+  }
+
+  Future<File?> cropImage(File imageFile) async {
+    final croppedFile = await ImageCropper().cropImage(
+      sourcePath: imageFile.path,
+      uiSettings: [
+        AndroidUiSettings(
+          toolbarTitle: "Crop Image",
+          toolbarColor: Colors.white,
+          toolbarWidgetColor: Colors.black,
+          initAspectRatio: CropAspectRatioPreset.original,
+          lockAspectRatio: false,
+        ),
+      ],
+    );
+
+    if (croppedFile != null) {
+      return File(croppedFile.path);
+    } else {
+      return null;
+    }
+  }
+
+  uploadImageToFirebase(File imageFile) async {
+    try {
+      final ref = FirebaseStorage.instance
+          .ref()
+          .child("images")
+          .child("${DateTime.now().millisecondsSinceEpoch}");
+      // isLoading.value = true;
+
+      final result = await ref.putFile(imageFile);
+
+      final fileUrl = await result.ref.getDownloadURL();
+      imgUrl = fileUrl;
+      update();
+      print("Uploaded image URL: $imgUrl");
+      successSnackbar("Success", 'Image successfully saved');
+    } catch (e) {
+      errorSnackBar(message: 'Error in uploading image $e');
+    }
+  }
 
   editUserDetails() async {
     await auth.currentUser!.updateDisplayName(fullNameController.text);
@@ -493,12 +595,14 @@ class AuthController extends GetxController {
           'imageUrl': imgUrl,
         });
         update();
+        Get.back();
+
         successSnackbar("Success", 'User updated successfully');
       } else {
-        errorSnackBar('Error', 'No user found with the provided ID');
+        errorSnackBar(message: 'No user found with the provided ID');
       }
     } catch (e) {
-      errorSnackBar('Error', 'Error updating user: $e');
+      errorSnackBar(title: 'Error', message: 'Error updating user: $e');
     }
   }
 
@@ -514,18 +618,20 @@ class AuthController extends GetxController {
         Map<String, dynamic> data = userDoc.data() as Map<String, dynamic>;
         fullNameController.text = data['userName'];
         imgUrl = data['imageUrl'];
+        update();
       } else {
-        errorSnackBar("Error", "No user found with the provided ID.");
+        errorSnackBar(message: "No user found with the provided ID.");
       }
     } catch (e) {
-      errorSnackBar('Error', e.toString());
+      errorSnackBar(title: 'Error', message: e.toString());
     }
     loading.value = false;
   }
 
   getUserDetailsByUId(String uid) async {
     if (uid == "") {
-      errorSnackBar("Error", "Something went wrong. Please try again");
+      errorSnackBar(
+          title: "Error", message: "Something went wrong. Please try again");
       Get.back();
       return;
     }
@@ -543,18 +649,18 @@ class AuthController extends GetxController {
         ];
       }
     } catch (e) {
-      errorSnackBar('Error', e.toString());
+      errorSnackBar(title: 'Error', message: e.toString());
     }
   }
 
-  @override
-  void onClose() {
-    fullNameController.dispose();
-    emailController.dispose();
-    passwordController.dispose();
-    confirmPasswordController.dispose();
-    super.onClose();
-  }
+  // @override
+  // void onClose() {
+  //   fullNameController.dispose();
+  //   emailController.dispose();
+  //   passwordController.dispose();
+  //   confirmPasswordController.dispose();
+  //   super.onClose();
+  // }
 
   // Signup logic
 

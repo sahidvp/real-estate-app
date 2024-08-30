@@ -69,7 +69,6 @@ import 'package:real_estate/commonwidgdets/backbutton.dart';
 import 'package:real_estate/commonwidgdets/formfields.dart';
 import 'package:real_estate/commonwidgdets/richtext.dart';
 
-
 import 'package:real_estate/controller/logincontroller.dart';
 import 'package:real_estate/model/loginpage/logintexts.dart';
 import 'package:real_estate/utils/colors.dart';
@@ -92,72 +91,110 @@ class SignupScreen extends StatelessWidget {
         body: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.all(padsize),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ArrowButton(),
-                SizedBox(height: sb * 2),
-                RichTexts(textspans: Logintext.signupText),
-                SizedBox(height: sb),
-                Text(
-                  "Enter your details to sign up",
-                  style: AppTextStyles.minitext,
-                ),
-                SizedBox(height: sb * 1.5),
-                CustomFormField(
-                  controller: controller.fullNameController,
-                  labelText: "Full name",
-                  labelIcon: Icon(Iconsdata.user),
-                ),
-                SizedBox(height: sb),
-                CustomFormField(
-                  controller: controller.emailController,
-                  labelText: "Email",
-                  labelIcon: Icon(Iconsdata.email),
-                ),
-                SizedBox(height: sb),
-                CustomFormField(
-                  controller: controller.passwordController,
-                  labelText: "Password",
-                  labelIcon: Icon(Iconsdata.password),
-                  isPassword: true,
-                ),
-                SizedBox(height: sb),
-                CustomFormField(
-                  controller: controller.confirmPasswordController,
-                  labelText: "Confirm password",
-                  labelIcon: Icon(Iconsdata.password),
-                  isPassword: true,
-                ),
-                SizedBox(height: sb * 2),
-                SubmitButton(
-                  controller: controller,
-                  buttonname: "Register",
-                  onPressed: () async {
-                   
-                    await controller.signUp(
-                      userName: controller.fullNameController.text,
-                      userEmail: controller.emailController.text,
-                      password: controller.passwordController.text,
-                      confirmPassword:
-                          controller.confirmPasswordController.text,
-                      context: context,
-                    );
-
-
-                    // if (!isAgreedTermsAndConditions!) {
-                    //   Get.snackbar(
-                    //       "Error", "Please agree to the terms and conditions",
-                    //       colorText: AppThemeData.red,
-                    //       snackPosition: SnackPosition.BOTTOM);
-                    //   return;
-                    // }
-                    // if (auth.currentUser != null) {
-                    //   Get.to(() => const EmailVerificationPage());
-                    // }
-                  },
-                )
-              ],
+            child: Form(
+              key: controller.signupformKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ArrowButton(),
+                  SizedBox(height: sb * 2),
+                  RichTexts(textspans: Logintext.signupText),
+                  SizedBox(height: sb),
+                  Text(
+                    "Enter your details to sign up",
+                    style: AppTextStyles.minitext,
+                  ),
+                  SizedBox(height: sb * 1.5),
+                  CustomFormField(
+                    controller: controller.fullNameController,
+                    labelText: "Full name",
+                    labelIcon: Icon(Iconsdata.user),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "Please enter your name";
+                      }
+                      final RegExp nameRegExp = RegExp(r'^[a-zA-Z]+$');
+                      if (!nameRegExp.hasMatch(value)) {
+                        return "Name should contain only alphabets";
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(height: sb),
+                  CustomFormField(
+                    controller: controller.emailController,
+                    labelText: "Email",
+                    labelIcon: Icon(Iconsdata.email),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your email';
+                      } else if (!GetUtils.isEmail(value)) {
+                        return 'Please enter a valid email';
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(height: sb),
+                  CustomFormField(
+                    controller: controller.passwordController,
+                    labelText: "Password",
+                    labelIcon: Icon(Iconsdata.password),
+                    isPassword: true,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your password';
+                      }
+                      if (value.length < 6) {
+                        return 'Password must be at least 6 characters long';
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(height: sb),
+                  CustomFormField(
+                    controller: controller.confirmPasswordController,
+                    labelText: "Confirm password",
+                    labelIcon: Icon(Iconsdata.password),
+                    isPassword: true,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please confirm your password';
+                      }
+                      if (value != controller.passwordController.text) {
+                        return 'Passwords does not match';
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(height: sb * 2),
+                  SubmitButton(
+                    controller: controller,
+                    buttonname: "Register",
+                    onPressed: () async {
+                      if (controller.signupformKey.currentState!.validate()) {
+                        await controller.signUp(
+                          userName: controller.fullNameController.text,
+                          userEmail: controller.emailController.text,
+                          password: controller.passwordController.text,
+                          confirmPassword:
+                              controller.confirmPasswordController.text,
+                          context: context,
+                        );
+                      }
+                      // if (!isAgreedTermsAndConditions!) {
+                      //   Get.snackbar(
+                      //       "Error", "Please agree to the terms and conditions",
+                      //       colorText: AppThemeData.red,
+                      //       snackPosition: SnackPosition.BOTTOM);
+                      //   return;
+                      // }
+                      // if (auth.currentUser != null) {
+                      //   Get.to(() => const EmailVerificationPage());
+                      // }
+                    },
+                  )
+                ],
+              ),
             ),
           ),
         ),

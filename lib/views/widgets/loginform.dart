@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/src/get_utils/get_utils.dart';
+
 import 'package:real_estate/commonwidgdets/formfields.dart';
 import 'package:real_estate/controller/logincontroller.dart';
 import 'package:real_estate/model/loginpage/logintexts.dart';
@@ -7,14 +9,11 @@ import 'package:real_estate/utils/icons.dart';
 import 'package:real_estate/commonwidgdets/richtext.dart';
 import 'package:real_estate/utils/media_query.dart';
 
-Container loginform(AuthController controller,context) {
-  
-  final sb=MediaQueryUtil.screenWidth(context)*.05;
-   // final screenHeight = MediaQuery.of(context).size.height;
+Container loginform(AuthController controller, context) {
+  final sb = MediaQueryUtil.screenWidth(context) * .05;
+  // final screenHeight = MediaQuery.of(context).size.height;
   return Container(
-    
-      
-    padding:  EdgeInsets.symmetric(horizontal: sb+10),
+    padding: EdgeInsets.symmetric(horizontal: sb + 10),
     child: Form(
       key: controller.formKey,
       child: Column(
@@ -26,14 +25,25 @@ Container loginform(AuthController controller,context) {
             "Enter your credentials to login",
             style: AppTextStyles.minitext,
           ),
-           SizedBox(
+          SizedBox(
             height: sb,
           ),
           CustomFormField(
-              controller: controller.logemailController,
-              labelText: "Email",
-              labelIcon: Icon(Iconsdata.email)),
-           SizedBox(
+            controller: controller.logemailController,
+            labelText: "Email",
+            labelIcon: Icon(
+              Iconsdata.email,
+            ),
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter your email';
+              } else if (!GetUtils.isEmail(value)) {
+                return 'Please enter a valid email';
+              }
+              return null;
+            },
+          ),
+          SizedBox(
             height: sb,
           ),
           CustomFormField(
@@ -41,6 +51,15 @@ Container loginform(AuthController controller,context) {
             labelText: "Password",
             labelIcon: Icon(Iconsdata.password),
             isPassword: true,
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter your password';
+              }
+              if (value.length < 6) {
+                return 'Password must be at least 6 characters long';
+              }
+              return null;
+            },
           ),
           const SizedBox(height: 5),
           TextButton(
@@ -50,7 +69,6 @@ Container loginform(AuthController controller,context) {
               style: AppTextStyles.minitext,
             ),
           ),
-        
         ],
       ),
     ),

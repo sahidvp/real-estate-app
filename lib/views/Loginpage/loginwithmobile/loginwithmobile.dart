@@ -7,7 +7,7 @@ import 'package:real_estate/controller/logincontroller.dart';
 import 'package:real_estate/utils/colors.dart';
 
 import 'package:real_estate/utils/media_query.dart';
-import 'package:real_estate/views/Loginpage/widgets/phonenumberfield.dart';
+import 'package:real_estate/views/Loginpage/loginwithmobile/widgets/phonenumberfield.dart';
 import 'package:real_estate/views/widgets/submitbutton.dart';
 
 class OtpScreen extends StatelessWidget {
@@ -57,7 +57,10 @@ class OtpScreen extends StatelessWidget {
                     controller: _authController,
                     buttonname: "Send otp",
                     onPressed: () {
-                      _authController.sentOtp();
+                      if (_authController.mobileformKey.currentState!
+                          .validate()) {
+                        _authController.sentOtp();
+                      }
                     })
               ],
             ),

@@ -107,6 +107,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:real_estate/controller/firbase/firebase_constant.dart';
 import 'package:real_estate/controller/logincontroller.dart';
 
 class PhonenNumberfield extends StatelessWidget {
@@ -119,8 +120,10 @@ class PhonenNumberfield extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Form(
+      key: _authController.mobileformKey,
       child: TextFormField(
         controller: _authController.phoneNumber,
+        maxLength: 10,
         keyboardType: TextInputType.phone,
         decoration: InputDecoration(
           hintText: "Phone number",
@@ -140,9 +143,9 @@ class PhonenNumberfield extends StatelessWidget {
         validator: (value) {
           if (value!.isEmpty) {
             // Get.snackbar("Error", "number field is empty");
-            return "empty field";
+            return "Mobile number is required";
           } else if (value.length != 10) {
-            Get.snackbar("Error", "Invalid phone number");
+            return "Mobile number should be 10 digits long";
           }
           return null;
         },
