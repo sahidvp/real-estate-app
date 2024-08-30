@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:iconsax_plus/iconsax_plus.dart';
-import 'package:real_estate/commonwidgdets/formfields.dart';
 import 'package:real_estate/controller/addproperty_controller.dart';
 import 'package:real_estate/model/propertlisting/property_model.dart';
 import 'package:real_estate/utils/colors.dart';
 import 'package:real_estate/utils/media_query.dart';
+import 'package:real_estate/views/listing_property/add_propertysecond.dart';
+import 'package:real_estate/views/listing_property/widgets/build_button.dart';
 import 'package:real_estate/views/listing_property/widgets/build_status.dart';
 import 'package:real_estate/views/listing_property/widgets/build_textfield.dart';
 import 'package:real_estate/views/listing_property/widgets/build_typeofproperty.dart';
 import 'package:real_estate/views/listing_property/widgets/toggle_button.dart';
-
 import 'widgets/build_features.dart';
 
 class AddPropertyscreen extends StatelessWidget {
@@ -41,15 +40,21 @@ class AddPropertyscreen extends StatelessWidget {
                   children: [
                     Expanded(
                       child: ToggleButton(
-                          text: "Sale",
-                          index: 0,
-                          selectedIndex: propertyCntr.selectedIndex1),
+                        text: "Sale",
+                        index: 0,
+                        selectedIndex: propertyCntr.selectedIndex1,
+                        singleselection: true,
+                        cntrl: propertyCntr,
+                      ),
                     ),
                     Expanded(
                       child: ToggleButton(
-                          text: "Rent",
-                          index: 1,
-                          selectedIndex: propertyCntr.selectedIndex1),
+                        text: "Rent",
+                        index: 1,
+                        selectedIndex: propertyCntr.selectedIndex1,
+                        singleselection: true,
+                        cntrl: propertyCntr,
+                      ),
                     )
                   ],
                 ),
@@ -61,7 +66,7 @@ class AddPropertyscreen extends StatelessWidget {
               SizedBox(
                 height: sb * .1,
               ),
-              buildType(PropertyModel.type, sb, propertyCntr),
+              buildType(PropertyModel.type, sb, propertyCntr, true),
               SizedBox(height: sb * .8),
               const Text("Property Features", style: AppTextStyles.subHeading),
               SizedBox(height: sb * .1),
@@ -104,15 +109,36 @@ class AddPropertyscreen extends StatelessWidget {
               Text("Super Builtup area (ft²) ",
                   style: AppTextStyles.subHeading),
               SizedBox(height: sb * .1),
-              buildTextfield(propertyCntr, propertyCntr.builtupArea, true, 0),
+              buildTextfield(
+                  propertyCntr, propertyCntr.builtupArea, true, 0, ""),
               SizedBox(height: sb),
               Text("Project name", style: AppTextStyles.subHeading),
               SizedBox(height: sb * .1),
-              buildTextfield(propertyCntr, propertyCntr.projectName, false, 7),
+              buildTextfield(
+                  propertyCntr, propertyCntr.projectName, false, 7, ""),
               SizedBox(height: sb * .5),
               Text("Ad tittle", style: AppTextStyles.subHeading),
               SizedBox(height: sb * .1),
-              buildTextfield(propertyCntr, propertyCntr.adTittle, false, 7),
+              buildTextfield(propertyCntr, propertyCntr.adTittle, false, 7,
+                  "Mention the key features"),
+              SizedBox(height: sb * .5),
+              Text("Description", style: AppTextStyles.subHeading),
+              SizedBox(height: sb * .1),
+              buildTextfield(propertyCntr, propertyCntr.description, false, 40,
+                  "Include condition, features and reason for selling"),
+              SizedBox(height: sb * .5),
+              Text("SET A PRICE", style: AppTextStyles.subHeading),
+              SizedBox(height: sb * .1),
+              buildTextfield(propertyCntr, propertyCntr.price, true, 0, ""),
+              SizedBox(height: sb * .5),
+              Divider(),
+              SizedBox(height: sb * .5),
+              SubmitButtontwo(
+                  controller: propertyCntr,
+                  buttonname: "Next",
+                  onPressed: () {
+                    Get.to(() => const AddPropertysecond());
+                  })
             ],
           ),
         ),

@@ -14,4 +14,11 @@ class PropertyModel {
     "Ready to Move",
     "Under Construction",
   ];
+  static List<String> enviornment = [
+    "Garden",
+    "Gym",
+    "Park",
+    "Home theater",
+    "Swiming pool"
+  ];
 }

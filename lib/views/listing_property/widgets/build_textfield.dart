@@ -1,15 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:real_estate/controller/addproperty_controller.dart';
 import 'package:real_estate/utils/colors.dart';
 
-TextFormField buildTextfield(AddpropertyController propertyCntr,
-    TextEditingController builtupArea, bool keybordnum, int index) {
+TextFormField buildTextfield(
+    AddpropertyController propertyCntr,
+    TextEditingController textcontroller,
+    bool keybordnum,
+    int index,
+    String texthint) {
   return TextFormField(
+    maxLines: textcontroller == propertyCntr.description ? 6 : null,
     maxLength: keybordnum == false ? 10 * index : null,
     keyboardType:
         keybordnum == true ? TextInputType.number : TextInputType.name,
-    controller: builtupArea,
+    controller: textcontroller,
     decoration: InputDecoration(
+        //prefixIcon: textcontroller == propertyCntr.price ? Icon(IconsaxPlusBold.amou) : null,
+        hintText: texthint,
+        hintStyle: TextStyle(color: Colors.grey[500], fontSize: 12),
         fillColor: AppColors.fieldcolor,
         // Background color
         filled: true,

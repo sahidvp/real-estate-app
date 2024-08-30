@@ -103,7 +103,7 @@ import 'package:real_estate/utils/colors.dart';
 import 'package:real_estate/utils/icons.dart';
 import 'package:real_estate/views/home_page/home_page.dart';
 import 'package:real_estate/views/chat_screen/chat_screen.dart';
-import 'package:real_estate/views/listing_property/addpropertyscreen.dart';
+import 'package:real_estate/views/listing_property/addproperty_screen.dart';
 import 'package:real_estate/views/userprofile/userprofile_screen.dart';
 
 class BottomNavbar extends StatelessWidget {

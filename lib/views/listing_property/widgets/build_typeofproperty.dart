@@ -3,7 +3,7 @@ import 'package:real_estate/controller/addproperty_controller.dart';
 import 'package:real_estate/views/listing_property/widgets/toggle_button.dart';
 
 Container buildType(
-    List<String> list, double sb, AddpropertyController propertyCntr) {
+    List<String> list, double sb, AddpropertyController propertyCntr,bool singleselection) {
   return Container(
     // padding: EdgeInsets.symmetric(horizontal: sb * .5),
     child: Wrap(
@@ -16,6 +16,9 @@ Container buildType(
             text: list[index],
             index: index,
             selectedIndex: propertyCntr.selectedIndex2,
+            singleselection: singleselection,
+            cntrl: propertyCntr,
+            
           ),
         );
       }),
