@@ -77,6 +77,7 @@ Obx buildStatus(
         border: Border.all(color: Colors.black.withAlpha(150)),
       ),
       child: DropdownButton<String>(
+        
         underline: const SizedBox.shrink(),
         icon: SizedBox.shrink(),
         value: selectedValue.value,

@@ -5,6 +5,7 @@ import 'package:real_estate/model/propertlisting/property_model.dart';
 import 'package:real_estate/utils/colors.dart';
 import 'package:real_estate/utils/media_query.dart';
 import 'package:real_estate/views/listing_property/add_propertysecond.dart';
+import 'package:real_estate/views/listing_property/widgets/build_adimage.dart';
 import 'package:real_estate/views/listing_property/widgets/build_button.dart';
 import 'package:real_estate/views/listing_property/widgets/build_status.dart';
 import 'package:real_estate/views/listing_property/widgets/build_textfield.dart';
@@ -75,14 +76,10 @@ class AddPropertyscreen extends StatelessWidget {
                 height: sb * .5,
               ),
               buildCounter(sb, "Bathroom", propertyCntr.bathroomCount),
-              SizedBox(
-                height: sb * .5,
-              ),
-              buildCounter(sb, "Balcony", propertyCntr.balconyCount),
-              SizedBox(
-                height: sb * .5,
-              ),
+              SizedBox(height: sb * .5),
               buildCounter(sb, "Car Parking", propertyCntr.carparkingCount),
+              SizedBox(height: sb * .5),
+              buildCounter(sb, "No of floors ", propertyCntr.floorCount),
               SizedBox(
                 height: sb,
               ),
@@ -103,6 +100,9 @@ class AddPropertyscreen extends StatelessWidget {
                   "Select one",
                   propertyCntr.selectedConstructionStatus,
                   propertyCntr.selectConstructionStatus),
+              SizedBox(height: sb * .5),
+              buildStatus(sb, propertyCntr, PropertyModel.listedby, "",
+                  propertyCntr.selectedlistedby, propertyCntr.selectlistby),
               SizedBox(
                 height: sb,
               ),
@@ -132,12 +132,22 @@ class AddPropertyscreen extends StatelessWidget {
               buildTextfield(propertyCntr, propertyCntr.price, true, 0, ""),
               SizedBox(height: sb * .5),
               Divider(),
-              SizedBox(height: sb * .5),
+              SizedBox(
+                height: sb * .5,
+              ),
+              Text(
+                "Enviornment / Facilities",
+                style: AppTextStyles.subHeading,
+              ),
+              SizedBox(height: sb * .1),
+              buildType(PropertyModel.enviornment, sb, propertyCntr, false),
+              AddLocation(),
+              AddImage(),
               SubmitButtontwo(
                   controller: propertyCntr,
                   buttonname: "Next",
                   onPressed: () {
-                    Get.to(() => const AddPropertysecond());
+                    propertyCntr.location.clear();
                   })
             ],
           ),

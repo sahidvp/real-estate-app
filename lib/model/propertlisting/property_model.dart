@@ -21,4 +21,5 @@ class PropertyModel {
     "Home theater",
     "Swiming pool"
   ];
+  static List<String> listedby = ["Dealer", "Owner"];
 }

@@ -5,4 +5,6 @@ class Imagepath {
   static const String googleicon = "asset/icons/googlelogo.svg";
   static const String splashimage = "asset/images/mainapplogo.svg";
   static const String mobilemage = "asset/icons/mobileicon.svg";
+  static const String houseandothers = "asset/icons/houseandothers.svg";
+  static const String land = "asset/icons/land.svg";
 }
