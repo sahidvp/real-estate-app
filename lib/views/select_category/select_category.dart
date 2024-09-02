@@ -18,18 +18,31 @@ class SelectCategory extends StatelessWidget {
         elevation: 0,
         title: const Text('Select category', style: AppTextStyles.mainHeading),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            buildCateory(Imagepath.houseandothers, "House", sb),
-            SizedBox(
-              height: sb * .5,
+      body: Stack(children: [
+        Positioned.fill(
+          child: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Colors.white, AppColors.iconSecondary],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+              ),
             ),
-            buildCateory(Imagepath.land, "Land", sb)
-          ],
+          ),
         ),
-      ),
+        Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              buildCateory(Imagepath.houseandothers, "House", sb),
+              SizedBox(
+                height: sb * .5,
+              ),
+              buildCateory(Imagepath.land, "Land", sb)
+            ],
+          ),
+        ),
+      ]),
     );
   }
 
@@ -37,23 +50,32 @@ class SelectCategory extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         if (svgicon == Imagepath.houseandothers) {
-          Get.to(() => const AddPropertyscreen());
+          Get.to(() => const AddPropertyscreen(
+                isLand: false,
+              ));
         } else {
+          Get.to(() => AddPropertyscreen(isLand: true));
           // Handle other categories or do nothing
         }
       },
       child: Container(
         width: sb * 5,
-        height: sb * 2,
+        height: sb * 1.5,
         decoration: BoxDecoration(
             border: Border.all(color: AppColors.primary),
-            borderRadius: BorderRadius.circular(15)),
+            borderRadius: BorderRadius.circular(10)),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SvgPicture.asset(
-              svgicon,
+            SizedBox(
               height: sb,
+              width: sb,
+              child: SvgPicture.asset(
+                svgicon,
+              ),
+            ),
+            SizedBox(
+              width: sb * .5,
             ),
             Text(
               textdata,

@@ -27,7 +27,7 @@ class AppColors {
 
 class AppTextStyles {
   static const TextStyle headline1 = TextStyle(
-    fontSize: 32,
+    fontSize: 30,
     fontWeight: FontWeight.w400,
     color: Colors.black,
   );
@@ -58,7 +58,7 @@ class AppTextStyles {
   static const TextStyle minitext2 = TextStyle(
       fontSize: 15, color: AppColors.textPrimary, fontWeight: FontWeight.w400);
   static const TextStyle mainHeading = TextStyle(
-      fontWeight: FontWeight.w700, color: AppColors.textPrimary, fontSize: 20);
+      fontWeight: FontWeight.w500, color: AppColors.textPrimary, fontSize: 20);
   static const TextStyle subHeading = TextStyle(
     fontWeight: FontWeight.w500,
     color: AppColors.iconPrimary,

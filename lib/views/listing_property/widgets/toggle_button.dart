@@ -27,6 +27,13 @@ class ToggleButton extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           singleselection ? singletoggle() : cntrl.toggleSelection(index);
+          if (singleselection) {
+            if (text == "Sale" || text == "Rent") {
+              cntrl.type = text;
+            } else {
+              cntrl.category = text;
+            }
+          }
         },
         child: Obx(
           () => Container(
@@ -90,6 +97,7 @@ class ToggleButton extends StatelessWidget {
   singletoggle() {
     if (selectedIndex.value == index) {
       selectedIndex.value = 100;
+
       return;
     }
     selectedIndex.value = index;

@@ -5,45 +5,6 @@ import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:real_estate/controller/addproperty_controller.dart';
 import 'package:real_estate/utils/colors.dart';
 
-// Obx buildStatus(double sb, AddpropertyController propertyCntr,List<String> status,String menuhint) {
-//     return Obx(() => Container(
-//                   width: double.infinity,
-//                   decoration: BoxDecoration(
-//                       color: AppColors.fieldcolor,
-//                       borderRadius: BorderRadius.circular(15),
-//                       border: Border.all(color: Colors.black.withAlpha(150))),
-//                   child: DropdownButton<String>(
-//                     underline: const SizedBox.shrink(),
-//                     icon: Padding(
-//                         padding: EdgeInsets.only(left: sb * 2.5),
-//                         child: Icon(IconsaxPlusLinear.arrow_down)),
-//                     value: propertyCntr.selectedPropertyType.value.isEmpty
-//                         ? null
-//                         : propertyCntr.selectedPropertyType.value,
-//                     hint:  Text(
-//                       menuhint,
-//                       style: AppTextStyles.minitext3,
-//                     ),
-//                     onChanged: (String? newValue) {
-//                       if (newValue != null) {
-//                         propertyCntr.selectPropertyType(newValue);
-//                       }
-//                     },
-//                     items:
-//                         status.map<DropdownMenuItem<String>>((String value) {
-//                       return DropdownMenuItem<String>(
-//                         value: value,
-//                         child: Padding(
-//                             padding: EdgeInsets.only(left: 20.0),
-//                             child: Container(
-//                                 decoration: BoxDecoration(
-//                                     borderRadius: BorderRadius.circular(15)),
-//                                 child: Text(value))),
-//                       );
-//                     }).toList(),
-//                   ),
-//                 ));
-//   }
 Obx buildStatus(
     double sb,
     AddpropertyController propertyCntr,
@@ -77,7 +38,6 @@ Obx buildStatus(
         border: Border.all(color: Colors.black.withAlpha(150)),
       ),
       child: DropdownButton<String>(
-        
         underline: const SizedBox.shrink(),
         icon: SizedBox.shrink(),
         value: selectedValue.value,
@@ -86,6 +46,8 @@ Obx buildStatus(
           color: Colors.black,
         ),
         onChanged: (String? newValue) {
+          
+          
           if (newValue != null) {
             onChanged(newValue);
           }

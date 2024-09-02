@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
-import 'package:get/instance_manager.dart';
 import 'package:real_estate/controller/firbase/firebase_constant.dart';
 import 'package:real_estate/controller/logincontroller.dart';
 import 'package:real_estate/utils/colors.dart';
@@ -21,8 +20,10 @@ class UserProfile extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+        surfaceTintColor: AppColors.iconSecondary,
+        shadowColor: AppColors.iconSecondary,
         backgroundColor: Colors.transparent,
-        elevation: 0,
+        // elevation: 10,
         title: const Text('Profile', style: AppTextStyles.mainHeading),
       ),
       body: Stack(
@@ -31,10 +32,7 @@ class UserProfile extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [
-                    Colors.white,
-                    const Color.fromARGB(255, 238, 235, 235)
-                  ],
+                  colors: [Colors.white, AppColors.iconSecondary],
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                 ),

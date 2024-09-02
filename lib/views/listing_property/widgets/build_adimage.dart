@@ -2,7 +2,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
-import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:real_estate/controller/addproperty_controller.dart';
 import 'package:real_estate/utils/colors.dart';
@@ -32,29 +31,6 @@ class _AddImageState extends State<AddImage> {
     } else {
       Get.snackbar("Error", "Image not selected",
           snackPosition: SnackPosition.BOTTOM, backgroundColor: Colors.red);
-    }
-  }
-
-  _cropImage(File imageFile) async {
-    //File croppedFile =
-    final croppedFile = await ImageCropper().cropImage(
-      sourcePath: imageFile.path,
-      // aspectRatioPresets: [
-      //   CropAspectRatioPreset.ratio7x5,
-      // ],
-      uiSettings: [
-        AndroidUiSettings(
-          toolbarTitle: "Crop Image",
-          toolbarColor: AppColors.primary,
-          toolbarWidgetColor: AppColors.fieldcolor,
-        )
-      ],
-    );
-
-    if (croppedFile != null) {
-      return File(croppedFile.path);
-    } else {
-      return imageFile;
     }
   }
 
@@ -94,7 +70,7 @@ class _AddImageState extends State<AddImage> {
                     await _selectAndUploadImage();
                   },
                   child: const ImageContainer(
-                    icon: IconsaxPlusBold.add,
+                    icon: IconsaxPlusLinear.add,
                   ),
                 ),
               ],
@@ -109,7 +85,7 @@ class _AddImageState extends State<AddImage> {
 
   removeImage(int i) {
     try {
-       ctrl.imageUrls.removeAt(i);
+      ctrl.imageUrls.removeAt(i);
       _images.remove(_images[i]);
       successSnackbar("", "Image ${i + 1} removed");
       // Get.snackbar("", "Image ${i + 1} removed",
@@ -138,7 +114,7 @@ class ImageContainer extends StatelessWidget {
       width: 110,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: Colors.black, width: 1),
+        // border: Border.all(color: Colors.black, width: 1),
         color: AppColors.fieldcolor,
       ),
       child: image != null
@@ -161,7 +137,8 @@ class ImageContainer extends StatelessWidget {
             )
           : Icon(
               icon ?? IconsaxPlusBold.folder,
-              color: AppColors.primary,
+              color: Colors.black,
+              size: 50,
             ),
     );
   }

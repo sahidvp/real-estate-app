@@ -1,8 +1,8 @@
 class PropertyModel {
   static List<String> type = [
     "House",
-    "Appartments",
-    "villas",
+    "Apartment",
+    "Villa",
   ];
   static List<String> furnishing = [
     "Furnished",
