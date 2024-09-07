@@ -1,11 +1,13 @@
  import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:real_estate/controller/addproperty_controller.dart';
+import 'package:real_estate/model/google_map/get_currentlocation.dart';
 import 'package:real_estate/utils/colors.dart';
 
 GestureDetector buildCurrentlocation(AddpropertyController propertyCntr, double sb) {
     return GestureDetector(
-          onTap: () async {
-            await propertyCntr.getUserLocation();
+          onTap: ()  {
+            Get.to(()=>const GetCurrentlocationScreen(isHomeScreen: false,));
            
           },
           child: Container(
@@ -17,7 +19,7 @@ GestureDetector buildCurrentlocation(AddpropertyController propertyCntr, double 
                 borderRadius: BorderRadius.circular(25)),
             child: Center(
               child: Text(
-                "use current location",
+                "choose location",
                 style: AppTextStyles.subHeading,
               ),
             ),

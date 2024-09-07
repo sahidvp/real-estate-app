@@ -56,7 +56,9 @@ import 'package:real_estate/utils/imagespath.dart';
 
 GestureDetector buildLocation(sb, MapController cntrl) {
   return GestureDetector(
-    onTap: () => Get.to(()=>const GetCurrentlocationScreen()),
+    onTap: () => Get.to(() => const GetCurrentlocationScreen(
+          isHomeScreen: true,
+        )),
     child: Container(
       height: sb * .7,
       decoration: BoxDecoration(

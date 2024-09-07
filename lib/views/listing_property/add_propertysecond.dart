@@ -1,10 +1,8 @@
-import 'package:csc_picker/csc_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:real_estate/controller/addproperty_controller.dart';
 import 'package:real_estate/utils/colors.dart';
 import 'package:real_estate/utils/media_query.dart';
-import 'package:real_estate/views/listing_property/widgets/build_cscpicker.dart';
 import 'package:real_estate/views/listing_property/widgets/build_currebtlocation.dart';
 
 class AddLocation extends StatelessWidget {
@@ -21,15 +19,15 @@ class AddLocation extends StatelessWidget {
           SizedBox(height: sb * .5),
           Divider(),
           SizedBox(height: sb * .5),
-          buildCscpicker(propertyCntr),
+         //    buildCscpicker(propertyCntr),
           SizedBox(height: sb * .5),
-          Align(
-            alignment: Alignment.center,
-            child: Text(
-              "OR",
-              style: AppTextStyles.subHeading,
-            ),
-          ),
+          // Align(
+          //   alignment: Alignment.center,
+          //   child: Text(
+          //     "OR",
+          //     style: AppTextStyles.subHeading,
+          //   ),
+          // ),
           SizedBox(height: sb * .5),
           buildCurrentlocation(propertyCntr, sb),
           SizedBox(height: sb * .5),
