@@ -98,7 +98,7 @@ Stack userImage(double sw, double sh, BuildContext context) {
                 ? CircleAvatar(
                     radius: 55,
                     backgroundImage: cntrl.imgUrl == null
-                        ? const AssetImage(Imagepath.homelogo) as ImageProvider
+                        ? const AssetImage(Imagepath.usertemp) as ImageProvider
                         : NetworkImage(cntrl.imgUrl!),
                   )
                 : CircleAvatar(

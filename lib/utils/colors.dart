@@ -14,6 +14,7 @@ class AppColors {
 
   static const Color textPrimary = Color.fromARGB(255, 24, 80, 115);
   static const Color textPrimarytwo = Color.fromARGB(255, 54, 45, 120);
+  static const Color screenColor = Color.fromARGB(255, 245, 242, 242);
 
   static const Color textSecondary = Colors.white;
   static final Color fieldcolor = Colors.grey.shade200;
@@ -41,6 +42,16 @@ class AppTextStyles {
       color: AppColors.textPrimary,
       fontWeight: FontWeight.w500,
       decoration: TextDecoration.underline);
+  static const TextStyle hompagebodyText = TextStyle(
+    fontSize: 12,
+    color: AppColors.textPrimary,
+    fontWeight: FontWeight.w600,
+  );
+  static const TextStyle hompagebodyText2 = TextStyle(
+    fontSize: 13,
+    color: Colors.white,
+    fontWeight: FontWeight.w600,
+  );
 
   static const TextStyle bodytext3 = TextStyle(
       fontSize: 25,
@@ -67,5 +78,23 @@ class AppTextStyles {
   static const TextStyle minitext3 =
       TextStyle(fontSize: 15, color: Colors.black, fontWeight: FontWeight.w500);
 
+  static const TextStyle locationtext = TextStyle(
+      fontWeight: FontWeight.w500, fontSize: 12, color: Color(0xFFB9B9B9));
+  static const TextStyle categorytag = TextStyle(
+      color: AppColors.primary, fontSize: 10, fontWeight: FontWeight.w700);
+  static const TextStyle propertyText =
+      TextStyle(fontSize: 16, fontWeight: FontWeight.w600);
+  static const TextStyle featurecount =
+      TextStyle(fontWeight: FontWeight.w600, color: AppColors.textPrimarytwo);
+
   // Add more text styles as needed
+}
+
+class AppDecoration {
+  static final boxShadow = BoxShadow(
+    color: Colors.black.withOpacity(0.3), // Shadow color
+    spreadRadius: 2, // Spread radius
+    blurRadius: 10, // Blur radius
+    offset: Offset(0, 5), // Offset in x and y direction
+  );
 }

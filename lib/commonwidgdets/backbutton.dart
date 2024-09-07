@@ -16,18 +16,16 @@ class ArrowButton extends StatelessWidget {
         color: AppColors.fieldcolor,
         shape: BoxShape.circle,
       ),
-      child: Center(
-        child: IconButton(
-          onPressed: () {
-            Get.back();
-          },
-          icon: Icon(
-            IconsaxPlusLinear.arrow_left,
-            color: Colors.black,
-            size: MediaQueryUtil.backbuttonheight(context) * .30,
-          ),
-          splashRadius: 50,
+      child: IconButton(
+        onPressed: () {
+          Get.back();
+        },
+        icon: Icon(
+          IconsaxPlusLinear.arrow_left,
+          color: Colors.black,
+          size: MediaQueryUtil.backbuttonheight(context) * .30,
         ),
+        splashRadius: 50,
       ),
     );
   }

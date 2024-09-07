@@ -12,6 +12,7 @@ Obx buildStatus(
     String menuHint,
     Rx<String?> selectedValue,
     void Function(String) onChanged) {
+  bool bordercolor = true;
   return Obx(() {
     // Check if `status` is empty to avoid issues
     if (status.isEmpty) {
@@ -35,20 +36,24 @@ Obx buildStatus(
       decoration: BoxDecoration(
         color: AppColors.fieldcolor,
         borderRadius: BorderRadius.circular(15),
-        border: Border.all(color: Colors.black.withAlpha(150)),
+        border: bordercolor
+            ? Border.all(color: Colors.black.withAlpha(150))
+            : Border.all(color: AppColors.primary.withAlpha(150)),
       ),
       child: DropdownButton<String>(
         underline: const SizedBox.shrink(),
         icon: SizedBox.shrink(),
         value: selectedValue.value,
-        hint: Icon(
-          IconsaxPlusLinear.arrow_right_3,
-          color: Colors.black,
-        ),
+        hint: Row(children: [
+          Icon(
+            IconsaxPlusLinear.arrow_right_3,
+            color: Colors.black,
+          ),
+          Text(menuHint)
+        ]),
         onChanged: (String? newValue) {
-          
-          
           if (newValue != null) {
+            bordercolor = false;
             onChanged(newValue);
           }
         },
