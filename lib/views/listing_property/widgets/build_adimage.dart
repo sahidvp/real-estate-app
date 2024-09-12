@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:real_estate/controller/addproperty_controller.dart';
 import 'package:real_estate/utils/colors.dart';
@@ -19,19 +20,57 @@ class _AddImageState extends State<AddImage> {
   final List<File> _images = [];
   AddpropertyController ctrl = Get.find();
 
+  // _selectAndUploadImage() async {
+  //   final picker = ImagePicker();
+  //   final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+  //   if (pickedFile != null) {
+  //     final croppedFile = File(
+  //         pickedFile.path); //await _cropImage(File(pickedFile.path)) as File;
+  //     _images.add(croppedFile);
+  //     await ctrl.uploadImageToFirebase(croppedFile);
+  //     setState(() {});
+  //   } else {
+  //     Get.snackbar("Error", "Image not selected",
+  //         snackPosition: SnackPosition.BOTTOM, backgroundColor: Colors.red);
+  //   }
+  // }
+
   _selectAndUploadImage() async {
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
     if (pickedFile != null) {
-      final croppedFile = File(
-          pickedFile.path); //await _cropImage(File(pickedFile.path)) as File;
-      _images.add(croppedFile);
-      await ctrl.uploadImageToFirebase(croppedFile);
-      setState(() {});
+      final croppedFile = await _cropImage(File(pickedFile.path));
+      if (croppedFile != null) {
+        _images.add(croppedFile);
+        await ctrl.uploadImageToFirebase(croppedFile);
+        setState(() {});
+      } else {
+        errorSnackBar(message: "Image not cropped");
+      }
     } else {
-      Get.snackbar("Error", "Image not selected",
-          snackPosition: SnackPosition.BOTTOM, backgroundColor: Colors.red);
+      errorSnackBar(message: "Image not selected");
     }
+  }
+
+  Future<File?> _cropImage(File imageFile) async {
+    CroppedFile? croppedFile = await ImageCropper().cropImage(
+      sourcePath: imageFile.path,
+      aspectRatio: CropAspectRatio(ratioX: 1, ratioY: 1),
+      uiSettings: [
+        AndroidUiSettings(
+          toolbarTitle: 'Crop Image',
+          toolbarColor: Colors.deepOrange,
+          toolbarWidgetColor: Colors.white,
+          lockAspectRatio: false, // Allow users to change aspect ratio
+        ),
+      ],
+    );
+
+    if (croppedFile != null) {
+      return File(croppedFile.path); // Return the cropped image file
+    }
+    return null; // Return null if no image is cropped
   }
 
   @override

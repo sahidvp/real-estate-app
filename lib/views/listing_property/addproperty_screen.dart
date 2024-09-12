@@ -517,6 +517,7 @@ class AddPropertyscreen extends StatelessWidget {
                     transactionType: propertyCntr.type,
                     title: propertyCntr.adTittle.text,
                     description: propertyCntr.description.text,
+                    projectname: propertyCntr.projectName.text,
                     price: propertyCntr.price.text,
                     location: propertyCntr.location,
                     imageUrls: propertyCntr.imageUrls,

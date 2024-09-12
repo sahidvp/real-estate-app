@@ -14,4 +14,10 @@ class Iconsdata {
 
   static IconData addpropertypage = IconsaxPlusLinear.add_square;
   static IconData addpropertypageactive = IconsaxPlusBold.add_square;
+
+  static IconData allpropertypage = IconsaxPlusLinear.buildings_2;
+
+  static IconData allpropertypageactive = IconsaxPlusBold.buildings_2;
+
+
 }

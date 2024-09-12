@@ -22,4 +22,5 @@ class PropertyModel {
     "Swiming pool"
   ];
   static List<String> listedby = ["Dealer", "Owner"];
+   static const List category = ["All", "HOUSE", "APARTMENT", "VILLA", "LAND"];
 }

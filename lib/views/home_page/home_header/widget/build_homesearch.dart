@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
+import 'package:real_estate/controller/bottomnav_controller.dart';
 import 'package:real_estate/utils/colors.dart';
+import 'package:real_estate/views/property_view/all_property.dart';
 
 Container buildHomesearch(sb) {
+  BottomNavController cntrl = Get.put(BottomNavController());
+
   return Container(
     width: sb * 3.5,
     height: sb * .7,
@@ -11,6 +16,9 @@ Container buildHomesearch(sb) {
         color: Colors.white,
         borderRadius: BorderRadius.circular(15)),
     child: TextFormField(
+      onTap: () {
+        cntrl.selectedIndex.value = 2;
+      },
       decoration: InputDecoration(
           hintText: "Search by category",
           hintStyle: TextStyle(

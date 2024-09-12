@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
+import 'package:real_estate/controller/addproperty_controller.dart';
 import 'package:real_estate/controller/homepage_controller.dart';
 import 'package:real_estate/utils/colors.dart';
 import 'package:real_estate/utils/imagespath.dart';

@@ -52,6 +52,7 @@ class AddpropertyController extends GetxController {
   final TextEditingController breadth = TextEditingController();
   String postedBy = "";
   String postedFrom = "";
+  
 
   void updateLocation(String key, String value) {
     location[key] = value;
@@ -112,6 +113,7 @@ class AddpropertyController extends GetxController {
     required String carParking,
     required String bedrooms,
     required String bathrooms,
+    required String projectname,
     required String areaftsq,
     required String floors,
     required String postedBy,
@@ -147,7 +149,7 @@ class AddpropertyController extends GetxController {
       PropertyListingModel property = PropertyListingModel(
         id: db.collection('properties').doc().id,
         transactionType: transactionType,
-        propertyType: category, // "House", "Apartment", or other property type
+        propertyType: category,
         title: title,
         description: description,
         price: price,
@@ -161,7 +163,7 @@ class AddpropertyController extends GetxController {
         constructionStatus: constructionStatus,
         environment: [], // Add environment data if available
         listedBy: listedBy,
-        projectName: '', // Replace with actual project name if needed
+        projectName:projectname , // Replace with actual project name if needed
         postedBy: postedBy,
         userImg: userImg,
         postedFrom: postedFrom,
@@ -266,5 +268,32 @@ class AddpropertyController extends GetxController {
     } catch (e) {
       errorSnackBar(message: 'Error in uploading image $e');
     }
+  }
+
+  var recentProperties = [].obs;
+
+ void fetchRecentProperties() {
+  FirebaseFirestore.instance
+      .collection("properties")
+      .where('hide', isEqualTo: false)
+      .orderBy('timestamp', descending: true) // Ensure this field exists and is indexed
+      .limit(5) // Limit to the last 5 properties
+      .snapshots()
+      .listen((event) {
+    recentProperties.clear(); // Clear the list before adding new data
+    for (var doc in event.docs) {
+      recentProperties.add(doc.data());
+    }
+  }, onError: (error) {
+    print("Error fetching properties: $error");
+  });
+}
+
+
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+    fetchRecentProperties();
   }
 }

@@ -10,6 +10,7 @@ import 'package:real_estate/views/home_page/home_header/widget/build_filter.dart
 import 'package:real_estate/views/home_page/home_header/widget/build_homesearch.dart';
 import 'package:real_estate/views/home_page/home_header/widget/build_location.dart';
 import 'package:real_estate/views/home_page/home_header/widget/build_userimage.dart';
+import 'package:real_estate/views/property_view/all_property.dart';
 
 class HomeHeader extends StatelessWidget {
   const HomeHeader({
@@ -30,18 +31,17 @@ class HomeHeader extends StatelessWidget {
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [buildLocation(sb,mapcntrl), buildUserimage(cntrl, sb)],
+              children: [
+                buildLocation(sb, mapcntrl),
+                buildUserimage(cntrl, sb)
+              ],
             ),
             SizedBox(
               height: sb * .2,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                buildHomesearch(sb),
-                //SizedBox(wi),
-                buildFilter(sb)
-              ],
+              children: [buildHomesearch(sb), buildFilter(sb)],
             )
           ],
         ),

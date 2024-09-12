@@ -104,6 +104,7 @@ import 'package:real_estate/utils/icons.dart';
 import 'package:real_estate/views/home_page/home_page.dart';
 import 'package:real_estate/views/chat_screen/chat_screen.dart';
 import 'package:real_estate/views/listing_property/addproperty_screen.dart';
+import 'package:real_estate/views/property_view/all_property.dart';
 import 'package:real_estate/views/select_category/select_category.dart';
 import 'package:real_estate/views/userprofile/userprofile_screen.dart';
 
@@ -118,6 +119,7 @@ class BottomNavbar extends StatelessWidget {
   final List<Widget> _pages = [
     const HomeScreen(),
     const ChatScreen(),
+    const AllProperty(),
     const SelectCategory(),
     const UserProfile(),
   ];
@@ -159,6 +161,11 @@ class BottomNavbar extends StatelessWidget {
               icon: Icon(Iconsdata.chatpage, color: Colors.black87),
               label: '--',
               activeIcon: navbarIcon(Iconsdata.chatpageactive),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Iconsdata.allpropertypage, color: Colors.black87),
+              label: '--',
+              activeIcon: navbarIcon(Iconsdata.allpropertypageactive),
             ),
             BottomNavigationBarItem(
               icon: Icon(Iconsdata.addpropertypage, color: Colors.black87),

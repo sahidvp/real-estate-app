@@ -1,23 +1,4 @@
-// import 'package:flutter/material.dart';
-// import 'package:flutter_svg/flutter_svg.dart';
-// import 'package:real_estate/controller/logincontroller.dart';
-// import 'package:real_estate/utils/imagespath.dart';
 
-// Container buildUserimage(AuthController cntrl, sb) {
-//   return Container(
-//     child: cntrl.image == null
-//         ? CircleAvatar(
-//             radius: sb * .3,
-//             backgroundImage: cntrl.imgUrl == null
-//                 ? SvgPicture.asset(Imagepath.usertemp)
-//                 : NetworkImage(cntrl.imgUrl!),
-//           )
-//         : CircleAvatar(
-//             radius: sb * .3,
-//             backgroundImage: FileImage(cntrl.image!),
-//           ),
-//   );
-// }
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -45,3 +26,5 @@ Container buildUserimage(AuthController cntrl, double sb) {
     ),
   );
 }
+
+
