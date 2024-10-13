@@ -48,11 +48,13 @@ class CarousalSlider extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Expanded(
-                      child: Image.asset(
-                        Imagepath.homedemo,
-                        fit: BoxFit.fill,
-                        width: double.infinity,
-                        height: sb * 2,
+                      child: Container(
+                        child: Image.asset(
+                          Imagepath.homedemo,
+                          fit: BoxFit.fill,
+                          width: double.infinity,
+                          height: sb * 1.5,
+                        ),
                       ),
                     ),
                     SizedBox(
