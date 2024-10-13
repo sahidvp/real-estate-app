@@ -52,7 +52,8 @@ class AddpropertyController extends GetxController {
   final TextEditingController breadth = TextEditingController();
   String postedBy = "";
   String postedFrom = "";
-  
+    var properties = <dynamic>[].obs; // Observable list of properties
+   // Loading state
 
   void updateLocation(String key, String value) {
     location[key] = value;
@@ -95,6 +96,8 @@ class AddpropertyController extends GetxController {
       environment.add(PropertyModel.enviornment[index]);
     }
   }
+
+  
 
   addPropertyDetails({
     required String category,
@@ -163,7 +166,7 @@ class AddpropertyController extends GetxController {
         constructionStatus: constructionStatus,
         environment: [], // Add environment data if available
         listedBy: listedBy,
-        projectName:projectname , // Replace with actual project name if needed
+        projectName: projectname, // Replace with actual project name if needed
         postedBy: postedBy,
         userImg: userImg,
         postedFrom: postedFrom,
@@ -202,7 +205,7 @@ class AddpropertyController extends GetxController {
         location: location,
         imageUrls: imageUrls,
         listedBy: listedBy,
-        projectName: '', // Replace with actual project name if needed
+        projectName: projectname, // Replace with actual project name if needed
         postedBy: postedBy,
         userImg: userImg,
         postedFrom: postedFrom,
@@ -270,30 +273,41 @@ class AddpropertyController extends GetxController {
     }
   }
 
-  var recentProperties = [].obs;
 
- void fetchRecentProperties() {
-  FirebaseFirestore.instance
-      .collection("properties")
-      .where('hide', isEqualTo: false)
-      .orderBy('timestamp', descending: true) // Ensure this field exists and is indexed
-      .limit(5) // Limit to the last 5 properties
-      .snapshots()
-      .listen((event) {
-    recentProperties.clear(); // Clear the list before adding new data
-    for (var doc in event.docs) {
-      recentProperties.add(doc.data());
+   Future<void> fetchProperties() async {
+    isLoading.value = true; // Set loading to true
+
+    try {
+      QuerySnapshot snapshot = await db.collection('properties').get();
+      properties.clear(); // Clear the current list of properties
+
+      for (var doc in snapshot.docs) {
+        var data = doc.data() as Map<String, dynamic>;
+
+        // Create the appropriate model based on the category
+        if (data['category'] == 'land') {
+          properties.add(LandListingModel.fromMap(data));
+        } else {
+          properties.add(PropertyListingModel.fromMap(data)); // Adjust for your other property models
+        }
+      }
+    } catch (e) {
+      print("Error fetching properties: $e");
+    } finally {
+      isLoading.value = false; // Set loading to false after fetching
     }
-  }, onError: (error) {
-    print("Error fetching properties: $error");
-  });
-}
+  }
 
+  
+
+ 
 
   @override
   void onInit() {
     // TODO: implement onInit
+     fetchProperties();
     super.onInit();
-    fetchRecentProperties();
+    
+    
   }
 }

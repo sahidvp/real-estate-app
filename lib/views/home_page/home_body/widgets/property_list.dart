@@ -12,14 +12,11 @@ class PropertyList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-      
-        child: ListView.builder(
-          itemCount: 5,
-          itemBuilder: (context, i) => propertyTag(sb),
-        ),
-      ),
+    return ListView.builder(
+      physics: NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      itemCount: 5,
+      itemBuilder: (context, i) => propertyTag(sb),
     );
   }
 }
