@@ -40,8 +40,9 @@ abstract class ListingModel {
     required this.hide,
     required this.isSold,
   });
-   Map<String, dynamic> toMap() {
+  Map<String, dynamic> toMap() {
     return {
+      'id': id,
       'transactionType': transactionType,
       'title': title,
       'description': description,

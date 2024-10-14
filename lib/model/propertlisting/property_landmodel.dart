@@ -148,9 +148,9 @@ class LandListingModel extends ListingModel {
           hide: hide,
           isSold: isSold,
         );
-         factory LandListingModel.fromMap(Map<String, dynamic> data) {
+  factory LandListingModel.fromMap(Map<String, dynamic> data) {
     return LandListingModel(
-      id: data['id'] ?? "", // Assign ID if available
+      id:data['id'], // Assign ID if available
       transactionType: data['transactionType'],
       title: data['title'],
       description: data['description'],

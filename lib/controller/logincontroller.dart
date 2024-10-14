@@ -653,6 +653,13 @@ class AuthController extends GetxController {
     }
   }
 
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    getUserData();
+    super.onInit();
+  }
+
   // @override
   // void onClose() {
   //   fullNameController.dispose();

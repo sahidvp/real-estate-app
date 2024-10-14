@@ -1,4 +1,3 @@
-
 // import 'package:cloud_firestore/cloud_firestore.dart';
 
 // class PropertyListingModel {
@@ -125,7 +124,6 @@
 //   }
 // }
 
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:real_estate/model/propertlisting/property_basemodel.dart';
 
@@ -187,9 +185,9 @@ class PropertyListingModel extends ListingModel {
           isSold: isSold,
         );
 
-        factory PropertyListingModel.fromMap(Map<String, dynamic> data) {
+  factory PropertyListingModel.fromMap(Map<String, dynamic> data) {
     return PropertyListingModel(
-      id: data['id'] ?? "", // Assign ID if available
+      id: data['id'], // Assign ID if available
       transactionType: data['transactionType'],
       propertyType: data['propertyType'],
       title: data['title'],
@@ -218,8 +216,7 @@ class PropertyListingModel extends ListingModel {
     );
   }
 
-
- @override
+  @override
   Map<String, dynamic> toMap() {
     final map = super.toMap();
     map['propertyType'] = propertyType;
@@ -232,6 +229,4 @@ class PropertyListingModel extends ListingModel {
     map['environment'] = environment;
     return map;
   }
-
-  
 }

@@ -52,8 +52,8 @@ class AddpropertyController extends GetxController {
   final TextEditingController breadth = TextEditingController();
   String postedBy = "";
   String postedFrom = "";
-    var properties = <dynamic>[].obs; // Observable list of properties
-   // Loading state
+  var properties = <dynamic>[].obs; // Observable list of properties
+  // Loading state
 
   void updateLocation(String key, String value) {
     location[key] = value;
@@ -96,8 +96,6 @@ class AddpropertyController extends GetxController {
       environment.add(PropertyModel.enviornment[index]);
     }
   }
-
-  
 
   addPropertyDetails({
     required String category,
@@ -164,7 +162,7 @@ class AddpropertyController extends GetxController {
         floors: floors,
         furnishing: furnishing,
         constructionStatus: constructionStatus,
-        environment: [], // Add environment data if available
+        environment: environment, // Add environment data if available
         listedBy: listedBy,
         projectName: projectname, // Replace with actual project name if needed
         postedBy: postedBy,
@@ -273,8 +271,7 @@ class AddpropertyController extends GetxController {
     }
   }
 
-
-   Future<void> fetchProperties() async {
+  Future<void> fetchProperties() async {
     isLoading.value = true; // Set loading to true
 
     try {
@@ -285,10 +282,11 @@ class AddpropertyController extends GetxController {
         var data = doc.data() as Map<String, dynamic>;
 
         // Create the appropriate model based on the category
-        if (data['category'] == 'land') {
+        if (data['category'] == 'Land') {
           properties.add(LandListingModel.fromMap(data));
         } else {
-          properties.add(PropertyListingModel.fromMap(data)); // Adjust for your other property models
+          properties.add(PropertyListingModel.fromMap(
+              data)); // Adjust for your other property models
         }
       }
     } catch (e) {
@@ -298,16 +296,10 @@ class AddpropertyController extends GetxController {
     }
   }
 
-  
-
- 
-
   @override
   void onInit() {
     // TODO: implement onInit
-     fetchProperties();
+    fetchProperties();
     super.onInit();
-    
-    
   }
 }

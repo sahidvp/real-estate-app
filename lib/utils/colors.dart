@@ -57,6 +57,8 @@ class AppTextStyles {
       fontSize: 25,
       fontWeight: FontWeight.w500,
       color: AppColors.textPrimarytwo);
+  static const TextStyle priceText = TextStyle(
+      color: AppColors.primary, fontWeight: FontWeight.w600, fontSize: 17);
 
   static const TextStyle bodyText4 = TextStyle(
       fontSize: 28, color: AppColors.textPrimary, fontWeight: FontWeight.bold);
@@ -65,7 +67,13 @@ class AppTextStyles {
       fontSize: 12,
       color: AppColors.textPrimarytwo,
       fontWeight: FontWeight.w400);
+  static const TextStyle propertyLocation = TextStyle(
+      fontWeight: FontWeight.w500,
+      //  fontSize: 15,
+      color: Color(0xFFB9B9B9));
 
+  static const TextStyle propertyTitle =
+      TextStyle(fontWeight: FontWeight.w500, fontSize: 17, color: Colors.black);
   static const TextStyle minitext2 = TextStyle(
       fontSize: 15, color: AppColors.textPrimary, fontWeight: FontWeight.w400);
   static const TextStyle mainHeading = TextStyle(
@@ -81,7 +89,7 @@ class AppTextStyles {
   static const TextStyle locationtext = TextStyle(
       fontWeight: FontWeight.w500, fontSize: 12, color: Color(0xFFB9B9B9));
   static const TextStyle categorytag = TextStyle(
-      color: AppColors.primary, fontSize: 10, fontWeight: FontWeight.w700);
+      color: AppColors.primary, fontSize: 10, fontWeight: FontWeight.bold);
   static const TextStyle propertyText =
       TextStyle(fontSize: 16, fontWeight: FontWeight.w600);
   static const TextStyle featurecount =
