@@ -508,6 +508,7 @@ class AddPropertyscreen extends StatelessWidget {
 
               AddLocation(),
               AddImage(),
+              
               SubmitButtontwo(
                 controller: propertyCntr,
                 buttonname: "Next",

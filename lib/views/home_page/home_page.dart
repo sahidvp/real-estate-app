@@ -53,8 +53,7 @@ class HomeScreen extends StatelessWidget {
                     // Observe properties
                     if (controller.isLoading.value) {
                       return const Center(
-                          child:
-                              CircularProgressIndicator()); // Loading indicator
+                          child: SizedBox.shrink()); // Loading indicator
                     }
                     return PropertyList(
                         sb: sb,

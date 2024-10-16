@@ -92,6 +92,7 @@ class SignupScreen extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.all(padsize),
             child: Form(
+              autovalidateMode: AutovalidateMode.onUserInteraction,
               key: controller.signupformKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

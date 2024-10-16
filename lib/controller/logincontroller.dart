@@ -24,6 +24,7 @@ class AuthController extends GetxController {
   FirebaseFirestore db = FirebaseFirestore.instance;
 
   final TextEditingController fullNameController = TextEditingController();
+  final TextEditingController editNameController = TextEditingController();
 
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -36,6 +37,8 @@ class AuthController extends GetxController {
   TextEditingController otp = TextEditingController();
 
   final RxBool isFullNameFocused = false.obs;
+  var isLoading = false.obs;
+
   final RxBool isEmailFocused = false.obs;
   final RxBool isPasswordFocused = false.obs;
   final RxBool isConfirmPasswordFocused = false.obs;
@@ -507,6 +510,9 @@ class AuthController extends GetxController {
   Future<void> selectAndUploadImage() async {
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+    isLoading(true);
+    update();
     if (pickedFile != null) {
       // final croppedFile = await cropImage(File(pickedFile.path)) as File;
 
@@ -521,6 +527,8 @@ class AuthController extends GetxController {
   Future<void> takePictureAndUpload() async {
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(source: ImageSource.camera);
+    isLoading(true);
+    update();
 
     if (pickedFile != null) {
       print("Picture taken");
@@ -570,6 +578,7 @@ class AuthController extends GetxController {
       update();
       print("Uploaded image URL: $imgUrl");
       successSnackbar("Success", 'Image successfully saved');
+      isLoading(false);
     } catch (e) {
       errorSnackBar(message: 'Error in uploading image $e');
     }
@@ -594,6 +603,7 @@ class AuthController extends GetxController {
           'userName': fullNameController.text,
           'imageUrl': imgUrl,
         });
+
         update();
         Get.back();
 

@@ -18,6 +18,7 @@ class AddImage extends StatefulWidget {
 
 class _AddImageState extends State<AddImage> {
   final List<File> _images = [];
+  bool _isLoading = false;
   AddpropertyController ctrl = Get.find();
 
   // _selectAndUploadImage() async {
@@ -40,11 +41,16 @@ class _AddImageState extends State<AddImage> {
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
     if (pickedFile != null) {
+      setState(() {
+        _isLoading = true;
+      });
       final croppedFile = await _cropImage(File(pickedFile.path));
       if (croppedFile != null) {
         _images.add(croppedFile);
         await ctrl.uploadImageToFirebase(croppedFile);
-        setState(() {});
+        setState(() {
+          _isLoading = false;
+        });
       } else {
         errorSnackBar(message: "Image not cropped");
       }
@@ -115,6 +121,10 @@ class _AddImageState extends State<AddImage> {
               ],
             ),
             const SizedBox(height: 15),
+            if (_isLoading)
+              const Center(
+                child: CircularProgressIndicator(), // Loading spinner
+              ),
           ],
         ),
         const Divider(),
@@ -127,9 +137,7 @@ class _AddImageState extends State<AddImage> {
       ctrl.imageUrls.removeAt(i);
       _images.remove(_images[i]);
       successSnackbar("", "Image ${i + 1} removed");
-      // Get.snackbar("", "Image ${i + 1} removed",
-      //     backgroundColor: Colors.transparent,
-      //     snackPosition: SnackPosition.BOTTOM);
+
       setState(() {});
     } catch (e) {
       print(_images.length);

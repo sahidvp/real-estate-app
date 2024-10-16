@@ -103,7 +103,7 @@ Stack userImage(double sw, double sh, BuildContext context) {
                   )
                 : CircleAvatar(
                     radius: 55,
-                     backgroundImage: FileImage(cntrl.image!),
+                    backgroundImage: FileImage(cntrl.image!),
                   ),
           );
         },
