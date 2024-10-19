@@ -1,4 +1,4 @@
- import 'package:intl/intl.dart';
+import 'package:intl/intl.dart';
 
 String indianRupee(amount) =>
-      "₹${NumberFormat('#,##,###').format(int.parse(amount))}";
+    "₹${NumberFormat('#,##,###').format(int.parse(amount))}";

@@ -19,8 +19,11 @@ class HomeScreen extends StatelessWidget {
         Get.put(AddpropertyController()); // Instantiate the controller
 
     // Call fetchProperties when the widget builds
-    controller.fetchProperties();
-    print(controller.properties.length);
+    // controller.fetchProperties();
+    // controller.fetchRecentProperties();
+    // controller.fetchNearbyProperties(userCity);
+
+  
 
     return Scaffold(
       body: Column(
@@ -45,7 +48,7 @@ class HomeScreen extends StatelessWidget {
                               CircularProgressIndicator()); // Loading indicator
                     }
                     return CarousalSlider(
-                        sb: sb, properties: controller.properties);
+                        sb: sb, properties: controller.recentProperties);
                   }),
                   textNearYou(),
 
@@ -57,7 +60,8 @@ class HomeScreen extends StatelessWidget {
                     }
                     return PropertyList(
                         sb: sb,
-                        properties: controller.properties); // Pass properties
+                        properties:
+                            controller.nearbyProperties); // Pass properties
                   }),
                 ],
               ),

@@ -356,7 +356,7 @@ class AddPropertyscreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: Padding(padding: EdgeInsets.all(10), child: ArrowButton()),
-        surfaceTintColor: AppColors.iconSecondary,
+        surfaceTintColor: Colors.transparent,
         shadowColor: AppColors.iconSecondary,
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -478,10 +478,10 @@ class AddPropertyscreen extends StatelessWidget {
 
               Text("Project name", style: AppTextStyles.subHeading),
               SizedBox(height: sb * .1),
-              buildTextfield(
-                  propertyCntr, propertyCntr.projectName, false, 7, ""),
+              buildTextfield(propertyCntr, propertyCntr.projectName, false, 7,
+                  "Create a title for your property that will appear in search results"),
               SizedBox(height: sb * .5),
-              Text("Ad title", style: AppTextStyles.subHeading),
+              Text("Title", style: AppTextStyles.subHeading),
               SizedBox(height: sb * .1),
               buildTextfield(propertyCntr, propertyCntr.adTittle, false, 7,
                   "Mention the key features"),
@@ -508,7 +508,7 @@ class AddPropertyscreen extends StatelessWidget {
 
               AddLocation(),
               AddImage(),
-              
+
               SubmitButtontwo(
                 controller: propertyCntr,
                 buttonname: "Next",

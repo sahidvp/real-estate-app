@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
+import 'package:real_estate/commonwidgdets/category_tag.dart';
 import 'package:real_estate/commonwidgdets/indian_rupee.dart';
 import 'package:real_estate/utils/colors.dart';
 import 'package:real_estate/utils/imagespath.dart';
@@ -58,16 +59,7 @@ Container propertyTag(double sb, dynamic property) {
                 indianRupee(property.price),
                 style: AppTextStyles.priceText,
               ),
-              Container(
-                decoration: BoxDecoration(
-                    color: AppColors.fieldcolor,
-                    borderRadius: BorderRadius.circular(5)),
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                  child:
-                      Text(property.category, style: AppTextStyles.categorytag),
-                ),
-              ),
+              categoryTag(property.category),
               // Padding(
               //   padding: EdgeInsetsDirectional.symmetric(vertical: 10),
               //   child: Row(

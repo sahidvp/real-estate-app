@@ -52,7 +52,9 @@ class AddpropertyController extends GetxController {
   final TextEditingController breadth = TextEditingController();
   String postedBy = "";
   String postedFrom = "";
-  var properties = <dynamic>[].obs; // Observable list of properties
+  var properties = <dynamic>[].obs;
+  var recentProperties = <dynamic>[].obs;
+  var nearbyProperties = <dynamic>[].obs;
   // Loading state
 
   void updateLocation(String key, String value) {
@@ -124,6 +126,7 @@ class AddpropertyController extends GetxController {
   }) {
     if (transactionType == null ||
         title == "" ||
+        projectname == "" ||
         description == "" ||
         price == "" ||
         listedBy == null ||
@@ -248,8 +251,8 @@ class AddpropertyController extends GetxController {
 
     location["country"] = placemarks.first.country.toString();
     location["state"] = placemarks.first.administrativeArea.toString();
-    location["city"] =
-        "${placemarks.first.subLocality}, ${placemarks.first.locality}";
+    location["city"] = placemarks.first.locality.toString();
+
     update();
   }
 
@@ -276,6 +279,8 @@ class AddpropertyController extends GetxController {
 
     try {
       QuerySnapshot snapshot = await db.collection('properties').get();
+      //  print(snapshot.docs);
+
       properties.clear(); // Clear the current list of properties
 
       for (var doc in snapshot.docs) {
@@ -296,9 +301,68 @@ class AddpropertyController extends GetxController {
     }
   }
 
+  Future<void> fetchRecentProperties() async {
+    isLoading.value = true;
+    try {
+      QuerySnapshot snapshot = await db
+          .collection('properties')
+          .orderBy('timestamp', descending: true) // Sort by creation time
+          .limit(5)
+          .get();
+
+      recentProperties.clear(); // Clear the current list of recent properties
+
+      for (var doc in snapshot.docs) {
+        print("snapshot doc");
+        var data = doc.data() as Map<String, dynamic>;
+
+        if (data['category'] == 'Land') {
+          recentProperties.add(LandListingModel.fromMap(data));
+        } else {
+          recentProperties.add(PropertyListingModel.fromMap(data));
+        }
+        print("length of recent prorp${recentProperties.length}");
+      }
+    } catch (e) {
+      print("Error fetching recent properties: $e");
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  Future<void> fetchNearbyProperties(String? userCity) async {
+    //  isLoading.value = true;
+    try {
+      QuerySnapshot snapshot = await db
+          .collection('properties')
+          .where('location.city', isEqualTo: userCity)
+          .get();
+
+      nearbyProperties.clear(); // Clear the current list of nearby properties
+      
+      for (var doc in snapshot.docs) {
+        var data = doc.data() as Map<String, dynamic>;
+
+        if (data['category'] == 'Land') {
+          nearbyProperties.add(LandListingModel.fromMap(data));
+        } else {
+          nearbyProperties.add(PropertyListingModel.fromMap(data));
+        }
+        update();
+      }
+    } catch (e) {
+      print("Error fetching nearby properties: $e");
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
   @override
   void onInit() {
     // TODO: implement onInit
+
+    fetchRecentProperties();
+    fetchNearbyProperties(location["city"]);
     fetchProperties();
     super.onInit();
   }

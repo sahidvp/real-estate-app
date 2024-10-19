@@ -12,7 +12,7 @@ import 'package:real_estate/views/widgets/submitbutton.dart';
 
 class GetCurrentlocationScreen extends StatefulWidget {
   final bool isHomeScreen;
-  const GetCurrentlocationScreen({super.key,required this.isHomeScreen});
+  const GetCurrentlocationScreen({super.key, required this.isHomeScreen});
 
   @override
   State<GetCurrentlocationScreen> createState() =>
@@ -32,11 +32,11 @@ class _GetCurrentlocationScreenState extends State<GetCurrentlocationScreen> {
   String address = "Fetching address...";
 
   // Location map to store country, state, and city
-  Map<String, String> location = {
-    "country": "",
-    "state": "",
-    "city": "",
-  };
+  // Map<String, String> location = {
+  //   "country": "",
+  //   "state": "",
+  //   "city": "",
+  // };
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +71,10 @@ class _GetCurrentlocationScreenState extends State<GetCurrentlocationScreen> {
           SubmitButton(
             controller: cntrl,
             buttonname: "Finish",
-            onPressed: () => Get.back(),
+            onPressed: () {
+              pCntrl.update();
+              Get.back();
+            },
           )
         ],
       ),
@@ -97,13 +100,14 @@ class _GetCurrentlocationScreenState extends State<GetCurrentlocationScreen> {
               position: LatLng(position.latitude, position.longitude),
               onDragEnd: (newPosition) async {
                 // Update address when marker is dragged to new position
-                await _updateAddress(
-                    newPosition.latitude, newPosition.longitude,widget.isHomeScreen);
+                await _updateAddress(newPosition.latitude,
+                    newPosition.longitude, widget.isHomeScreen);
               },
             ));
 
             // Perform reverse geocoding to get address details for the initial position
-            await _updateAddress(position.latitude, position.longitude,widget.isHomeScreen);
+            await _updateAddress(
+                position.latitude, position.longitude, widget.isHomeScreen);
 
             setState(() {});
           },
@@ -113,7 +117,8 @@ class _GetCurrentlocationScreenState extends State<GetCurrentlocationScreen> {
   }
 
   // Update address based on coordinates
-  Future<void> _updateAddress(double latitude, double longitude,bool isHomeScreen) async {
+  Future<void> _updateAddress(
+      double latitude, double longitude, bool isHomeScreen) async {
     try {
       // Reverse geocoding to get placemarks
       List<Placemark> placemarks =
@@ -126,7 +131,8 @@ class _GetCurrentlocationScreenState extends State<GetCurrentlocationScreen> {
             "${place.street}, ${place.subLocality}, ${place.locality}, ${place.subAdministrativeArea}, ${place.administrativeArea}, ${place.country}";
         // "${place.street}, ${place.locality},${place.subAdministrativeArea}, ${place.administrativeArea}, ${place.country}";
 
-      if(isHomeScreen)  mCntrl.updateLocation("${place.subLocality}, ${place.locality}");
+        if (isHomeScreen)
+          mCntrl.updateLocation("${place.subLocality}, ${place.locality}");
 
         // Store city, state, and country in the location map
         pCntrl.location["country"] = place.country ?? "";

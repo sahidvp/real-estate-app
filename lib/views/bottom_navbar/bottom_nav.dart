@@ -126,7 +126,7 @@ class BottomNavbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    cntrl.getUserData();
+   
     return Scaffold(
       // appBar: AppBar(
       //   backgroundColor: Colors.transparent,

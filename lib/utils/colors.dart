@@ -95,13 +95,18 @@ class AppTextStyles {
   static const TextStyle featurecount =
       TextStyle(fontWeight: FontWeight.w600, color: AppColors.textPrimarytwo);
 
+  static const TextStyle detailText = TextStyle(
+      fontSize: 20, fontWeight: FontWeight.w700, color: Colors.black54);
+  static const TextStyle detailText2 = TextStyle(
+      fontSize: 20, fontWeight: FontWeight.w700, color: Colors.black87);
+
   // Add more text styles as needed
 }
 
 class AppDecoration {
   static final boxShadow = BoxShadow(
     color: Colors.black.withOpacity(0.3), // Shadow color
-    spreadRadius: 2, // Spread radius
+    spreadRadius: 1, // Spread radius
     blurRadius: 10, // Blur radius
     offset: Offset(0, 5), // Offset in x and y direction
   );
