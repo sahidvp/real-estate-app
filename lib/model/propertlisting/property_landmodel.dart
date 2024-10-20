@@ -121,6 +121,7 @@ class LandListingModel extends ListingModel {
     required String projectName,
     required String postedBy,
     String? userImg,
+    required String areasqft,
     required String postedFrom,
     required String category,
     required String userId,
@@ -140,6 +141,7 @@ class LandListingModel extends ListingModel {
           projectName: projectName,
           postedBy: postedBy,
           userImg: userImg,
+          areasqft: areasqft,
           postedFrom: postedFrom,
           category: category,
           userId: userId,
@@ -150,7 +152,7 @@ class LandListingModel extends ListingModel {
         );
   factory LandListingModel.fromMap(Map<String, dynamic> data) {
     return LandListingModel(
-      id:data['id'], // Assign ID if available
+      id: data['id'], // Assign ID if available
       transactionType: data['transactionType'],
       title: data['title'],
       description: data['description'],
@@ -163,6 +165,7 @@ class LandListingModel extends ListingModel {
       projectName: data['projectName'],
       postedBy: data['postedBy'],
       userImg: data['userImg'],
+      areasqft: data['areasqft'],
       postedFrom: data['postedFrom'],
       category: data['category'],
       userId: data['userId'],

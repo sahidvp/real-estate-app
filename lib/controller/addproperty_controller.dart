@@ -53,6 +53,7 @@ class AddpropertyController extends GetxController {
   String postedBy = "";
   String postedFrom = "";
   var properties = <dynamic>[].obs;
+  var filteredProperties = [].obs;
   var recentProperties = <dynamic>[].obs;
   var nearbyProperties = <dynamic>[].obs;
   // Loading state
@@ -170,6 +171,7 @@ class AddpropertyController extends GetxController {
         projectName: projectname, // Replace with actual project name if needed
         postedBy: postedBy,
         userImg: userImg,
+        areasqft: areaftsq,
         postedFrom: postedFrom,
         category: category,
         userId: auth.currentUser!.uid,
@@ -209,6 +211,7 @@ class AddpropertyController extends GetxController {
         projectName: projectname, // Replace with actual project name if needed
         postedBy: postedBy,
         userImg: userImg,
+        areasqft: areaftsq,
         postedFrom: postedFrom,
         category: category,
         userId: auth.currentUser!.uid,
@@ -339,7 +342,7 @@ class AddpropertyController extends GetxController {
           .get();
 
       nearbyProperties.clear(); // Clear the current list of nearby properties
-      
+
       for (var doc in snapshot.docs) {
         var data = doc.data() as Map<String, dynamic>;
 
@@ -357,6 +360,19 @@ class AddpropertyController extends GetxController {
     }
   }
 
+  void filterProperties(String query) {
+    if (query.isEmpty) {
+      filteredProperties.value = properties; // Reset to all if no query
+    } else {
+      filteredProperties.value = properties
+          .where((property) => property.title
+              .toLowerCase()
+              .contains(query.toLowerCase())) // Filter properties
+          .toList();
+    }
+    update();
+  }
+
   @override
   void onInit() {
     // TODO: implement onInit
@@ -364,6 +380,7 @@ class AddpropertyController extends GetxController {
     fetchRecentProperties();
     fetchNearbyProperties(location["city"]);
     fetchProperties();
+    filteredProperties.value = properties;
     super.onInit();
   }
 }

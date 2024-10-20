@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
+import 'package:real_estate/controller/addproperty_controller.dart';
 import 'package:real_estate/controller/logincontroller.dart';
 import 'package:real_estate/controller/map_controller.dart';
 import 'package:real_estate/utils/colors.dart';
@@ -24,6 +25,7 @@ class HomeHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     MapController mapcntrl = Get.put(MapController());
     AuthController cntrl = Get.put(AuthController());
+    AddpropertyController pCntrl = Get.put(AddpropertyController());
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: sb * .3),
       child: Container(
@@ -41,7 +43,7 @@ class HomeHeader extends StatelessWidget {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [buildHomesearch(sb), buildFilter(sb)],
+              children: [buildHomesearch(sb, pCntrl), buildFilter(sb)],
             )
           ],
         ),

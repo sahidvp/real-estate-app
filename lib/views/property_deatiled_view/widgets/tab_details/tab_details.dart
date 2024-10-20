@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:real_estate/utils/colors.dart';
 import 'package:real_estate/utils/imagespath.dart';
 
-import 'property_fecilty.dart';
+import '../property_fecilty.dart';
 
 Container tabDetails(double sw, double sh, dynamic property) {
   final category = property.category;
@@ -17,9 +18,12 @@ Container tabDetails(double sw, double sh, dynamic property) {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                featureCount(sw, Imagepath.carparking),
-                featureCount(sw, Imagepath.bedroom),
-                featureCount(sw, Imagepath.bathroom)
+                featureCount(
+                    sw, Imagepath.carparking, "Parking", property.carParking),
+                featureCount(
+                    sw, Imagepath.bedroom, "Bedroom", property.bedrooms),
+                featureCount(
+                    sw, Imagepath.bathroom, "Bathroom", property.bathrooms)
               ],
             ),
           ),
@@ -27,10 +31,7 @@ Container tabDetails(double sw, double sh, dynamic property) {
         SizedBox(
           height: sh * .02,
         ),
-        listingAgent(sh),
-        // SizedBox(
-        //   height: sh * .02,
-        // ),
+        listingAgent(sh, property),
         Padding(
           padding:
               EdgeInsets.symmetric(horizontal: sw * .04, vertical: sw * .04),
@@ -54,7 +55,8 @@ Container tabDetails(double sw, double sh, dynamic property) {
                         style: AppTextStyles.detailText,
                       ),
                       Text("Listed by", style: AppTextStyles.detailText),
-                      Text("Floors", style: AppTextStyles.detailText),
+                      if (category != "Land")
+                        Text("Floors", style: AppTextStyles.detailText),
                       Text("Area", style: AppTextStyles.detailText),
                       Text(category == "Land" ? "Length" : "Status",
                           style: AppTextStyles.detailText),
@@ -70,17 +72,25 @@ Container tabDetails(double sw, double sh, dynamic property) {
                       Text(property.listedBy, style: AppTextStyles.detailText2),
                       if (category != "Land")
                         Text(property.floors, style: AppTextStyles.detailText2),
-                      Text("Built area", style: AppTextStyles.detailText2),
-                      Text("Status", style: AppTextStyles.detailText2),
-                      Text("Furnishing", style: AppTextStyles.detailText2),
+                      Text(property.areasqft, style: AppTextStyles.detailText2),
+                      Text(
+                          category == "Land"
+                              ? property.length
+                              : property.constructionStatus,
+                          style: AppTextStyles.detailText2),
+                      Text(
+                          category == "Land"
+                              ? property.breadth
+                              : property.furnishing,
+                          style: AppTextStyles.detailText2),
                     ],
                   )
                 ],
               ),
-              Padding(
+              const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                   child: Divider()),
-              Padding(
+              const Padding(
                 padding: EdgeInsets.only(left: 20, bottom: 10),
                 child: Text(
                   "Description",
@@ -88,12 +98,12 @@ Container tabDetails(double sw, double sh, dynamic property) {
                 ),
               ),
               Padding(
-                  padding: EdgeInsets.only(left: 20, bottom: 10),
+                  padding: const EdgeInsets.only(left: 20, bottom: 10),
                   child: Text(property.description)),
             ]),
           ),
         ),
-        propertyFeciliities(sw),
+        if (category != "Land") propertyFeciliities(sw),
         SizedBox(
           height: sh * .02,
         ),
@@ -102,31 +112,40 @@ Container tabDetails(double sw, double sh, dynamic property) {
   );
 }
 
-Padding listingAgent(double sh) {
+Padding listingAgent(double sh, dynamic property) {
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 17),
     child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
       Row(
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(20),
-            child: SvgPicture.asset(
-              Imagepath.usertemp,
-              width: sh * .06,
-            ),
-          ),
-          const Text(" Sandeep. s", style: AppTextStyles.minitext3),
+          CircleAvatar(
+              child: property.userImg != null
+                  ? ClipOval(
+                      child: Image.network(
+                        fit: BoxFit.cover,
+                        property.userImg,
+                        width: sh * .08,
+                      ),
+                    )
+                  : SvgPicture.asset(
+                      Imagepath.usertemp,
+                      width: sh * .06,
+                      height: sh * .06,
+                    )),
+          Padding(
+              padding: EdgeInsets.only(left: 10),
+              child: Text(property.postedBy, style: AppTextStyles.minitext3)),
         ],
       ),
       const Icon(
-        Icons.messenger,
+        IconsaxPlusBold.sms,
         color: AppColors.primary,
       )
     ]),
   );
 }
 
-Container featureCount(double sw, String svgicon) {
+Container featureCount(double sw, String svgicon, String feature, featCount) {
   return Container(
     decoration: BoxDecoration(
         color: Colors.white,
@@ -139,15 +158,15 @@ Container featureCount(double sw, String svgicon) {
       children: [
         SvgPicture.asset(
           svgicon,
-          width: sw * .1,
+          width: sw * .06,
         ),
         Text(
-          "3.0",
+          featCount,
           style: AppTextStyles.featurecount,
         ),
         Flexible(
             child: Text(
-          "Bedroom",
+          feature,
           style: TextStyle(color: Colors.grey, fontSize: 12),
         ))
       ],

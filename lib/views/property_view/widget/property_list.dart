@@ -30,13 +30,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:real_estate/controller/addproperty_controller.dart';
+import 'package:real_estate/utils/colors.dart';
 import 'package:real_estate/views/home_page/home_body/widgets/build_propertytag.dart';
 import 'package:real_estate/views/home_page/home_header/widget/build_location.dart';
 import 'package:real_estate/views/listing_property/widgets/build_currebtlocation.dart';
 import 'package:real_estate/views/property_deatiled_view/propery_details.dart';
 
-class PropertyList extends StatelessWidget {
-  const PropertyList({super.key, required this.sb, required this.properties});
+class PropertyListTwo extends StatelessWidget {
+  const PropertyListTwo(
+      {super.key, required this.sb, required this.properties});
 
   final double sb;
   final List properties;
@@ -46,18 +48,22 @@ class PropertyList extends StatelessWidget {
     return GetBuilder<AddpropertyController>(
       init: AddpropertyController(),
       builder: (controller) {
-        controller.fetchNearbyProperties(controller.location["city"]);
-        return controller.location["city"] == ""
-            ? buildCurrentlocation(controller, sb)
+        return controller.isLoading.value
+            ? CircularProgressIndicator()
             : properties.isEmpty
-                ? Text("no data")
+                ? Center(
+                    child: Text(
+                      "No Results ",
+                      style: AppTextStyles.headline1,
+                    ),
+                  )
                 : ListView.builder(
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    itemCount:
-                        properties.length, // Show all properties from the list
+                    itemCount: controller.filteredProperties
+                        .length, // Show all properties from the list
                     itemBuilder: (context, i) {
-                      final property = properties[i];
+                      final property = controller.filteredProperties[i];
                       return propertyTag(
                           sb, property); // Pass each property to the widget
                     },

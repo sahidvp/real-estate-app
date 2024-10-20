@@ -156,7 +156,8 @@ import 'package:real_estate/utils/media_query.dart';
 import 'package:real_estate/views/property_deatiled_view/widgets/bottom_body.dart';
 import 'package:real_estate/views/property_deatiled_view/widgets/silver_appbar.dart';
 import 'package:real_estate/views/property_deatiled_view/widgets/silver_list.dart';
-import 'package:real_estate/views/property_deatiled_view/widgets/tab_details.dart';
+import 'package:real_estate/views/property_deatiled_view/widgets/tab_details/tab_details.dart';
+import 'package:real_estate/views/property_deatiled_view/widgets/tab_galelry/tab_gallery.dart';
 
 class PropertyDetailsView extends StatelessWidget {
   final dynamic property;
@@ -189,7 +190,7 @@ class PropertyDetailsView extends StatelessWidget {
                 children: [
                   SingleChildScrollView(
                       child: tabDetails(screenWidth, screenHeight, property)),
-                  tabGallery()
+                  SingleChildScrollView(child: tabGallery(property.imageUrls))
                 ],
               ),
             ),
@@ -198,12 +199,6 @@ class PropertyDetailsView extends StatelessWidget {
         bottomNavigationBar:
             bottomBody(screenHeight, screenWidth, property.price),
       ),
-    );
-  }
-
-  Container tabGallery() {
-    return Container(
-      height: 200,
     );
   }
 }

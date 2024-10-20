@@ -23,8 +23,6 @@ class HomeScreen extends StatelessWidget {
     // controller.fetchRecentProperties();
     // controller.fetchNearbyProperties(userCity);
 
-  
-
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -32,7 +30,7 @@ class HomeScreen extends StatelessWidget {
           SizedBox(height: sb * .5),
           HomeHeader(sb: sb),
           SizedBox(height: sb * .2),
-          HomeBodyone(sb: sb, category: category),
+          //  HomeBodyone(sb: sb, category: category),
           SizedBox(height: sb * .2),
           Expanded(
             child: SingleChildScrollView(

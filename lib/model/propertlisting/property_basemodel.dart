@@ -12,6 +12,7 @@ abstract class ListingModel {
   String projectName;
   String postedBy;
   String? userImg;
+  String areasqft;
   String postedFrom;
   String category;
   String userId;
@@ -32,6 +33,7 @@ abstract class ListingModel {
     required this.projectName,
     required this.postedBy,
     this.userImg,
+    required this.areasqft,
     required this.postedFrom,
     required this.category,
     required this.userId,
@@ -53,6 +55,7 @@ abstract class ListingModel {
       'projectName': projectName,
       'postedBy': postedBy,
       'userImg': userImg,
+      'areasqft': areasqft,
       'postedFrom': postedFrom,
       'category': category,
       'userId': userId,
