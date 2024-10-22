@@ -40,6 +40,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:real_estate/controller/addproperty_controller.dart';
 import 'package:real_estate/controller/bottomnav_controller.dart';
+import 'package:real_estate/controller/homepage_controller.dart';
+import 'package:real_estate/model/propertlisting/property_model.dart';
 
 import 'package:real_estate/utils/colors.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
@@ -47,6 +49,7 @@ import 'package:iconsax_plus/iconsax_plus.dart';
 Container buildHomesearch(double sb, AddpropertyController propertyController) {
   BottomNavController cntrl = Get.put(BottomNavController());
   TextEditingController searchController = TextEditingController();
+  HomeBodyController hCntrl = HomeBodyController();
 
   WidgetsBinding.instance.addPostFrameCallback((_) {
     searchController.clear();

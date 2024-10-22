@@ -10,7 +10,7 @@ import 'home_body/widgets/property_list.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
-  static const List category = ["All", "HOUSE", "APARTMENT", "VILLA", "LAND"];
+  //static const List category = ["All", "HOUSE", "APARTMENT", "VILLA", "LAND"];
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class HomeScreen extends StatelessWidget {
           SizedBox(height: sb * .5),
           HomeHeader(sb: sb),
           SizedBox(height: sb * .2),
-          //  HomeBodyone(sb: sb, category: category),
+           // HomeBodyone(sb: sb, category: category),
           SizedBox(height: sb * .2),
           Expanded(
             child: SingleChildScrollView(

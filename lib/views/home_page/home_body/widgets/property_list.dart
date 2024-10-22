@@ -30,6 +30,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:real_estate/controller/addproperty_controller.dart';
+import 'package:real_estate/utils/colors.dart';
 import 'package:real_estate/views/home_page/home_body/widgets/build_propertytag.dart';
 import 'package:real_estate/views/home_page/home_header/widget/build_location.dart';
 import 'package:real_estate/views/listing_property/widgets/build_currebtlocation.dart';
@@ -48,7 +49,21 @@ class PropertyList extends StatelessWidget {
       builder: (controller) {
         controller.fetchNearbyProperties(controller.location["city"]);
         return controller.location["city"] == ""
-            ? buildCurrentlocation(controller, sb)
+            ? Center(
+                child: Column(
+                  children: [
+                    Icon(
+                      Icons.location_off,
+                      color: AppColors.primary,
+                      size: sb,
+                    ),
+                    Text(
+                      "Choose location",
+                      style: AppTextStyles.headline1,
+                    )
+                  ],
+                ),
+              )
             : properties.isEmpty
                 ? Text("no data")
                 : ListView.builder(
