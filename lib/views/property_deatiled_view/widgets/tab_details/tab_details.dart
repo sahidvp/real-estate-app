@@ -103,7 +103,7 @@ Container tabDetails(double sw, double sh, dynamic property) {
             ]),
           ),
         ),
-        if (category != "Land") propertyFeciliities(sw),
+        if (category != "Land") propertyFeciliities(sw,property.environment),
         SizedBox(
           height: sh * .02,
         ),

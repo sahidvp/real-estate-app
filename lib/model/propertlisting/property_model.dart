@@ -22,5 +22,13 @@ class PropertyModel {
     "Swiming pool"
   ];
   static List<String> listedby = ["Dealer", "Owner"];
-   static const List category = ["All", "HOUSE", "APARTMENT", "VILLA", "LAND"];
+  static const List<String> categoryFilter = [
+    "All",
+    "House",
+    "Apartment",
+    "Villa",
+    "Land"
+  ];
+  static const List<String> typeFilter = ["All", "Rent", "Sale"];
+  static const List<String> listedbyFilter = ["All", "Dealer", "Owner"];
 }

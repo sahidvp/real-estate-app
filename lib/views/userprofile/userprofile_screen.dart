@@ -57,10 +57,11 @@ class UserProfile extends StatelessWidget {
                   ),
                   SizedBox(height: sh * .05),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      buildInfoCard('5.0', 'Properties', Icons.star, context),
+                      //  buildInfoCard('5.0', 'Properties', Icons.star, context),
                       buildInfoCard('24', 'Properties', Icons.home, context),
+                      SizedBox(width: sh * .05),
                       buildInfoCard('10', 'Sold', Icons.sell, context),
                     ],
                   ),

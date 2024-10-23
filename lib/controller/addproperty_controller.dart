@@ -56,6 +56,10 @@ class AddpropertyController extends GetxController {
   var filteredProperties = [].obs;
   var recentProperties = <dynamic>[].obs;
   var nearbyProperties = <dynamic>[].obs;
+  var categoryFilter=0.obs;
+  var listedbyFilter=0.obs;
+  var typeFilter=0.obs;
+  var filterIndex = 0.obs;
   // Loading state
 
   void updateLocation(String key, String value) {

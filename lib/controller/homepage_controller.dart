@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
 class HomeBodyController extends GetxController {
-  var selectedIndex = 0.obs;
+  var selectedIndices = <int>[].obs;
   var favoriteItems = <int, bool>{}.obs;
 
   void toggleFavorite(int itemId) {
@@ -17,6 +17,10 @@ class HomeBodyController extends GetxController {
   }
 
   void updateSelectedIndex(int index) {
-    selectedIndex.value = index;
+      if (selectedIndices.contains(index)) {
+      selectedIndices.remove(index); // Remove if already selected
+    } else {
+      selectedIndices.add(index); // Add if not selected
+    }
   }
 }

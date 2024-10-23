@@ -66,46 +66,6 @@ GestureDetector propertyTag(double sb, dynamic property) {
                   style: AppTextStyles.priceText,
                 ),
                 categoryTag(property.category),
-                // Padding(
-                //   padding: EdgeInsetsDirectional.symmetric(vertical: 10),
-                //   child: Row(
-                //     children: [
-                //       SvgPicture.asset(
-                //         Imagepath.bedroom,
-                //         width: sb * .25,
-                //         height: sb * .25,
-                //       ),
-                //       Text(
-                //         "3.0",
-                //         style: AppTextStyles.featurecount,
-                //       ),
-                //       SizedBox(
-                //         width: 10,
-                //       ),
-                //       SvgPicture.asset(
-                //         Imagepath.bathroom,
-                //         width: sb * .25,
-                //         height: sb * .25,
-                //       ),
-                //       Text(
-                //         "2.0",
-                //         style: AppTextStyles.featurecount,
-                //       ),
-                //       SizedBox(
-                //         width: 10,
-                //       ),
-                //       SvgPicture.asset(
-                //         Imagepath.floorno,
-                //         width: sb * .25,
-                //         height: sb * .25,
-                //       ),
-                //       Text(
-                //         "2.0",
-                //         style: AppTextStyles.featurecount,
-                //       )
-                //     ],
-                //   ),
-                // )
               ],
             ),
           )

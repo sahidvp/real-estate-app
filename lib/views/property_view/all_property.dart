@@ -31,20 +31,23 @@ class AllProperty extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [buildHomesearch(sb, controller), buildFilter(sb)],
             ),
-            SizedBox(
-              height: sb * .2,
+            // SizedBox(
+            //   height: sb * .2,
+            // ),
+            //  HomeBodyone(sb: sb, category: PropertyModel.category),
+            Expanded(
+              child: Obx(() {
+                // Observe properties
+                if (controller.isLoading.value) {
+                  return const Center(
+                      child: SizedBox.shrink()); // Loading indicator
+                }
+                return PropertyListTwo(
+                    sb: sb,
+                    properties:
+                        controller.filteredProperties); // Pass properties
+              }),
             ),
-            HomeBodyone(sb: sb, category: PropertyModel.category),
-            Obx(() {
-              // Observe properties
-              if (controller.isLoading.value) {
-                return const Center(
-                    child: SizedBox.shrink()); // Loading indicator
-              }
-              return PropertyListTwo(
-                  sb: sb,
-                  properties: controller.filteredProperties); // Pass properties
-            }),
           ],
         ),
       ),
