@@ -29,7 +29,10 @@ class AllProperty extends StatelessWidget {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [buildHomesearch(sb, controller), buildFilter(sb)],
+              children: [
+                buildHomesearch(sb, controller),
+                Obx(() => buildFilter(sb, controller.filterCount.value)),
+              ],
             ),
             // SizedBox(
             //   height: sb * .2,

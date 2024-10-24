@@ -7,6 +7,8 @@ import 'package:real_estate/utils/colors.dart';
 import 'package:real_estate/utils/media_query.dart';
 import 'package:real_estate/views/home_page/home_body/home_body.dart';
 
+import 'widget/filter_buttons.dart';
+
 class FilterPage extends StatelessWidget {
   const FilterPage({super.key});
 
@@ -19,29 +21,26 @@ class FilterPage extends StatelessWidget {
       appBar: AppBar(
           backgroundColor: AppColors.fieldcolor,
           centerTitle: true,
-          title: Text("Filter"),
-          leading: ArrowButton()),
+          title: const Text("Filter"),
+          leading: const ArrowButton()),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Price Range Slider
-            Text(
+            const Text(
               "Price Range",
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
             ),
-            Slider(
-              value: 20000,
-              min: 0,
-              max: 100000,
-              activeColor: AppColors.primary,
-              inactiveColor: Colors.grey,
-              onChanged: (value) {},
+            Row(
+              children: [
+                priceRange(sb, controller.minAmount, "min"),
+                priceRange(sb, controller.maxAmount, "max")
+              ],
             ),
-            SizedBox(height: 10),
 
-            Text(
+            const Text(
               "Type",
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
             ),
@@ -52,9 +51,8 @@ class FilterPage extends StatelessWidget {
                 onSelected: (index) {
                   controller.typeFilter.value = index;
                 }),
-            SizedBox(height: 20),
 
-            Text(
+            const Text(
               "Listed by",
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
             ),
@@ -65,9 +63,9 @@ class FilterPage extends StatelessWidget {
                 onSelected: (index) {
                   controller.listedbyFilter.value = index;
                 }),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
 
-            Text(
+            const Text(
               "Category",
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
             ),
@@ -78,73 +76,28 @@ class FilterPage extends StatelessWidget {
                 onSelected: (index) {
                   controller.categoryFilter.value = index;
                 }),
-            Spacer(),
+            const Spacer(),
 
             // Reset and Apply Buttons
-            Row(
-              children: [
-                Expanded(
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.grey[300],
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25)),
-                    ),
-                    onPressed: () {
-                      // Reset filter action
-                    },
-                    child: Text(
-                      "Reset Filter",
-                      style: TextStyle(color: Colors.black),
-                    ),
-                  ),
-                ),
-                SizedBox(width: 10),
-                Expanded(
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.primary,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25)),
-                    ),
-                    onPressed: () {
-                      // Apply filter action
-                    },
-                    child: Text(
-                      "Apply",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            // filterButtons(controller, minAmount, maxAmount),
           ],
         ),
       ),
+      bottomNavigationBar:
+          filterButtons(controller, controller.minAmount, controller.maxAmount),
     );
   }
 
-  // Widget for the toggle buttons (Rent, Sale, All, etc.)
-  Widget _buildToggleButton(String text) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 5.0),
-      child: GestureDetector(
-        onTap: () {
-          // Toggle button action
-        },
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.grey[300], // Can change color on selection
-            borderRadius: BorderRadius.circular(25),
-          ),
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          child: Text(
-            text,
-            style: TextStyle(
-              color: Colors.black,
-            ),
-          ),
-        ),
+  SizedBox priceRange(
+      double sb, TextEditingController controller, String label) {
+    return SizedBox(
+      width: sb * 1.5,
+      height: sb * .7,
+      child: TextField(
+        keyboardType: TextInputType.number,
+        controller: controller,
+        decoration:
+            InputDecoration(labelText: label, border: OutlineInputBorder()),
       ),
     );
   }

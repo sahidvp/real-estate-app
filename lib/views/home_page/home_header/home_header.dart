@@ -43,7 +43,10 @@ class HomeHeader extends StatelessWidget {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [buildHomesearch(sb, pCntrl), buildFilter(sb)],
+              children: [
+                buildHomesearch(sb, pCntrl),
+                buildFilter(sb, pCntrl.filterCount.value)
+              ],
             )
           ],
         ),

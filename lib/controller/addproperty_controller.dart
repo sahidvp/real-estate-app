@@ -50,16 +50,23 @@ class AddpropertyController extends GetxController {
   final TextEditingController price = TextEditingController();
   final TextEditingController length = TextEditingController();
   final TextEditingController breadth = TextEditingController();
+
   String postedBy = "";
   String postedFrom = "";
   var properties = <dynamic>[].obs;
   var filteredProperties = [].obs;
   var recentProperties = <dynamic>[].obs;
   var nearbyProperties = <dynamic>[].obs;
-  var categoryFilter=0.obs;
-  var listedbyFilter=0.obs;
-  var typeFilter=0.obs;
+  var categoryFilter = 0.obs;
+  var listedbyFilter = 0.obs;
+  var typeFilter = 0.obs;
   var filterIndex = 0.obs;
+  var filterCount = 0.obs;
+  int? startingRange;
+  int? endingRange;
+  TextEditingController minAmount = TextEditingController();
+  TextEditingController maxAmount = TextEditingController();
+
   // Loading state
 
   void updateLocation(String key, String value) {
@@ -281,30 +288,83 @@ class AddpropertyController extends GetxController {
     }
   }
 
+  // Future<void> fetchProperties() async {
+  //   isLoading.value = true; // Set loading to true
+
+  //   try {
+  //     QuerySnapshot snapshot = await db.collection('properties').get();
+  //     //  print(snapshot.docs);
+
+  //     properties.clear(); // Clear the current list of properties
+
+  //     for (var doc in snapshot.docs) {
+  //       var data = doc.data() as Map<String, dynamic>;
+
+  //       // Create the appropriate model based on the category
+  //       if (data['category'] == 'Land') {
+  //         properties.add(LandListingModel.fromMap(data));
+  //       } else {
+  //         properties.add(PropertyListingModel.fromMap(
+  //             data)); // Adjust for your other property models
+  //       }
+  //     }
+  //   } catch (e) {
+  //     print("Error fetching properties: $e");
+  //   } finally {
+  //     isLoading.value = false; // Set loading to false after fetching
+  //   }
+  // }
+
   Future<void> fetchProperties() async {
     isLoading.value = true; // Set loading to true
 
     try {
-      QuerySnapshot snapshot = await db.collection('properties').get();
-      //  print(snapshot.docs);
+      Query query = db.collection('properties');
 
-      properties.clear(); // Clear the current list of properties
+      if (categoryFilter.value != 0) {
+        query = query.where('category',
+            isEqualTo: PropertyModel.categoryFilter[categoryFilter.value]);
+      }
+
+      if (typeFilter.value != 0) {
+        query = query.where('transactionType',
+            isEqualTo: PropertyModel.typeFilter[typeFilter.value]);
+      }
+
+      if (listedbyFilter.value != 0) {
+        query = query.where('listedBy',
+            isEqualTo: PropertyModel.listedbyFilter[listedbyFilter.value]);
+      }
+
+      QuerySnapshot snapshot = await query.get();
+
+      properties.clear();
 
       for (var doc in snapshot.docs) {
         var data = doc.data() as Map<String, dynamic>;
-
-        // Create the appropriate model based on the category
-        if (data['category'] == 'Land') {
-          properties.add(LandListingModel.fromMap(data));
+        if (startingRange != null && endingRange != null) {
+          int price = int.parse(data['price']);
+          if (price >= startingRange! && price <= endingRange!) {
+            if (data['category'] == 'Land') {
+              properties.add(LandListingModel.fromMap(data));
+            } else {
+              properties.add(PropertyListingModel.fromMap(
+                  data)); // Adjust this for other property models
+            }
+          }
         } else {
-          properties.add(PropertyListingModel.fromMap(
-              data)); // Adjust for your other property models
+          if (data['category'] == 'Land') {
+            properties.add(LandListingModel.fromMap(data));
+          } else {
+            properties.add(PropertyListingModel.fromMap(
+                data)); // Adjust this for other property models
+          }
         }
       }
     } catch (e) {
       print("Error fetching properties: $e");
     } finally {
-      isLoading.value = false; // Set loading to false after fetching
+      isLoading.value = false;
     }
   }
 
@@ -362,6 +422,26 @@ class AddpropertyController extends GetxController {
     } finally {
       isLoading.value = false;
     }
+  }
+
+  void updateFilterCount() {
+    int count = 0;
+    if (startingRange != null && endingRange != null) count++;
+    if (categoryFilter.value != 0) count++;
+    if (typeFilter.value != 0) count++;
+    if (listedbyFilter.value != 0) count++;
+
+    filterCount.value = count;
+  }
+
+  void filterClear() {
+    typeFilter.value = 0;
+    categoryFilter.value = 0;
+    listedbyFilter.value = 0;
+    minAmount.clear();
+    maxAmount.clear();
+    startingRange = null;
+    endingRange = null;
   }
 
   void filterProperties(String query) {

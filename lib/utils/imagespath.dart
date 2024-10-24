@@ -15,4 +15,10 @@ class Imagepath {
   static const String bathroom = "asset/icons/bathtub-icon.svg";
   static const String carparking = "asset/icons/carparking.svg";
   static const String floorno = "asset/icons/multiple-layers-icon.svg";
+  static const String gym = "asset/icons/gg--gym.svg";
+  static const String swimingpool = "asset/icons/maki_swimming.svg";
+  static const String park = "asset/icons/Park-Bench--Streamline-Ultimate.svg";
+  static const String garden = "asset/icons/Organic-Plant-Grow-1--Streamline-Ultimate.svg";
+  static const String hometheater = "asset/icons/Organic-Plant-Grow-1--Streamline-Ultimate.svg";
+
 }

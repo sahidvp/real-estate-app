@@ -9,27 +9,28 @@ Padding propertyFeciliities(double sw, List fecility) {
     child: Wrap(
       spacing: 8,
       runSpacing: 8,
-      children: List.generate(
-          fecility.length,
-          (index) => Container(
-                width: sw * .20,
-                height: sw * .2,
-                decoration: BoxDecoration(
-                    boxShadow: [AppDecoration.boxShadow],
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(15)),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Flexible(child: SvgPicture.asset(Imagepath.carparking)),
-                    Flexible(
-                        child: Text(
-                      fecility[index],
-                      style: AppTextStyles.locationtext,
-                    ))
-                  ],
-                ),
-              )),
+      children: List.generate(fecility.length, (index) {
+        String result = fecility[index].replaceAll(" ", "").toLowerCase();
+        return Container(
+          width: sw * .20,
+          height: sw * .2,
+          decoration: BoxDecoration(
+              boxShadow: [AppDecoration.boxShadow],
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(15)),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Flexible(child: SvgPicture.asset("asset/icons/$result.svg")),
+              Flexible(
+                  child: Text(
+                fecility[index],
+                style: AppTextStyles.locationtext,
+              ))
+            ],
+          ),
+        );
+      }),
     ),
   );
 }
