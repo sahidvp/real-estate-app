@@ -380,7 +380,7 @@ class AddpropertyController extends GetxController {
       recentProperties.clear(); // Clear the current list of recent properties
 
       for (var doc in snapshot.docs) {
-        print("snapshot doc");
+        print("snapshot doc ${doc.id}");
         var data = doc.data() as Map<String, dynamic>;
 
         if (data['category'] == 'Land') {
@@ -423,6 +423,70 @@ class AddpropertyController extends GetxController {
       isLoading.value = false;
     }
   }
+  /////////
+  var savedStatus = <String, bool>{}.obs;
+
+  Future<void> savedProperties(String propertyId, bool toAdd) async {
+    final querySnapshot = await db
+        .collection('properties')
+        .where('id', isEqualTo: propertyId)
+        .get();
+
+    if (querySnapshot.docs.isNotEmpty) {
+      final docId = querySnapshot.docs.first.id;
+
+      if (toAdd) {
+        await db.collection('properties').doc(docId).update({
+          'propertySaved': FieldValue.arrayUnion([auth.currentUser!.uid])
+        });
+        savedStatus[propertyId] = true; // Update the saved status
+      } else {
+        await db.collection('properties').doc(docId).update({
+          'propertySaved': FieldValue.arrayRemove([auth.currentUser!.uid])
+        });
+        savedStatus[propertyId] = false; // Update the saved status
+      }
+      successSnackbar("Success", toAdd ? "Property saved" : "Property removed");
+    } else {
+      print("No document found with id: $propertyId");
+    }
+    update();
+  }
+
+   void checkSavedStatus(String propertyId, List<dynamic> propertySavedList) {
+    savedStatus[propertyId] = propertySavedList.contains(auth.currentUser!.uid);
+  }
+  
+///////////////////////
+
+  // savedProperties(String property, bool toAdd) async {
+  //   // Query the 'properties' collection to find the document with the 'id' field equal to 'property'
+  //   final querySnapshot = await db
+  //       .collection('properties')
+  //       .where('id', isEqualTo: property)
+  //       .get();
+
+  //   if (querySnapshot.docs.isNotEmpty) {
+  //     // Get the document ID of the matched document
+  //     final docId = querySnapshot.docs.first.id;
+
+  //     // Update the document based on the toAdd flag
+  //     if (toAdd) {
+  //       await db.collection('properties').doc(docId).update({
+  //         'propertySaved': FieldValue.arrayUnion([auth.currentUser!.uid])
+  //       });
+  //       successSnackbar("Success", "property saved");
+  //     } else {
+  //       await db.collection('properties').doc(docId).update({
+  //         'propertySaved': FieldValue.arrayRemove([auth.currentUser!.uid])
+  //       });
+  //       successSnackbar("Success", "property removed");
+  //     }
+  //   } else {
+  //     print("No document found with id: $property");
+  //   }
+  //   update();
+  // }
 
   void updateFilterCount() {
     int count = 0;

@@ -147,6 +147,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:real_estate/controller/addproperty_controller.dart';
 
 import 'package:real_estate/controller/homepage_controller.dart';
 import 'package:real_estate/utils/colors.dart';
@@ -165,18 +166,19 @@ class PropertyDetailsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    HomeBodyController hController = Get.put(HomeBodyController());
+    AddpropertyController controller = Get.find();
     final screenHeight = MediaQueryUtil.getHeightPercentage(context, 1);
     final screenWidth = MediaQueryUtil.getWidthPercentage(context, 1);
     final sh = screenHeight * .02;
     var sb = SizedBox(height: sh);
+    // controller.checkSavedStatus(property.id, property.propertySaved);
 
     return DefaultTabController(
       length: 2,
       child: Scaffold(
         body: CustomScrollView(
           slivers: [
-            silverAppbar(hController, property.imageUrls[0]),
+            silverAppbar(controller, property.imageUrls[0], property),
             silverList(
               sh,
               sb,
