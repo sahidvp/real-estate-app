@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:iconsax_plus/iconsax_plus.dart';
+
 import 'package:real_estate/utils/colors.dart';
 import 'package:real_estate/utils/imagespath.dart';
+import 'package:real_estate/views/property_deatiled_view/widgets/tab_details/features_count.dart';
+import 'package:real_estate/views/property_deatiled_view/widgets/tab_details/listing_agent.dart';
 
 import '../property_fecilty.dart';
 
@@ -112,64 +113,4 @@ Container tabDetails(double sw, double sh, dynamic property) {
   );
 }
 
-Padding listingAgent(double sh, dynamic property) {
-  return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 17),
-    child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-      Row(
-        children: [
-          CircleAvatar(
-              child: property.userImg != null
-                  ? ClipOval(
-                      child: Image.network(
-                        fit: BoxFit.cover,
-                        property.userImg,
-                        width: sh * .08,
-                      ),
-                    )
-                  : SvgPicture.asset(
-                      Imagepath.usertemp,
-                      width: sh * .06,
-                      height: sh * .06,
-                    )),
-          Padding(
-              padding: EdgeInsets.only(left: 10),
-              child: Text(property.postedBy, style: AppTextStyles.minitext3)),
-        ],
-      ),
-      const Icon(
-        IconsaxPlusBold.sms,
-        color: AppColors.primary,
-      )
-    ]),
-  );
-}
 
-Container featureCount(double sw, String svgicon, String feature, featCount) {
-  return Container(
-    decoration: BoxDecoration(
-        color: Colors.white,
-        boxShadow: [AppDecoration.boxShadow],
-        borderRadius: BorderRadius.circular(10)),
-    width: sw * .28,
-    height: sw * .2,
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        SvgPicture.asset(
-          svgicon,
-          width: sw * .06,
-        ),
-        Text(
-          featCount,
-          style: AppTextStyles.featurecount,
-        ),
-        Flexible(
-            child: Text(
-          feature,
-          style: TextStyle(color: Colors.grey, fontSize: 12),
-        ))
-      ],
-    ),
-  );
-}

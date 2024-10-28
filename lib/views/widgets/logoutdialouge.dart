@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:real_estate/controller/firbase/firebase_constant.dart';
+import 'package:real_estate/controller/logincontroller.dart';
 import 'package:real_estate/utils/colors.dart';
 import 'package:real_estate/views/Loginpage/loginscreen.dart';
 
 showConfirmationDialog(BuildContext context) {
+  final aCtrl = Get.put(AuthController());
   showDialog(
     context: context,
     builder: (BuildContext context) {
@@ -21,7 +23,6 @@ showConfirmationDialog(BuildContext context) {
         actions: <Widget>[
           TextButton(
             onPressed: () {
-              
               Get.back();
             },
             child: Text(
@@ -31,8 +32,9 @@ showConfirmationDialog(BuildContext context) {
           ),
           TextButton(
             onPressed: () async {
+              aCtrl.signOut();
               Get.back();
-              await auth.signOut();
+
               Get.offAll(() => const Loginscreen());
             },
             child: Text(

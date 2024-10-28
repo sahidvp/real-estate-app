@@ -102,7 +102,7 @@ import 'package:real_estate/controller/logincontroller.dart';
 import 'package:real_estate/utils/colors.dart';
 import 'package:real_estate/utils/icons.dart';
 import 'package:real_estate/views/home_page/home_page.dart';
-import 'package:real_estate/views/chat_screen/chat_screen.dart';
+import 'package:real_estate/views/chat_screen/chat_list/chat_screen.dart';
 import 'package:real_estate/views/listing_property/addproperty_screen.dart';
 import 'package:real_estate/views/property_view/all_property.dart';
 import 'package:real_estate/views/select_category/select_category.dart';
@@ -126,7 +126,8 @@ class BottomNavbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   
+    cntrl.getUserData();
+
     return Scaffold(
       // appBar: AppBar(
       //   backgroundColor: Colors.transparent,
