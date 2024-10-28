@@ -57,6 +57,9 @@ class AddpropertyController extends GetxController {
   var filteredProperties = [].obs;
   var recentProperties = <dynamic>[].obs;
   var nearbyProperties = <dynamic>[].obs;
+  var favProperties = <dynamic>[].obs;
+  var myProperties = <dynamic>[].obs;
+
   var categoryFilter = 0.obs;
   var listedbyFilter = 0.obs;
   var typeFilter = 0.obs;
@@ -423,6 +426,7 @@ class AddpropertyController extends GetxController {
       isLoading.value = false;
     }
   }
+
   /////////
   var savedStatus = <String, bool>{}.obs;
 
@@ -447,16 +451,43 @@ class AddpropertyController extends GetxController {
         savedStatus[propertyId] = false; // Update the saved status
       }
       successSnackbar("Success", toAdd ? "Property saved" : "Property removed");
+      fetchSavedProperties(auth.currentUser!.uid);
     } else {
       print("No document found with id: $propertyId");
     }
     update();
   }
 
-   void checkSavedStatus(String propertyId, List<dynamic> propertySavedList) {
+  void checkSavedStatus(String propertyId, List<dynamic> propertySavedList) {
     savedStatus[propertyId] = propertySavedList.contains(auth.currentUser!.uid);
   }
-  
+
+  Future<void> fetchSavedProperties(String userId) async {
+    try {
+      // Fetch properties where 'propertySaved' array contains the current user's ID
+      QuerySnapshot snapshot = await db
+          .collection('properties')
+          .where('propertySaved', arrayContains: userId)
+          .get();
+
+      favProperties.clear(); // Clear the current list of saved properties
+
+      for (var doc in snapshot.docs) {
+        var data = doc.data() as Map<String, dynamic>;
+
+        if (data['category'] == 'Land') {
+          favProperties.add(LandListingModel.fromMap(data));
+        } else {
+          favProperties.add(PropertyListingModel.fromMap(data));
+        }
+      }
+
+      update(); // Notify listeners to rebuild the UI
+    } catch (e) {
+      print("Error fetching saved properties: $e");
+    } finally {}
+  }
+
 ///////////////////////
 
   // savedProperties(String property, bool toAdd) async {
@@ -487,6 +518,36 @@ class AddpropertyController extends GetxController {
   //   }
   //   update();
   // }
+
+  Future<void> fetchMyProperties() async {
+    isLoading.value = true;
+    
+
+    try {
+      // Query to get properties where the userId matches the current user
+      Query query =
+          db.collection('properties').where('userId', isEqualTo: auth.currentUser!.uid);
+
+      QuerySnapshot snapshot = await query.get();
+
+      myProperties.clear(); // Clear the current user's properties list
+
+      for (var doc in snapshot.docs) {
+        var data = doc.data() as Map<String, dynamic>;
+
+        // Add the properties to myProperties list based on the category type
+        if (data['category'] == 'Land') {
+          myProperties.add(LandListingModel.fromMap(data));
+        } else {
+          myProperties.add(PropertyListingModel.fromMap(data));
+        }
+      }
+    } catch (e) {
+      print("Error fetching my properties: $e");
+    } finally {
+      isLoading.value = false;
+    }
+  }
 
   void updateFilterCount() {
     int count = 0;
@@ -528,7 +589,10 @@ class AddpropertyController extends GetxController {
     fetchRecentProperties();
     fetchNearbyProperties(location["city"]);
     fetchProperties();
+    fetchSavedProperties(auth.currentUser!.uid);
     filteredProperties.value = properties;
+    fetchMyProperties();
+
     super.onInit();
   }
 }

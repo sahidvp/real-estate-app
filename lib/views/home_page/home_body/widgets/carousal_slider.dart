@@ -32,7 +32,7 @@ class CarousalSlider extends StatelessWidget {
           autoPlayCurve: Curves.easeInBack,
         ),
         items: properties.map((property) {
-        //  pCntrl.checkSavedStatus(property.id, property.propertySaved);
+          pCntrl.checkSavedStatus(property.id, property.propertySaved);
           return GestureDetector(
             onTap: () => Get.to(() => PropertyDetailsView(
                   property: property,
@@ -101,7 +101,8 @@ class CarousalSlider extends StatelessWidget {
                         ),
                         Padding(
                             padding: const EdgeInsets.only(bottom: 10),
-                            child: heartButton(controller: pCntrl, propertyId: property.id))
+                            child: heartButton(
+                                controller: pCntrl, propertyId: property.id))
                       ],
                     ),
                   ),

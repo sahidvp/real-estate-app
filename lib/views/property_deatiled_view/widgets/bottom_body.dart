@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:real_estate/commonwidgdets/indian_rupee.dart';
 import 'package:real_estate/utils/colors.dart';
+import 'package:real_estate/utils/imagespath.dart';
 
 Container bottomBody(
     double screenHeight, double screenWidth, String totalPrice) {
@@ -33,10 +35,14 @@ Container bottomBody(
               width: screenWidth * .3,
               child: ElevatedButton(
                 onPressed: () {},
-                child: Text(
-                  "Token",
-                  style: AppTextStyles.headline6,
-                ),
+                child: Row(children: [
+                  Expanded(
+                    child: SvgPicture.asset(
+                      Imagepath.token,
+                      width: 25,
+                    ),
+                  )
+                ]),
                 style: ElevatedButton.styleFrom(
                     shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(20))),

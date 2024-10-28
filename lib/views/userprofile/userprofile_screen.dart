@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
+import 'package:real_estate/controller/addproperty_controller.dart';
 import 'package:real_estate/controller/firbase/firebase_constant.dart';
 import 'package:real_estate/controller/logincontroller.dart';
 import 'package:real_estate/utils/colors.dart';
 
 import 'package:real_estate/utils/media_query.dart';
+import 'package:real_estate/views/userprofile/screens/favourite_properties.dart/favourite_property.dart';
+import 'package:real_estate/views/userprofile/screens/my_properties/my_properties.dart';
 import 'package:real_estate/views/userprofile/widgets/build_card.dart';
 import 'package:real_estate/views/userprofile/widgets/build_itemlist.dart';
 import 'package:real_estate/views/userprofile/widgets/user_image.dart';
@@ -17,6 +21,7 @@ class UserProfile extends StatelessWidget {
   Widget build(BuildContext context) {
     final sw = MediaQueryUtil.screenWidth(context);
     final sh = MediaQueryUtil.screenWidth(context);
+    AddpropertyController controller = Get.find();
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -69,7 +74,9 @@ class UserProfile extends StatelessWidget {
                   buildMenuItem(
                       icon: Icons.business,
                       title: 'My properties',
-                      onTap: () {}),
+                      onTap: () {
+                        Get.to(() => const MyProperties());
+                      }),
                   buildMenuItem(
                     icon: Icons.settings,
                     title: 'Settings',
@@ -78,17 +85,23 @@ class UserProfile extends StatelessWidget {
                   buildMenuItem(
                     icon: Icons.favorite,
                     title: 'Favourites',
-                    onTap: () {},
+                    onTap: () {
+                      Get.to(() => FavouriteProperty());
+                    },
                   ),
                   buildMenuItem(
                     icon: Icons.star,
                     title: 'Rate us',
-                    onTap: () {},
+                    onTap: () {
+                      print(controller.favProperties);
+                    },
                   ),
                   buildMenuItem(
                     icon: Icons.info,
                     title: 'About',
-                    onTap: () {},
+                    onTap: () {
+                      print(controller.myProperties);
+                    },
                   ),
                   buildMenuItem(
                     icon: Icons.logout,
