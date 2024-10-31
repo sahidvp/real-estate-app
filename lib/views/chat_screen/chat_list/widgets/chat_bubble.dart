@@ -99,7 +99,7 @@ class ChatBubble extends StatelessWidget {
                 );
               }),
         ),
-        messageField(context, friendID, friendToken)
+       // messageField(context, friendID, friendToken)
       ],
     );
   }

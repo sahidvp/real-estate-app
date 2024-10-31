@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:real_estate/controller/logincontroller.dart';
@@ -17,14 +15,12 @@ Container buildUserimage(AuthController cntrl, double sb) {
               ? NetworkImage(cntrl.imgUrl!) as ImageProvider
               : AssetImage(
                   Imagepath.homelogo)), // Fallback to a PNG placeholder
-      child: cntrl.image == null && cntrl.imgUrl == null
-          ? SvgPicture.asset(
-              Imagepath.usertemp,
-              fit: BoxFit.cover,
-            )
-          : null,
+      // child: cntrl.image == null && cntrl.imgUrl == null
+      //     ? SvgPicture.asset(
+      //         Imagepath.usertemp,
+      //         fit: BoxFit.cover,
+      //       )
+      //     : null,
     ),
   );
 }
-
-

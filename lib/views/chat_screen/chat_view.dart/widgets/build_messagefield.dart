@@ -4,8 +4,6 @@ import 'package:get/get.dart';
 import 'package:real_estate/controller/chat_controller.dart';
 import 'package:real_estate/utils/colors.dart';
 
-
-
 Row messageField(BuildContext context, String friendID, String? friendToken) {
   final chatCtrl = Get.put(ChatController());
 
@@ -20,12 +18,11 @@ Row messageField(BuildContext context, String friendID, String? friendToken) {
           height: MediaQuery.of(context).size.height * 0.05,
           width: MediaQuery.of(context).size.width * 0.8,
           decoration: BoxDecoration(
-            color: AppColors.fieldcolor,
+            color: AppColors.surface,
           ),
           child: TextField(
             controller: chatCtrl.messageController,
-            style: TextStyle(
-                color: AppColors.primary, fontSize: 20),
+            style: TextStyle(color: AppColors.primary, fontSize: 20),
             decoration: InputDecoration(
               prefix: const SizedBox(width: 10),
               suffixIcon: GestureDetector(
@@ -35,7 +32,7 @@ Row messageField(BuildContext context, String friendID, String? friendToken) {
                   child: const Icon(Icons.attachment_outlined)),
               suffixIconColor: AppColors.primary,
               hintText: "Type here ...",
-            //  hintStyle: GoogleFonts.poppins(color: AppThemeData.themeColor),
+              //  hintStyle: GoogleFonts.poppins(color: AppThemeData.themeColor),
               border: const OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(30)),
               ),

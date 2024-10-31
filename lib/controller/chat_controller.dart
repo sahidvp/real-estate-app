@@ -154,4 +154,17 @@ class ChatController extends GetxController {
     }
     return result;
   }
+
+  /////////////
+ Stream<QuerySnapshot> getLastMessage(String chatId) {
+  return FirebaseFirestore.instance
+      .collection('chats')
+      .doc(chatId)
+      .collection('messages')
+      .orderBy('created_on', descending: true)
+      .limit(1)
+      .snapshots();
+}
+
+
 }

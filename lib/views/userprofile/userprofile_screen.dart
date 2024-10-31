@@ -9,10 +9,10 @@ import 'package:real_estate/utils/colors.dart';
 import 'package:real_estate/utils/media_query.dart';
 import 'package:real_estate/views/userprofile/screens/favourite_properties.dart/favourite_property.dart';
 import 'package:real_estate/views/userprofile/screens/my_properties/my_properties.dart';
+import 'package:real_estate/views/userprofile/screens/settings/build_settings.dart';
 import 'package:real_estate/views/userprofile/widgets/build_card.dart';
 import 'package:real_estate/views/userprofile/widgets/build_itemlist.dart';
 import 'package:real_estate/views/userprofile/widgets/user_image.dart';
-import 'package:real_estate/views/widgets/logoutdialouge.dart';
 
 class UserProfile extends StatelessWidget {
   const UserProfile({Key? key}) : super(key: key);
@@ -67,7 +67,6 @@ class UserProfile extends StatelessWidget {
                       //  buildInfoCard('5.0', 'Properties', Icons.star, context),
                       buildInfoCard('24', 'Properties', Icons.home, context),
                       SizedBox(width: sh * .05),
-                      buildInfoCard('10', 'Sold', Icons.sell, context),
                     ],
                   ),
                   SizedBox(height: sh * .05),
@@ -80,7 +79,9 @@ class UserProfile extends StatelessWidget {
                   buildMenuItem(
                     icon: Icons.settings,
                     title: 'Settings',
-                    onTap: () {},
+                    onTap: () {
+                      Get.to(() => MySettings());
+                    },
                   ),
                   buildMenuItem(
                     icon: Icons.favorite,
@@ -89,27 +90,15 @@ class UserProfile extends StatelessWidget {
                       Get.to(() => FavouriteProperty());
                     },
                   ),
-                  buildMenuItem(
-                    icon: Icons.star,
-                    title: 'Rate us',
-                    onTap: () {
-                      print(controller.favProperties);
-                    },
-                  ),
+
                   buildMenuItem(
                     icon: Icons.info,
                     title: 'About',
                     onTap: () {
-                      print(controller.myProperties);
+                      controller.fetchAndCheckProperties();
                     },
                   ),
-                  buildMenuItem(
-                    icon: Icons.logout,
-                    title: 'Sign out',
-                    onTap: () {
-                      showConfirmationDialog(context);
-                    },
-                  ),
+
                   SizedBox(height: sh * .05),
                   const Text('version 1.0.0'),
                 ],

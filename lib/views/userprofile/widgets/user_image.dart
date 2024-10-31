@@ -68,6 +68,7 @@
 // }
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
@@ -98,7 +99,7 @@ Stack userImage(double sw, double sh, BuildContext context) {
                 ? CircleAvatar(
                     radius: 55,
                     backgroundImage: cntrl.imgUrl == null
-                        ? const AssetImage(Imagepath.usertemp) as ImageProvider
+                        ? const AssetImage(Imagepath.homelogo) as ImageProvider
                         : NetworkImage(cntrl.imgUrl!),
                   )
                 : CircleAvatar(

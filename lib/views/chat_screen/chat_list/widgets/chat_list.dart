@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:real_estate/controller/chat_controller.dart';
 import 'package:real_estate/controller/logincontroller.dart';
 import 'package:real_estate/utils/colors.dart';
+import 'package:real_estate/utils/media_query.dart';
 
 
 import 'message_bubble.dart';
@@ -17,6 +18,7 @@ class ChatList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+       final sw = MediaQueryUtil.getWidthPercentage(context, .5);
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
       child: StreamBuilder(
@@ -63,7 +65,7 @@ class ChatList extends StatelessWidget {
                       final userDetails = chatList[index];
 
                       return messageBubble(userDetails[0], userDetails[1],
-                          userDetails[2], userDetails[3]);
+                          userDetails[2], userDetails[3],sw);
                     },
                   );
                 },

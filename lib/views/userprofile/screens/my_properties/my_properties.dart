@@ -7,6 +7,8 @@ import 'package:real_estate/utils/media_query.dart';
 import 'package:real_estate/views/property_deatiled_view/propery_details.dart';
 import 'package:real_estate/views/userprofile/widgets/app_bar.dart';
 
+import 'widgets/edit_remove.dart';
+
 class MyProperties extends StatelessWidget {
   const MyProperties({super.key});
 
@@ -63,23 +65,5 @@ class MyProperties extends StatelessWidget {
     );
   }
 
-  Container editRemove(double sw, String action) {
-    bool isEdit = action == "Edit";
-    return Container(
-      decoration: BoxDecoration(
-          boxShadow: [AppDecoration.boxShadow],
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(),
-          color: Colors.white),
-      width: sw * .3,
-      child: TextButton(
-          onPressed: () {},
-          child: Text(
-            action,
-            style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: isEdit ? AppColors.primary : Colors.red),
-          )),
-    );
-  }
+  
 }

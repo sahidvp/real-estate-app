@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:real_estate/commonwidgdets/backbutton.dart';
+import 'package:real_estate/utils/colors.dart';
 
 AppBar appBar(String title) {
-    return AppBar(
-      backgroundColor: Colors.white,
-      leading: ArrowButton(),
-      title: Text(title),
-      centerTitle: true,
-      elevation: 1,
-    );
-  }
+  return AppBar(
+    backgroundColor: AppColors.primary,
+    leading: Padding(padding: EdgeInsets.all(10), child: ArrowButton()),
+    title: Text(title),
+    centerTitle: true,
+    elevation: 1,
+  );
+}

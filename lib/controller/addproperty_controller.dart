@@ -364,6 +364,7 @@ class AddpropertyController extends GetxController {
           }
         }
       }
+      fetchAndCheckProperties();
     } catch (e) {
       print("Error fetching properties: $e");
     } finally {
@@ -458,6 +459,14 @@ class AddpropertyController extends GetxController {
     update();
   }
 
+  void fetchAndCheckProperties() async {
+    // Fetch properties and update saved status
+
+    for (var property in properties) {
+      checkSavedStatus(property.id, property.propertySaved);
+    }
+  }
+
   void checkSavedStatus(String propertyId, List<dynamic> propertySavedList) {
     savedStatus[propertyId] = propertySavedList.contains(auth.currentUser!.uid);
   }
@@ -521,12 +530,12 @@ class AddpropertyController extends GetxController {
 
   Future<void> fetchMyProperties() async {
     isLoading.value = true;
-    
 
     try {
       // Query to get properties where the userId matches the current user
-      Query query =
-          db.collection('properties').where('userId', isEqualTo: auth.currentUser!.uid);
+      Query query = db
+          .collection('properties')
+          .where('userId', isEqualTo: auth.currentUser!.uid);
 
       QuerySnapshot snapshot = await query.get();
 

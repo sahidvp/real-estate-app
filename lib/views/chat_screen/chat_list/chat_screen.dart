@@ -15,8 +15,6 @@ class ChatScreen extends StatelessWidget {
     return Scaffold(
         backgroundColor: AppColors.fieldcolor,
         appBar: AppBar(
-          centerTitle: true,
-          leading: ArrowButton(),
           elevation: 0,
           backgroundColor: Colors.white,
           title: Text(
@@ -24,8 +22,8 @@ class ChatScreen extends StatelessWidget {
             style: AppTextStyles.mainHeading,
           ),
         ),
-         body:ChatList()
-      
+        body: ChatList()
+
         //
         // Container(
         //   child: ListView.builder(
