@@ -34,14 +34,6 @@ class SaveUsername extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    CircleAvatar(
-                      radius: 55,
-                      backgroundColor: Colors.white,
-                      child: Icon(
-                        Icons.camera_alt_outlined,
-                        size: 40,
-                      ),
-                    ),
                     SizedBox(
                       height: 15,
                     ),

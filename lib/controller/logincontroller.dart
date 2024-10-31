@@ -199,6 +199,8 @@ class AuthController extends GetxController {
     notificationToken = null;
     imgUrl = null;
     fullNameController.clear();
+    emailController.clear();
+    passwordController.clear();
   }
 
   //sign in

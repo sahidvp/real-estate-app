@@ -100,6 +100,11 @@ class AppTextStyles {
   static const TextStyle detailText2 = TextStyle(
       fontSize: 20, fontWeight: FontWeight.w700, color: Colors.black87);
 
+  static const TextStyle tokenText =
+      TextStyle(color: Colors.black, fontSize: 15, fontWeight: FontWeight.w600);
+  static const TextStyle tokenText2 = TextStyle(
+      color: AppColors.primary, fontSize: 18, fontWeight: FontWeight.bold);
+
   // Add more text styles as needed
 }
 

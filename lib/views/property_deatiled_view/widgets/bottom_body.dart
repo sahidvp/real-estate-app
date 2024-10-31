@@ -9,7 +9,7 @@ import 'package:real_estate/views/razorpay_payment.dart/payment.dart';
 import 'package:real_estate/views/userprofile/screens/my_properties/widgets/edit_remove.dart';
 
 Container bottomBody(
-    double screenHeight, double screenWidth, String totalPrice, String userId) {
+    double screenHeight, double screenWidth, String totalPrice, String userId,dynamic property) {
   return Container(
       decoration: BoxDecoration(
           border:
@@ -40,7 +40,7 @@ Container bottomBody(
                     width: screenWidth * .3,
                     child: ElevatedButton(
                       onPressed: () {
-                        Get.to(() => PaymentScreen());
+                        Get.to(() => PaymentScreen(property: property,));
                       },
                       child: Row(children: [
                         Expanded(
@@ -57,7 +57,7 @@ Container bottomBody(
                           backgroundColor: AppColors.primary),
                     ),
                   )
-                : editRemove(screenWidth, "Edit")
+                : editRemove(screenWidth, "Edit",property)
           ],
         ),
       ));

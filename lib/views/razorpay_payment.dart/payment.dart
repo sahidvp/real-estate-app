@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:real_estate/controller/firbase/firebase_constant.dart';
 import 'package:real_estate/utils/colors.dart';
 import 'package:real_estate/views/userprofile/widgets/app_bar.dart';
 
@@ -7,6 +8,9 @@ import '../../controller/payment_controller.dart';
 
 class PaymentScreen extends StatelessWidget {
   final PaymentController paymentController = Get.put(PaymentController());
+  final dynamic property;
+
+  PaymentScreen({super.key, required this.property});
 
   @override
   Widget build(BuildContext context) {
@@ -39,8 +43,9 @@ class PaymentScreen extends StatelessWidget {
             int amount = int.tryParse(amountController.text) ??
                 0; // Use 0 if parsing fails
             if (amount > 0) {
-              paymentController
-                  .openCheckout(amount); // Pass the amount to the method
+              paymentController.setPaymentDetails(
+                  property.id, auth.currentUser!.uid, property.userId, amount);
+              paymentController.openCheckout(); // Pass the amount to the method
             } else {
               Get.snackbar("Error",
                   "Please enter a valid amount"); // Show an error if the amount is invalid

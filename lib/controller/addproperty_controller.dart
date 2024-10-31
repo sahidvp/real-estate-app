@@ -291,33 +291,6 @@ class AddpropertyController extends GetxController {
     }
   }
 
-  // Future<void> fetchProperties() async {
-  //   isLoading.value = true; // Set loading to true
-
-  //   try {
-  //     QuerySnapshot snapshot = await db.collection('properties').get();
-  //     //  print(snapshot.docs);
-
-  //     properties.clear(); // Clear the current list of properties
-
-  //     for (var doc in snapshot.docs) {
-  //       var data = doc.data() as Map<String, dynamic>;
-
-  //       // Create the appropriate model based on the category
-  //       if (data['category'] == 'Land') {
-  //         properties.add(LandListingModel.fromMap(data));
-  //       } else {
-  //         properties.add(PropertyListingModel.fromMap(
-  //             data)); // Adjust for your other property models
-  //       }
-  //     }
-  //   } catch (e) {
-  //     print("Error fetching properties: $e");
-  //   } finally {
-  //     isLoading.value = false; // Set loading to false after fetching
-  //   }
-  // }
-
   Future<void> fetchProperties() async {
     isLoading.value = true; // Set loading to true
 
@@ -384,7 +357,6 @@ class AddpropertyController extends GetxController {
       recentProperties.clear(); // Clear the current list of recent properties
 
       for (var doc in snapshot.docs) {
-        print("snapshot doc ${doc.id}");
         var data = doc.data() as Map<String, dynamic>;
 
         if (data['category'] == 'Land') {
@@ -497,36 +469,34 @@ class AddpropertyController extends GetxController {
     } finally {}
   }
 
-///////////////////////
+  //dlelete
+  void deleteProperty(String propertyId) async {
+    try {
+      // Query to find documents with the specified propertyId
+      var querySnapshot = await db
+          .collection('properties')
+          .where('id', isEqualTo: propertyId)
+          .get();
 
-  // savedProperties(String property, bool toAdd) async {
-  //   // Query the 'properties' collection to find the document with the 'id' field equal to 'property'
-  //   final querySnapshot = await db
-  //       .collection('properties')
-  //       .where('id', isEqualTo: property)
-  //       .get();
+      // Loop through each document found and delete
+      for (var doc in querySnapshot.docs) {
+        await doc.reference.delete();
+      }
 
-  //   if (querySnapshot.docs.isNotEmpty) {
-  //     // Get the document ID of the matched document
-  //     final docId = querySnapshot.docs.first.id;
+      successSnackbar("Success", "Property deleted successfully");
+     fetchRecentProperties();
+    fetchNearbyProperties(location["city"]);
+    fetchProperties();
+    fetchSavedProperties(auth.currentUser!.uid);
+    filteredProperties.value = properties;
+    fetchMyProperties();
 
-  //     // Update the document based on the toAdd flag
-  //     if (toAdd) {
-  //       await db.collection('properties').doc(docId).update({
-  //         'propertySaved': FieldValue.arrayUnion([auth.currentUser!.uid])
-  //       });
-  //       successSnackbar("Success", "property saved");
-  //     } else {
-  //       await db.collection('properties').doc(docId).update({
-  //         'propertySaved': FieldValue.arrayRemove([auth.currentUser!.uid])
-  //       });
-  //       successSnackbar("Success", "property removed");
-  //     }
-  //   } else {
-  //     print("No document found with id: $property");
-  //   }
-  //   update();
-  // }
+      // Optionally, remove from the local list as well
+    } catch (e) {
+      errorSnackBar(message: "Failed to delete property: $e");
+    }
+  }
+
 
   Future<void> fetchMyProperties() async {
     isLoading.value = true;

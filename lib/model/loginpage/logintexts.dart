@@ -13,5 +13,10 @@ class Logintext {
     TextSpan(text: "account", style: AppTextStyles.bodyText4),
   ];
 
+  static const List<TextSpan> paymentText = [
+    TextSpan(text: "Create your ", style: AppTextStyles.bodytext3),
+    TextSpan(text: "account", style: AppTextStyles.bodyText4),
+  ];
+
  
 }

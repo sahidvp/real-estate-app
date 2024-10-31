@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
+import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:real_estate/controller/addproperty_controller.dart';
 import 'package:real_estate/controller/firbase/firebase_constant.dart';
 import 'package:real_estate/controller/logincontroller.dart';
@@ -9,6 +10,7 @@ import 'package:real_estate/utils/colors.dart';
 import 'package:real_estate/utils/media_query.dart';
 import 'package:real_estate/views/userprofile/screens/favourite_properties.dart/favourite_property.dart';
 import 'package:real_estate/views/userprofile/screens/my_properties/my_properties.dart';
+import 'package:real_estate/views/userprofile/screens/my_tokens/my_tokens.dart';
 import 'package:real_estate/views/userprofile/screens/settings/build_settings.dart';
 import 'package:real_estate/views/userprofile/widgets/build_card.dart';
 import 'package:real_estate/views/userprofile/widgets/build_itemlist.dart';
@@ -64,8 +66,9 @@ class UserProfile extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      //  buildInfoCard('5.0', 'Properties', Icons.star, context),
-                      buildInfoCard('24', 'Properties', Icons.home, context),
+                      //    buildInfoCard('5.0', 'Properties', Icons.star, context),
+                      buildInfoCard("${controller.myProperties.length}",
+                          'Properties', Icons.home, context),
                       SizedBox(width: sh * .05),
                     ],
                   ),
@@ -77,12 +80,13 @@ class UserProfile extends StatelessWidget {
                         Get.to(() => const MyProperties());
                       }),
                   buildMenuItem(
-                    icon: Icons.settings,
-                    title: 'Settings',
+                    icon: Icons.account_balance_wallet,
+                    title: 'My tokens',
                     onTap: () {
-                      Get.to(() => MySettings());
+                      Get.to(() => MyTokens());
                     },
                   ),
+
                   buildMenuItem(
                     icon: Icons.favorite,
                     title: 'Favourites',
@@ -90,12 +94,11 @@ class UserProfile extends StatelessWidget {
                       Get.to(() => FavouriteProperty());
                     },
                   ),
-
                   buildMenuItem(
-                    icon: Icons.info,
-                    title: 'About',
+                    icon: Icons.settings,
+                    title: 'Settings',
                     onTap: () {
-                      controller.fetchAndCheckProperties();
+                      Get.to(() => MySettings());
                     },
                   ),
 

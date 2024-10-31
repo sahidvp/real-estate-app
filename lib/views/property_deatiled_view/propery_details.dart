@@ -199,7 +199,7 @@ class PropertyDetailsView extends StatelessWidget {
           ],
         ),
         bottomNavigationBar:
-            bottomBody(screenHeight, screenWidth, property.price,property.userId ),
+            bottomBody(screenHeight, screenWidth, property.price,property.userId,property ),
       ),
     );
   }
