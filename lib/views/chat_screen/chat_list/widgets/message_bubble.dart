@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-
 import 'package:real_estate/controller/chat_controller.dart';
 import 'package:real_estate/controller/firbase/firebase_constant.dart';
 import 'package:real_estate/utils/colors.dart';

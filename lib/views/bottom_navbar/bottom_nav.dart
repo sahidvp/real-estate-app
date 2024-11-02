@@ -129,26 +129,11 @@ class BottomNavbar extends StatelessWidget {
     cntrl.getUserData();
 
     return Scaffold(
-      // appBar: AppBar(
-      //   backgroundColor: Colors.transparent,
-      //   actions: [
-      //     IconButton(
-      //       icon: const Icon(
-      //         Icons.logout,
-      //         color: Colors.black,
-      //       ),
-      //       onPressed: () {
-      //         showConfirmationDialog(context);
-      //       },
-      //     ),
-      //   ],
-      // ),
       body: Obx(() => _pages[bottomNavController.selectedIndex.value]),
       bottomNavigationBar: Obx(
         () => BottomNavigationBar(
           showSelectedLabels: false,
           showUnselectedLabels: false,
-          elevation: 0,
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(

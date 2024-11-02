@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/simple/get_state.dart';
-import 'package:iconsax_plus/iconsax_plus.dart';
+
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:real_estate/controller/addproperty_controller.dart';
 import 'package:real_estate/controller/firbase/firebase_constant.dart';
 import 'package:real_estate/controller/logincontroller.dart';
@@ -18,6 +18,11 @@ import 'package:real_estate/views/userprofile/widgets/user_image.dart';
 
 class UserProfile extends StatelessWidget {
   const UserProfile({Key? key}) : super(key: key);
+
+  Future<String> _fetchVersionInfo() async {
+    final packageInfo = await PackageInfo.fromPlatform();
+    return packageInfo.version;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +108,21 @@ class UserProfile extends StatelessWidget {
                   ),
 
                   SizedBox(height: sh * .05),
-                  const Text('version 1.0.0'),
+                  FutureBuilder<String>(
+                    future: _fetchVersionInfo(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const CircularProgressIndicator();
+                      } else if (snapshot.hasError) {
+                        return const Text('Version info not available');
+                      } else {
+                        return Text(
+                          'Version: ${snapshot.data}',
+                          style: const TextStyle(fontSize: 14),
+                        );
+                      }
+                    },
+                  ),
                 ],
               ),
             ),

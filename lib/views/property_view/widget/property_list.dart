@@ -20,13 +20,12 @@ class PropertyListTwo extends StatelessWidget {
             ? const CircularProgressIndicator()
             : properties.isEmpty
                 ? const Center(
-                    child:  Text(
+                    child: Text(
                       "No Results ",
                       style: AppTextStyles.headline1,
                     ),
                   )
                 : ListView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: controller.filteredProperties
                         .length, // Show all properties from the list

@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:real_estate/controller/firbase/firebase_constant.dart';
 import 'package:real_estate/utils/colors.dart';
+import 'package:real_estate/views/listing_property/widgets/build_button.dart';
+import 'package:real_estate/views/razorpay_payment.dart/widget/payment_button.dart';
 import 'package:real_estate/views/userprofile/widgets/app_bar.dart';
+import 'package:real_estate/views/widgets/submitbutton.dart';
 
 import '../../controller/payment_controller.dart';
 
@@ -37,23 +40,10 @@ class PaymentScreen extends StatelessWidget {
                 )),
           ),
         ),
-        ElevatedButton(
-          onPressed: () {
-            // Get the amount entered by the user and convert it to paise
-            int amount = int.tryParse(amountController.text) ??
-                0; // Use 0 if parsing fails
-            if (amount > 0) {
-              paymentController.setPaymentDetails(
-                  property.id, auth.currentUser!.uid, property.userId, amount);
-              paymentController.openCheckout(); // Pass the amount to the method
-            } else {
-              Get.snackbar("Error",
-                  "Please enter a valid amount"); // Show an error if the amount is invalid
-            }
-          },
-          child: Text("Pay Now"),
-        ),
+        paymentButton(amountController,paymentController,property),
       ]),
     );
   }
+
+ 
 }

@@ -241,6 +241,7 @@ class AddpropertyController extends GetxController {
     } else {
       errorSnackBar(message: "select category");
     }
+    fetchRecentProperties();
   }
 
   getUserLocation() async {
@@ -484,19 +485,18 @@ class AddpropertyController extends GetxController {
       }
 
       successSnackbar("Success", "Property deleted successfully");
-     fetchRecentProperties();
-    fetchNearbyProperties(location["city"]);
-    fetchProperties();
-    fetchSavedProperties(auth.currentUser!.uid);
-    filteredProperties.value = properties;
-    fetchMyProperties();
+      fetchRecentProperties();
+      fetchNearbyProperties(location["city"]);
+      fetchProperties();
+      fetchSavedProperties(auth.currentUser!.uid);
+      filteredProperties.value = properties;
+      fetchMyProperties();
 
       // Optionally, remove from the local list as well
     } catch (e) {
       errorSnackBar(message: "Failed to delete property: $e");
     }
   }
-
 
   Future<void> fetchMyProperties() async {
     isLoading.value = true;

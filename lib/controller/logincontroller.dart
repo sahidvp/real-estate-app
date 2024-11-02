@@ -10,7 +10,6 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:real_estate/model/authentication/usermodel.dart';
-import 'package:real_estate/utils/colors.dart';
 import 'package:real_estate/views/Loginpage/loginwithmobile/save_username.dart';
 import 'package:real_estate/views/bottom_navbar/bottom_nav.dart';
 import 'package:real_estate/views/emailverifcation.dart';
@@ -533,7 +532,6 @@ class AuthController extends GetxController {
     update();
 
     if (pickedFile != null) {
-      print("Picture taken");
 
       image = File(pickedFile.path);
 

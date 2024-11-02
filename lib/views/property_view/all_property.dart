@@ -34,10 +34,6 @@ class AllProperty extends StatelessWidget {
                 Obx(() => buildFilter(sb, controller.filterCount.value)),
               ],
             ),
-            // SizedBox(
-            //   height: sb * .2,
-            // ),
-            //  HomeBodyone(sb: sb, category: PropertyModel.category),
             Expanded(
               child: Obx(() {
                 // Observe properties

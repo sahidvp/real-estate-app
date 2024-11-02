@@ -21,21 +21,6 @@ class _AddImageState extends State<AddImage> {
   bool _isLoading = false;
   AddpropertyController ctrl = Get.find();
 
-  // _selectAndUploadImage() async {
-  //   final picker = ImagePicker();
-  //   final pickedFile = await picker.pickImage(source: ImageSource.gallery);
-  //   if (pickedFile != null) {
-  //     final croppedFile = File(
-  //         pickedFile.path); //await _cropImage(File(pickedFile.path)) as File;
-  //     _images.add(croppedFile);
-  //     await ctrl.uploadImageToFirebase(croppedFile);
-  //     setState(() {});
-  //   } else {
-  //     Get.snackbar("Error", "Image not selected",
-  //         snackPosition: SnackPosition.BOTTOM, backgroundColor: Colors.red);
-  //   }
-  // }
-
   _selectAndUploadImage() async {
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);

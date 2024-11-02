@@ -1,12 +1,14 @@
+
+
 import 'package:flutter/material.dart';
+import 'widgets/image_view.dart';
 
 Container tabGallery(List<String> imageUrls) {
   return Container(
-    padding: const EdgeInsets.all(16.0), // Optional padding
+    padding: const EdgeInsets.all(16.0),
     child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start, // Align title to the left
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Title for the gallery
         const Padding(
           padding: EdgeInsets.only(bottom: 8.0),
           child: Text(
@@ -17,40 +19,46 @@ Container tabGallery(List<String> imageUrls) {
             ),
           ),
         ),
-
-        // GridView for displaying images
         imageUrls.isNotEmpty
             ? GridView.builder(
-                shrinkWrap: true, // Ensures the grid fits the content
-                physics:
-                    const NeverScrollableScrollPhysics(), // Disables grid scrolling inside a scrollable view
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2, // Number of images per row
-                  crossAxisSpacing: 8, // Space between columns
-                  mainAxisSpacing: 8, // Space between rows
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 8,
+                  mainAxisSpacing: 8,
                 ),
-                itemCount: imageUrls.length, // Number of images
+                itemCount: imageUrls.length,
                 itemBuilder: (context, index) {
-                  return ClipRRect(
-                    borderRadius: BorderRadius.circular(25), // Rounded corners
-                    child: Image.network(
-                      imageUrls[index],
-                      fit: BoxFit.cover,
-                      loadingBuilder: (context, child, loadingProgress) {
-                        if (loadingProgress == null) return child;
-                        return Center(
-                          child:
-                              CircularProgressIndicator(), // Show a loading indicator while images load
-                        );
-                      },
-                      errorBuilder: (context, error, stackTrace) =>
-                          const Icon(Icons.error), // Handle error
+                  return GestureDetector(
+                    onTap: () {
+                      
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) =>
+                              FullScreenImage(imageUrl: imageUrls[index]),
+                        ),
+                      );
+                    },
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(25),
+                      child: Image.network(
+                        imageUrls[index],
+                        fit: BoxFit.cover,
+                        loadingBuilder: (context, child, loadingProgress) {
+                          if (loadingProgress == null) return child;
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        },
+                        errorBuilder: (context, error, stackTrace) =>
+                            const Icon(Icons.error),
+                      ),
                     ),
                   );
                 },
               )
-            : const Text(
-                "No images uploaded."), // Display when there are no images
+            : const Text("No images uploaded."),
       ],
     ),
   );
