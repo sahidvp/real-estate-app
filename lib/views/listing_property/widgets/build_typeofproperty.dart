@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:real_estate/controller/addproperty_controller.dart';
 import 'package:real_estate/views/listing_property/widgets/toggle_button.dart';
 
-Container buildType(
+Container 
+buildType(
     List<String> list, double sb, AddpropertyController propertyCntr,bool singleselection) {
   return Container(
     // padding: EdgeInsets.symmetric(horizontal: sb * .5),
@@ -11,7 +12,7 @@ Container buildType(
       runSpacing: 8.0, // Vertical spacing between rows
       children: List.generate(list.length, (index) {
         return SizedBox(
-          width: sb * 3.5, // Specify the width directly
+          width: sb * 3.5, 
           child: ToggleButton(
             text: list[index],
             index: index,

@@ -50,7 +50,7 @@ class SelectCategory extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         if (svgicon == Imagepath.houseandothers) {
-          Get.to(() => const AddPropertyscreen(
+          Get.to(() =>  AddPropertyscreen(
                 isLand: false,
               ));
         } else {

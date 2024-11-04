@@ -11,6 +11,7 @@ import 'package:real_estate/model/propertlisting/property_landmodel.dart';
 import 'package:real_estate/model/propertlisting/property_listingmodel.dart';
 import 'package:real_estate/model/propertlisting/property_model.dart';
 import 'package:real_estate/views/bottom_navbar/bottom_nav.dart';
+import 'package:real_estate/views/userprofile/screens/my_properties/my_properties.dart';
 import 'package:real_estate/views/widgets/snackbar/errorsnckbar.dart';
 import 'package:real_estate/views/widgets/snackbar/successsnackbar.dart';
 
@@ -37,6 +38,7 @@ class AddpropertyController extends GetxController {
   List<String> imageUrls = [];
   List<String> environment = [];
   List<String> propertySaved = [];
+  static bool editMode = false;
   final isLoading = false.obs;
   String category = '';
   String? type;
@@ -50,6 +52,8 @@ class AddpropertyController extends GetxController {
   final TextEditingController price = TextEditingController();
   final TextEditingController length = TextEditingController();
   final TextEditingController breadth = TextEditingController();
+  static dynamic dataForEdit;
+  static String? propId;
 
   String postedBy = "";
   String postedFrom = "";
@@ -242,6 +246,172 @@ class AddpropertyController extends GetxController {
       errorSnackBar(message: "select category");
     }
     fetchRecentProperties();
+  }
+
+  void clearFields() {
+    selectedIndex1.value = -1;
+    selectedIndex2.value = -1;
+    adTittle.clear();
+    description.clear();
+    price.clear();
+    projectName.clear();
+    builtupArea.clear();
+    length.clear();
+    breadth.clear();
+    location.clear();
+    imageUrls.clear();
+    type = null;
+    listedBy = null;
+    category = '';
+    furnishing = null;
+    constructionStatus = null;
+    carparkingCount.value = 0;
+    bedroomCount.value = 0;
+    bathroomCount.value = 0;
+    floorCount.value = 0;
+    selectedIndices.clear();
+   // environment.clear();
+  }
+
+  getDataForEdit([bool? isLand]) {
+    dataForEdit.transactionType == "Sale"
+        ? selectedIndex1.value = 0
+        : selectedIndex1.value = 1;
+
+    adTittle.text = dataForEdit.title;
+    description.text = dataForEdit.description;
+    price.text = dataForEdit.price;
+    projectName.text = dataForEdit.projectName;
+
+    location['country'] = dataForEdit.location['country'];
+    location['state'] = dataForEdit.location['state'];
+    location['city'] = dataForEdit.location['city'];
+    builtupArea.text = dataForEdit.areasqft;
+
+    for (var img in dataForEdit.imageUrls) {
+      imageUrls.add(img);
+    }
+
+    type = dataForEdit.transactionType;
+    listedBy = dataForEdit.listedBy;
+    if (isLand!) {
+      length.text = dataForEdit.length;
+      breadth.text = dataForEdit.breadth;
+    } else {
+      selectedIndex2.value = PropertyModel.type.indexOf(dataForEdit.category);
+      category = dataForEdit.category;
+      environment = dataForEdit.environment;
+
+      furnishing = dataForEdit.furnishing;
+      constructionStatus = dataForEdit.constructionStatus;
+      carparkingCount.value = int.parse(dataForEdit.carParking);
+      bedroomCount.value = int.parse(dataForEdit.bedrooms);
+      bathroomCount.value = int.parse(dataForEdit.bathrooms);
+      floorCount.value = int.parse(dataForEdit.floors);
+      for (var env in dataForEdit.environment) {
+        selectedIndices.add(PropertyModel.enviornment.indexOf(env));
+      }
+    }
+  }
+
+  editProperty() async {
+    if (type == null ||
+        adTittle.text == "" ||
+        description.text == "" ||
+        price.text == "" ||
+        listedBy == null ||
+        location['country'] == "" ||
+        location["state"] == "null" ||
+        location["city"] == "null") {
+      errorSnackBar(message: "fill all fields");
+      return;
+    }
+
+    try {
+      Map<String, dynamic> updatedDetails;
+      if (category == "Land") {
+        if (builtupArea.text == "" || length.text == "" || breadth.text == "") {
+          errorSnackBar(message: "fill all fields");
+          return;
+        }
+        if (imageUrls.length < 4) {
+          errorSnackBar(message: "Minimum 4 images required");
+          return;
+        }
+        updatedDetails = {
+          'transactionType': type,
+          'breadth': breadth.text,
+          'category': category,
+          'description': description.text,
+          'imageUrls': imageUrls,
+          'length': length.text,
+          'title': adTittle.text,
+          'price': price.text,
+          'location': location,
+          'listedBy': listedBy,
+          'areasqft': builtupArea.text,
+          'postedBy': auth.currentUser?.displayName,
+          'postedFrom': postedFrom,
+          'projectName': projectName.text
+        };
+      } else {
+        if (furnishing == null ||
+            constructionStatus == null ||
+            carparkingCount.value == 0 ||
+            bedroomCount.value == 0 ||
+            bathroomCount.value == 0 ||
+            floorCount.value == 0 ||
+            builtupArea.text == "") {
+          errorSnackBar(
+            message: "fill all fields",
+          );
+          return;
+        }
+
+        if (imageUrls.length < 4) {
+          errorSnackBar(message: "Minimum 4 images required");
+          return;
+        }
+        updatedDetails = {
+          'transactionType': type,
+          'category': category,
+          'description': description.text,
+          'imageUrls': imageUrls,
+          'title': adTittle.text,
+          'price': price.text,
+          'location': location,
+          'listedBy': listedBy,
+          'postedBy': auth.currentUser?.displayName,
+          'postedFrom': postedFrom,
+          'furnishing': furnishing,
+          'constructionStatus': constructionStatus,
+          'carParking': carparkingCount.toString(),
+          'areasqft': builtupArea.text,
+          'floors': floorCount.toString(),
+          'bedrooms': bedroomCount.toString(),
+          'bathrooms': bathroomCount.toString(),
+          'environment': environment,
+          'projectName': projectName.text
+        };
+      }
+      CollectionReference properties = db.collection('properties');
+      QuerySnapshot querySnapshot =
+          await properties.where('id', isEqualTo: propId).get();
+      if (querySnapshot.docs.isNotEmpty) {
+        String documentId = querySnapshot.docs.first.id;
+
+        await properties.doc(documentId).update(updatedDetails);
+        onInit();
+        fetchMyProperties();
+      }
+      Get.back();
+      Get.off(() => const MyProperties());
+
+      editMode = false;
+      AddpropertyController.propId = null;
+    } catch (e) {
+      errorSnackBar(message: "Failed to update property details: $e");
+    }
   }
 
   getUserLocation() async {

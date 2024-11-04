@@ -8,6 +8,7 @@ import 'package:real_estate/controller/logincontroller.dart';
 import 'package:real_estate/utils/colors.dart';
 
 import 'package:real_estate/utils/media_query.dart';
+import 'package:real_estate/views/userprofile/screens/about_us/about_us.dart';
 import 'package:real_estate/views/userprofile/screens/favourite_properties.dart/favourite_property.dart';
 import 'package:real_estate/views/userprofile/screens/my_properties/my_properties.dart';
 import 'package:real_estate/views/userprofile/screens/my_tokens/my_tokens.dart';
@@ -88,6 +89,7 @@ class UserProfile extends StatelessWidget {
                     icon: Icons.account_balance_wallet,
                     title: 'My tokens',
                     onTap: () {
+                      controller.clearFields();
                       Get.to(() => MyTokens());
                     },
                   ),
@@ -104,6 +106,13 @@ class UserProfile extends StatelessWidget {
                     title: 'Settings',
                     onTap: () {
                       Get.to(() => MySettings());
+                    },
+                  ),
+                  buildMenuItem(
+                    icon: Icons.info,
+                    title: 'About us',
+                    onTap: () {
+                      Get.to(() => AboutMainScreen());
                     },
                   ),
 

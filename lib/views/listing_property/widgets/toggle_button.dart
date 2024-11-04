@@ -96,7 +96,7 @@ class ToggleButton extends StatelessWidget {
 
   singletoggle() {
     if (selectedIndex.value == index) {
-      selectedIndex.value = 100;
+      selectedIndex.value = -1;
 
       return;
     }

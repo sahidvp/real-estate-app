@@ -198,8 +198,8 @@ class AuthController extends GetxController {
     notificationToken = null;
     imgUrl = null;
     fullNameController.clear();
-    emailController.clear();
-    passwordController.clear();
+    logemailController.clear();
+    logpasswordController.clear();
   }
 
   //sign in
@@ -532,7 +532,6 @@ class AuthController extends GetxController {
     update();
 
     if (pickedFile != null) {
-
       image = File(pickedFile.path);
 
       await uploadImageToFirebase(image!);
@@ -672,7 +671,6 @@ class AuthController extends GetxController {
 
   // @override
   // void onClose() {
-  //   fullNameController.dispose();
   //   emailController.dispose();
   //   passwordController.dispose();
   //   confirmPasswordController.dispose();

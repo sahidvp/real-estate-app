@@ -1,8 +1,8 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:real_estate/controller/addproperty_controller.dart';
 import 'package:real_estate/utils/colors.dart';
+import 'package:real_estate/views/listing_property/addproperty_screen.dart';
 
 Container editRemove(double sw, String action, dynamic property) {
   AddpropertyController controller = Get.find();
@@ -19,6 +19,17 @@ Container editRemove(double sw, String action, dynamic property) {
     child: TextButton(
       onPressed: () {
         if (isEdit) {
+          AddpropertyController.dataForEdit = property;
+          AddpropertyController.editMode = true;
+          AddpropertyController.propId = property.id;
+
+          if (property.category == 'Land') {
+            controller.getDataForEdit(true);
+            Get.to(() => AddPropertyscreen(isLand: true));
+          } else {
+            controller.getDataForEdit(false);
+            Get.to(() => AddPropertyscreen(isLand: false));
+          }
         } else {
           showDialog(
             context: Get.context!,
