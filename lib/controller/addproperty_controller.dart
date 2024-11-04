@@ -270,7 +270,7 @@ class AddpropertyController extends GetxController {
     bathroomCount.value = 0;
     floorCount.value = 0;
     selectedIndices.clear();
-   // environment.clear();
+    // environment.clear();
   }
 
   getDataForEdit([bool? isLand]) {

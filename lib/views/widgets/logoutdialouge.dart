@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:real_estate/controller/firbase/firebase_constant.dart';
 import 'package:real_estate/controller/logincontroller.dart';
 import 'package:real_estate/utils/colors.dart';
 import 'package:real_estate/views/Loginpage/loginscreen.dart';
