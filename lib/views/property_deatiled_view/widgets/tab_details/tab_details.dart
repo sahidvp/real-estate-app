@@ -7,9 +7,9 @@ import 'package:real_estate/views/property_deatiled_view/widgets/tab_details/lis
 
 import '../property_fecilty.dart';
 
-Container tabDetails(double sw, double sh, dynamic property) {
+SizedBox tabDetails(double sw, double sh, dynamic property) {
   final category = property.category;
-  return Container(
+  return SizedBox(
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -37,7 +37,7 @@ Container tabDetails(double sw, double sh, dynamic property) {
           padding:
               EdgeInsets.symmetric(horizontal: sw * .04, vertical: sw * .04),
           child: Container(
-            padding: EdgeInsets.symmetric(vertical: 10),
+            padding: const EdgeInsets.symmetric(vertical: 10),
             decoration: BoxDecoration(
               boxShadow: [AppDecoration.boxShadow],
               borderRadius: BorderRadius.circular(20),
@@ -51,14 +51,14 @@ Container tabDetails(double sw, double sh, dynamic property) {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      const Text(
                         "Type",
                         style: AppTextStyles.detailText,
                       ),
-                      Text("Listed by", style: AppTextStyles.detailText),
+                      const Text("Listed by", style: AppTextStyles.detailText),
                       if (category != "Land")
-                        Text("Floors", style: AppTextStyles.detailText),
-                      Text("Area", style: AppTextStyles.detailText),
+                        const Text("Floors", style: AppTextStyles.detailText),
+                      const Text("Area", style: AppTextStyles.detailText),
                       Text(category == "Land" ? "Length" : "Status",
                           style: AppTextStyles.detailText),
                       Text(category == "Land" ? "Breadth" : "Furnishing",

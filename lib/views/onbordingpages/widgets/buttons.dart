@@ -13,15 +13,15 @@ class SkipButton extends StatelessWidget {
     return SizedBox(
       width: 79,
       child: ElevatedButton(
-          onPressed: () {
-            Get.to(() => Loginscreen());
-          },
-          child: const Text(
-            "Skip",
-            style: TextStyle(color: Colors.black),
-          ),
-          style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.fieldcolor)),
+        onPressed: () {
+          Get.to(() => const Loginscreen());
+        },
+        style: ElevatedButton.styleFrom(backgroundColor: AppColors.fieldcolor),
+        child: const Text(
+          "Skip",
+          style: TextStyle(color: Colors.black),
+        ),
+      ),
     );
   }
 }

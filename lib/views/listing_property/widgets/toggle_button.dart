@@ -23,7 +23,7 @@ class ToggleButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       child: GestureDetector(
         onTap: () {
           singleselection ? singletoggle() : cntrl.toggleSelection(index);
@@ -67,7 +67,7 @@ class ToggleButton extends StatelessWidget {
     return Center(
       child: Text(
         text,
-        style: TextStyle(
+        style: const TextStyle(
           color: Colors.black,
           fontWeight: FontWeight.bold,
         ),
@@ -79,13 +79,13 @@ class ToggleButton extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Icon(
+        const Icon(
           IconsaxPlusBold.tick_circle,
           color: Colors.black,
         ),
         Text(
           text,
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
           ),

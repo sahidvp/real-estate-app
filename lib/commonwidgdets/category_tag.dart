@@ -6,7 +6,7 @@ Container categoryTag(property) {
     decoration: BoxDecoration(
         color: AppColors.fieldcolor, borderRadius: BorderRadius.circular(5)),
     child: Padding(
-      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       child: Text(property, style: AppTextStyles.categorytag),
     ),
   );

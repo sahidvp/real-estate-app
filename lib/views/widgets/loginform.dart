@@ -64,7 +64,7 @@ Container loginform(AuthController controller, context) {
           const SizedBox(height: 5),
           TextButton(
             onPressed: () {},
-            child: Text(
+            child: const Text(
               "Forgot password?",
               style: AppTextStyles.minitext,
             ),

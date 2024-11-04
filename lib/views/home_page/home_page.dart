@@ -3,7 +3,6 @@ import 'package:get/get.dart'; // Import GetX for state management
 import 'package:real_estate/controller/addproperty_controller.dart';
 import 'package:real_estate/utils/colors.dart';
 import 'package:real_estate/utils/media_query.dart';
-import 'package:real_estate/views/home_page/home_body/home_body.dart';
 import 'home_body/widgets/carousal_slider.dart';
 import 'home_header/home_header.dart';
 import 'home_body/widgets/property_list.dart';
@@ -18,10 +17,7 @@ class HomeScreen extends StatelessWidget {
     final AddpropertyController controller =
         Get.put(AddpropertyController()); // Instantiate the controller
 
-    // Call fetchProperties when the widget builds
-    // controller.fetchProperties();
-    // controller.fetchRecentProperties();
-    // controller.fetchNearbyProperties(userCity);
+   
 
     return Scaffold(
       body: Column(
@@ -37,13 +33,13 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Pass the properties to CarousalSlider
+                  
                   Obx(() {
-                    // Observe properties
+                    
                     if (controller.isLoading.value) {
                       return const Center(
                           child:
-                              CircularProgressIndicator()); // Loading indicator
+                              CircularProgressIndicator()); 
                     }
                     return CarousalSlider(
                         sb: sb, properties: controller.recentProperties);

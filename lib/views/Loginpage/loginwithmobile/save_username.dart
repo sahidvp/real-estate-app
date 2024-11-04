@@ -16,7 +16,7 @@ class SaveUsername extends StatelessWidget {
       children: [
         Positioned.fill(
           child: Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               gradient: LinearGradient(
                 colors: [Color.fromARGB(255, 201, 233, 194), Colors.white],
                 end: Alignment.bottomCenter,
@@ -28,13 +28,13 @@ class SaveUsername extends StatelessWidget {
         Form(
           key: authController.usernameformKey,
           child: Padding(
-            padding: EdgeInsets.all(15),
-            child: Container(
+            padding: const EdgeInsets.all(15),
+            child: SizedBox(
               child: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     CustomFormField(
@@ -47,7 +47,7 @@ class SaveUsername extends StatelessWidget {
                         return null;
                       },
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     SubmitButton(

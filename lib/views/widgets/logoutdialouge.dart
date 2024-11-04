@@ -11,11 +11,11 @@ showConfirmationDialog(BuildContext context) {
     builder: (BuildContext context) {
       return AlertDialog(
         backgroundColor: Colors.black,
-        title: Text(
+        title: const Text(
           'Confirm Deletion',
           style: AppTextStyles.headline6,
         ),
-        content: Text(
+        content: const Text(
           'Are you sure you want to Sign out?',
           style: AppTextStyles.headline6,
         ),
@@ -24,7 +24,7 @@ showConfirmationDialog(BuildContext context) {
             onPressed: () {
               Get.back();
             },
-            child: Text(
+            child: const Text(
               'no',
               style: AppTextStyles.headline6,
             ),
@@ -36,7 +36,7 @@ showConfirmationDialog(BuildContext context) {
 
               Get.offAll(() => const Loginscreen());
             },
-            child: Text(
+            child: const Text(
               'Yes',
               style: AppTextStyles.headline6,
             ),

@@ -19,7 +19,7 @@ import 'widgets/build_features.dart';
 class AddPropertyscreen extends StatelessWidget {
   final bool isLand;
 
-  AddPropertyscreen({super.key, required this.isLand});
+  const AddPropertyscreen({super.key, required this.isLand});
 
   @override
   Widget build(BuildContext context) {
@@ -29,13 +29,15 @@ class AddPropertyscreen extends StatelessWidget {
 
     return PopScope(
       canPop: true,
+      // ignore: deprecated_member_use
       onPopInvoked: (invocation) {
         propertyCntr.clearFields();
         return;
       },
       child: Scaffold(
         appBar: AppBar(
-          leading: Padding(padding: EdgeInsets.all(10), child: ArrowButton()),
+          leading:
+              const Padding(padding: EdgeInsets.all(10), child: ArrowButton()),
           surfaceTintColor: Colors.transparent,
           shadowColor: AppColors.iconSecondary,
           backgroundColor: Colors.transparent,
@@ -138,7 +140,7 @@ class AddPropertyscreen extends StatelessWidget {
                 SizedBox(height: sb),
 
                 // Build-up Area, Project Name, Ad Title, Description, Price
-                Text("Super Builtup area (ft²)",
+                const Text("Super Builtup area (ft²)",
                     style: AppTextStyles.subHeading),
                 SizedBox(height: sb * .1),
                 buildTextfield(
@@ -147,50 +149,52 @@ class AddPropertyscreen extends StatelessWidget {
 
                 // Breadth and Length (only if isLand is true)
                 if (isLand) ...[
-                  Text("Breadth (ft)", style: AppTextStyles.subHeading),
+                  const Text("Breadth (ft)", style: AppTextStyles.subHeading),
                   SizedBox(height: sb * .1),
                   buildTextfield(
                       propertyCntr, propertyCntr.breadth, true, 0, ""),
                   SizedBox(height: sb),
-                  Text("Length (ft)", style: AppTextStyles.subHeading),
+                  const Text("Length (ft)", style: AppTextStyles.subHeading),
                   SizedBox(height: sb * .1),
                   buildTextfield(
                       propertyCntr, propertyCntr.length, true, 0, ""),
                   SizedBox(height: sb),
                 ],
 
-                Text("Project name", style: AppTextStyles.subHeading),
+                const Text("Project name", style: AppTextStyles.subHeading),
                 SizedBox(height: sb * .1),
                 buildTextfield(propertyCntr, propertyCntr.projectName, false, 7,
                     "Name your project"),
                 SizedBox(height: sb * .5),
-                Text("Title", style: AppTextStyles.subHeading),
+                const Text("Title", style: AppTextStyles.subHeading),
                 SizedBox(height: sb * .1),
                 buildTextfield(propertyCntr, propertyCntr.adTittle, false, 7,
                     "Add a titlt"),
                 SizedBox(height: sb * .5),
-                Text("Description", style: AppTextStyles.subHeading),
+                const Text("Description", style: AppTextStyles.subHeading),
                 SizedBox(height: sb * .1),
                 buildTextfield(propertyCntr, propertyCntr.description, false,
                     40, "Include condition, features and reason for selling"),
                 SizedBox(height: sb * .5),
-                Text("SET A PRICE", style: AppTextStyles.subHeading),
+                const Text("SET A PRICE", style: AppTextStyles.subHeading),
                 SizedBox(height: sb * .1),
                 buildTextfield(propertyCntr, propertyCntr.price, true, 0, ""),
                 SizedBox(height: sb * .5),
-                Divider(),
+                const Divider(),
                 SizedBox(height: sb * .5),
 
                 // Environment / Facilities
                 if (!isLand) ...[
-                  Text("Environment / Facilities",
+                  const Text("Environment / Facilities",
                       style: AppTextStyles.subHeading),
                   SizedBox(height: sb * .1),
                   buildType(PropertyModel.enviornment, sb, propertyCntr, false),
                 ],
 
-                AddLocation(),
-                AddpropertyController.editMode ? EditImage() : AddImage(),
+                const AddLocation(),
+                AddpropertyController.editMode
+                    ? const EditImage()
+                    : const AddImage(),
 
                 SubmitButtontwo(
                   controller: propertyCntr,

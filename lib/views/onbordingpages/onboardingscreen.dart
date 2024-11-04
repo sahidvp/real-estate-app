@@ -81,7 +81,7 @@ class OnboardingScreen extends GetView {
               );
             }
           } else {
-            return CircularProgressIndicator();
+            return const CircularProgressIndicator();
           }
         });
   }

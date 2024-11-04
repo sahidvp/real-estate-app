@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: "Real estate",
       theme: Apptheme().myTheme,
-      home:  SplashScreen()
+      home:  const SplashScreen()
     );
   }
 }

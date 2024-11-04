@@ -17,7 +17,7 @@ GestureDetector buildCurrentlocation(AddpropertyController propertyCntr, double 
                 color: AppColors.fieldcolor,
                 border: Border.all(color: Colors.black.withAlpha(150)),
                 borderRadius: BorderRadius.circular(25)),
-            child: Center(
+            child: const Center(
               child: Text(
                 "choose location",
                 style: AppTextStyles.subHeading,

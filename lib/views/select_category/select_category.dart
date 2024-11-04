@@ -21,7 +21,7 @@ class SelectCategory extends StatelessWidget {
       body: Stack(children: [
         Positioned.fill(
           child: Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               gradient: LinearGradient(
                 colors: [Colors.white, AppColors.iconSecondary],
                 begin: Alignment.topCenter,
@@ -50,11 +50,11 @@ class SelectCategory extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         if (svgicon == Imagepath.houseandothers) {
-          Get.to(() =>  AddPropertyscreen(
+          Get.to(() =>  const AddPropertyscreen(
                 isLand: false,
               ));
         } else {
-          Get.to(() => AddPropertyscreen(isLand: true));
+          Get.to(() => const AddPropertyscreen(isLand: true));
           // Handle other categories or do nothing
         }
       },

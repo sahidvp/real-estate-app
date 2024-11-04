@@ -14,7 +14,7 @@ GestureDetector propertyTag(double sb, dynamic property) {
       Get.to(() => PropertyDetailsView(property: property));
     },
     child: Container(
-      margin: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+      margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
       width: double.infinity,
       decoration: BoxDecoration(
           boxShadow: [AppDecoration.boxShadow],
@@ -24,7 +24,7 @@ GestureDetector propertyTag(double sb, dynamic property) {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
-            margin: EdgeInsets.only(left: 20),
+            margin: const EdgeInsets.only(left: 20),
             width: sb,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(10),
@@ -34,7 +34,7 @@ GestureDetector propertyTag(double sb, dynamic property) {
                 fit: BoxFit.fill,
                 loadingBuilder: (context, child, loadingProgress) {
                   if (loadingProgress == null) return child;
-                  return Center(
+                  return const Center(
                       child:
                           CircularProgressIndicator()); // Show loading indicator
                 },
@@ -42,7 +42,7 @@ GestureDetector propertyTag(double sb, dynamic property) {
             ),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -50,7 +50,7 @@ GestureDetector propertyTag(double sb, dynamic property) {
                 Text(property.title, style: AppTextStyles.propertyText),
                 Row(
                   children: [
-                    Icon(
+                    const Icon(
                       IconsaxPlusBold.location,
                       color: Color(0xFFB9B9B9),
                       size: 15,

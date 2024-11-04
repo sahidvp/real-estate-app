@@ -12,9 +12,9 @@ void errorSnackBar({String title = 'Failed', String message = ""}) {
     snackPosition: SnackPosition.BOTTOM,
     backgroundColor: Colors.transparent,
     colorText: Colors.redAccent,
-    margin: EdgeInsets.all(10),
+    margin: const EdgeInsets.all(10),
     borderRadius: 3,
-    padding: EdgeInsets.all(16),
+    padding: const EdgeInsets.all(16),
     snackStyle: SnackStyle.FLOATING,
   );
 }

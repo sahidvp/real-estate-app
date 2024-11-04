@@ -26,13 +26,13 @@ class ChatList extends StatelessWidget {
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (!snapshot.hasData) {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(
                   valueColor: AlwaysStoppedAnimation(AppColors.primary),
                 ),
               );
             } else if (snapshot.data!.docs.isEmpty) {
-              return Center(
+              return const Center(
                 child: Text(
                   "no messages",
                 
@@ -43,7 +43,7 @@ class ChatList extends StatelessWidget {
                 future: chatCtrl.getListChatWith(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Center(
+                    return const Center(
                         child: CircularProgressIndicator(
                       color: AppColors.primary,
                     ));

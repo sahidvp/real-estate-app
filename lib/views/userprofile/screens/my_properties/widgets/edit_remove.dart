@@ -25,10 +25,10 @@ Container editRemove(double sw, String action, dynamic property) {
 
           if (property.category == 'Land') {
             controller.getDataForEdit(true);
-            Get.to(() => AddPropertyscreen(isLand: true));
+            Get.to(() => const AddPropertyscreen(isLand: true));
           } else {
             controller.getDataForEdit(false);
-            Get.to(() => AddPropertyscreen(isLand: false));
+            Get.to(() => const AddPropertyscreen(isLand: false));
           }
         } else {
           showDialog(

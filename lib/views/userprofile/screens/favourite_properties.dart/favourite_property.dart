@@ -20,10 +20,10 @@ class FavouriteProperty extends StatelessWidget {
       appBar: appBar("Favourites"),
       body: Obx(() {
         if (controller.favProperties.isEmpty) {
-          return Center(
+          return const Center(
             child: Text(
               "No favourite properies",
-              style: TextStyle(fontSize: 18, color: Colors.grey),
+              style:  TextStyle(fontSize: 18, color: Colors.grey),
             ),
           );
         } else {

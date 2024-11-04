@@ -80,7 +80,7 @@ GestureDetector buildLocation(sb, MapController cntrl) {
                 cntrl.chooselocation.value, // Using the reactive variable
                 style: AppTextStyles.hompagebodyText,
               )),
-          Icon(
+          const Icon(
             IconsaxPlusBold.arrow_down,
             color: AppColors.textPrimary,
             size: 15,

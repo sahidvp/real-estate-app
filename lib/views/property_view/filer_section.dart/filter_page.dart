@@ -36,6 +36,9 @@ class FilterPage extends StatelessWidget {
             Row(
               children: [
                 priceRange(sb, controller.minAmount, "min"),
+                SizedBox(
+                  width: sb * .5,
+                ),
                 priceRange(sb, controller.maxAmount, "max")
               ],
             ),
@@ -96,8 +99,8 @@ class FilterPage extends StatelessWidget {
       child: TextField(
         keyboardType: TextInputType.number,
         controller: controller,
-        decoration:
-            InputDecoration(labelText: label, border: OutlineInputBorder()),
+        decoration: InputDecoration(
+            labelText: label, border: const OutlineInputBorder()),
       ),
     );
   }

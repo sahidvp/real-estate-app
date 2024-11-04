@@ -7,7 +7,7 @@ import 'package:real_estate/controller/firbase/firebase_constant.dart';
 import 'package:real_estate/controller/logincontroller.dart';
 import 'package:real_estate/utils/colors.dart';
 import 'package:real_estate/utils/imagespath.dart';
-import 'package:real_estate/views/chat_screen/chat_list/chat_screen.dart';
+
 import 'package:real_estate/views/chat_screen/chat_view.dart/chat_view.dart';
 
 Padding listingAgent(double sh, dynamic property) {
@@ -33,12 +33,12 @@ Padding listingAgent(double sh, dynamic property) {
                       height: sh * .06,
                     )),
           Padding(
-              padding: EdgeInsets.only(left: 10),
+              padding: const EdgeInsets.only(left: 10),
               child: Text(property.postedBy, style: AppTextStyles.minitext3)),
         ],
       ),
       property.userId == auth.currentUser!.uid
-          ? SizedBox.shrink()
+          ? const SizedBox.shrink()
           : messageButton(authCtrl, chatCtrl, property)
     ]),
   );
@@ -53,7 +53,7 @@ ElevatedButton messageButton(
       Get.to(() =>
           ChattingScreen(friendId: property.userId, friendToken: data[3]));
     },
-    child: Icon(
+    child: const Icon(
       IconsaxPlusBold.sms,
       color: AppColors.primary,
     ),

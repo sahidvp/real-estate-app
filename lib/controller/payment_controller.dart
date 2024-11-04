@@ -90,7 +90,7 @@ class PaymentController extends GetxController {
     receivedPayments.value = querySnapshot.docs.map((doc) {
       return PaymentModel.fromMap(doc.data());
     }).toList();
-    print(receivedPayments.length);
+    
   }
 
   var sentPayments = <PaymentModel>[].obs;
@@ -104,7 +104,7 @@ class PaymentController extends GetxController {
     sentPayments.value = querySnapshot.docs.map((doc) {
       return PaymentModel.fromMap(doc.data());
     }).toList();
-    print(sentPayments.length);
+   
   }
 
   @override

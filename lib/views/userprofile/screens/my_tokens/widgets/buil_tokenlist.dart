@@ -29,7 +29,7 @@ Widget buildTokenList(
             );
 
             return Padding(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               child: InkWell(
                 onTap: () {
                   property != null
@@ -37,7 +37,7 @@ Widget buildTokenList(
                       : successSnackbar("Property not exist", "");
                 },
                 child: Container(
-                  padding: EdgeInsets.all(15),
+                  padding: const EdgeInsets.all(15),
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(10)),

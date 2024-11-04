@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
+
 import 'package:real_estate/controller/firbase/firebase_constant.dart';
 import 'package:real_estate/controller/payment_controller.dart';
 import 'package:real_estate/utils/colors.dart';
@@ -25,6 +25,6 @@ ElevatedButton paymentButton(TextEditingController amountController,
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(10))),
         backgroundColor: AppColors.primary),
-    child: Text("Pay Now"),
+    child: const Text("Pay Now"),
   );
 }

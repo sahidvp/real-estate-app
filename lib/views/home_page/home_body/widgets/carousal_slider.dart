@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
-import 'package:intl/intl.dart';
+
 import 'package:real_estate/commonwidgdets/heart_button.dart';
 import 'package:real_estate/commonwidgdets/indian_rupee.dart';
 import 'package:real_estate/controller/addproperty_controller.dart';
-import 'package:real_estate/controller/firbase/firebase_constant.dart';
-import 'package:real_estate/controller/homepage_controller.dart';
+
+
 import 'package:real_estate/utils/colors.dart';
 import 'package:real_estate/views/property_deatiled_view/propery_details.dart'; // Ensure you have this package
 
@@ -19,10 +19,10 @@ class CarousalSlider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final HomeBodyController controller = Get.put(HomeBodyController());
+   
     AddpropertyController pCntrl = Get.find();
 
-    return Container(
+    return SizedBox(
       height: sb * 3,
       child: CarouselSlider(
         options: CarouselOptions(
@@ -58,7 +58,7 @@ class CarousalSlider extends StatelessWidget {
                         height: sb * 1.5,
                         loadingBuilder: (context, child, loadingProgress) {
                           if (loadingProgress == null) return child;
-                          return Center(
+                          return const Center(
                               child:
                                   CircularProgressIndicator()); // Show loading indicator
                         },
@@ -88,7 +88,7 @@ class CarousalSlider extends StatelessWidget {
                       children: [
                         Row(
                           children: [
-                            Icon(
+                            const Icon(
                               IconsaxPlusBold.location,
                               color: Color(0xFFB9B9B9),
                               size: 15,

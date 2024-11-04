@@ -43,7 +43,7 @@ class UserProfile extends StatelessWidget {
         children: [
           Positioned.fill(
             child: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 gradient: LinearGradient(
                   colors: [Colors.white, AppColors.iconSecondary],
                   begin: Alignment.topCenter,
@@ -98,21 +98,21 @@ class UserProfile extends StatelessWidget {
                     icon: Icons.favorite,
                     title: 'Favourites',
                     onTap: () {
-                      Get.to(() => FavouriteProperty());
+                      Get.to(() => const FavouriteProperty());
                     },
                   ),
                   buildMenuItem(
                     icon: Icons.settings,
                     title: 'Settings',
                     onTap: () {
-                      Get.to(() => MySettings());
+                      Get.to(() => const MySettings());
                     },
                   ),
                   buildMenuItem(
                     icon: Icons.info,
                     title: 'About us',
                     onTap: () {
-                      Get.to(() => AboutMainScreen());
+                      Get.to(() => const AboutMainScreen());
                     },
                   ),
 

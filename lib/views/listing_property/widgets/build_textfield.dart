@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:iconsax_plus/iconsax_plus.dart';
+
 import 'package:real_estate/controller/addproperty_controller.dart';
 import 'package:real_estate/utils/colors.dart';
 
@@ -24,7 +24,7 @@ TextFormField buildTextfield(
         filled: true,
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15.0),
-          borderSide: BorderSide(
+          borderSide: const BorderSide(
             color: AppColors.primary, // Color when the field is focused
             width: 2.0,
           ),

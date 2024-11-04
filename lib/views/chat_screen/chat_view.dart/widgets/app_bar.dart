@@ -6,7 +6,7 @@ import 'package:real_estate/utils/imagespath.dart';
 
 AppBar appbarMessage(List friendData) {
   return AppBar(
-    shape: Border(
+    shape: const Border(
       bottom: BorderSide(color: Colors.black, width: 1),
     ),
     surfaceTintColor: AppColors.surface,

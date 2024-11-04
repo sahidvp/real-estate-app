@@ -7,7 +7,7 @@ import 'package:real_estate/views/userprofile/screens/my_properties/my_propertie
 Widget buildInfoCard(String count, String label, IconData icon, context) {
   final width = MediaQueryUtil.getWidthPercentage(context, .25);
   return GestureDetector(
-    onTap: ()=> Get.to(()=>MyProperties()),
+    onTap: ()=> Get.to(()=>const MyProperties()),
     child: Column(
       children: [
         Container(

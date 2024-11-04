@@ -47,8 +47,8 @@ Container tabGallery(List<String> imageUrls) {
                         fit: BoxFit.cover,
                         loadingBuilder: (context, child, loadingProgress) {
                           if (loadingProgress == null) return child;
-                          return Center(
-                            child: CircularProgressIndicator(),
+                          return const Center(
+                            child:  CircularProgressIndicator(),
                           );
                         },
                         errorBuilder: (context, error, stackTrace) =>

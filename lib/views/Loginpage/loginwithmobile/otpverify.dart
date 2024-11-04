@@ -3,7 +3,8 @@ import 'package:get/get.dart';
 import 'package:real_estate/controller/logincontroller.dart';
 import 'package:real_estate/utils/colors.dart';
 import 'package:real_estate/utils/media_query.dart';
-import 'package:real_estate/views/Loginpage/loginwithmobile/widgets/otpField.dart';
+
+import 'package:real_estate/views/Loginpage/loginwithmobile/widgets/otp_field.dart';
 import 'package:real_estate/views/Loginpage/loginwithmobile/widgets/otpresend.dart';
 import 'package:real_estate/views/widgets/submitbutton.dart';
 
@@ -19,11 +20,11 @@ class OtpVerificationPage extends StatelessWidget {
       //  appBar: AppBar(),
       body: Center(
         child: Padding(
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
+              const Text(
                 'Enter code sent to your phone',
                 style: AppTextStyles.minitext2,
               ),
@@ -34,7 +35,7 @@ class OtpVerificationPage extends StatelessWidget {
               ),
               Obx(() {
                 if (otpController.isSubmitting.value) {
-                  return CircularProgressIndicator(
+                  return const CircularProgressIndicator(
                     color: AppColors.primary,
                   );
                 }

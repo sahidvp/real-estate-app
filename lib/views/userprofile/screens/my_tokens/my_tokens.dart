@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:real_estate/commonwidgdets/backbutton.dart';
-import 'package:real_estate/controller/addproperty_controller.dart';
+
 import 'package:real_estate/controller/firbase/firebase_constant.dart';
-import 'package:real_estate/model/payment/razorpay_model.dart';
+
 import 'package:real_estate/utils/colors.dart';
-import 'package:real_estate/views/property_deatiled_view/propery_details.dart';
+
 import 'package:real_estate/views/userprofile/screens/my_tokens/widgets/buil_tokenlist.dart';
-import 'package:real_estate/views/userprofile/screens/my_tokens/widgets/rich_text.dart';
-import 'package:real_estate/views/userprofile/widgets/app_bar.dart';
-import 'package:real_estate/views/widgets/snackbar/successsnackbar.dart';
+
 
 import '../../../../controller/payment_controller.dart';
 import 'widgets/token_appbar.dart';

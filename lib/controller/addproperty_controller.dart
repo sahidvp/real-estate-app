@@ -510,7 +510,7 @@ class AddpropertyController extends GetxController {
       }
       fetchAndCheckProperties();
     } catch (e) {
-      print("Error fetching properties: $e");
+      //
     } finally {
       isLoading.value = false;
     }
@@ -535,10 +535,10 @@ class AddpropertyController extends GetxController {
         } else {
           recentProperties.add(PropertyListingModel.fromMap(data));
         }
-        print("length of recent prorp${recentProperties.length}");
+        
       }
     } catch (e) {
-      print("Error fetching recent properties: $e");
+    //
     } finally {
       isLoading.value = false;
     }
@@ -565,7 +565,7 @@ class AddpropertyController extends GetxController {
         update();
       }
     } catch (e) {
-      print("Error fetching nearby properties: $e");
+     //
     } finally {
       isLoading.value = false;
     }
@@ -597,7 +597,7 @@ class AddpropertyController extends GetxController {
       successSnackbar("Success", toAdd ? "Property saved" : "Property removed");
       fetchSavedProperties(auth.currentUser!.uid);
     } else {
-      print("No document found with id: $propertyId");
+      
     }
     update();
   }
@@ -636,7 +636,7 @@ class AddpropertyController extends GetxController {
 
       update(); // Notify listeners to rebuild the UI
     } catch (e) {
-      print("Error fetching saved properties: $e");
+      //
     } finally {}
   }
 
@@ -692,7 +692,7 @@ class AddpropertyController extends GetxController {
         }
       }
     } catch (e) {
-      print("Error fetching my properties: $e");
+      //
     } finally {
       isLoading.value = false;
     }
@@ -733,7 +733,7 @@ class AddpropertyController extends GetxController {
 
   @override
   void onInit() {
-    // TODO: implement onInit
+    
 
     fetchRecentProperties();
     fetchNearbyProperties(location["city"]);

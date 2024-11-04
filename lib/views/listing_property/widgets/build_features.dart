@@ -28,7 +28,7 @@ Container buildCounter(double sb, String feature, RxInt counter) {
                       counter.value--; // Decrease counter
                     }
                   },
-                  icon: Icon(
+                  icon: const Icon(
                     IconsaxPlusBold.minus_square,
                     color: AppColors.unselectitem,
                   )),
@@ -41,7 +41,7 @@ Container buildCounter(double sb, String feature, RxInt counter) {
                   onPressed: () {
                     counter.value++;
                   },
-                  icon: Icon(
+                  icon: const Icon(
                     IconsaxPlusBold.add_square,
                     color: AppColors.unselectitem,
                   ))

@@ -25,7 +25,7 @@ Container featureCount(double sw, String svgicon, String feature, featCount) {
         Flexible(
             child: Text(
           feature,
-          style: TextStyle(color: Colors.grey, fontSize: 12),
+          style: const TextStyle(color: Colors.grey, fontSize: 12),
         ))
       ],
     ),

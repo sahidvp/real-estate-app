@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:real_estate/utils/colors.dart';
-import 'package:real_estate/utils/imagespath.dart';
+
 
 Padding propertyFeciliities(double sw, List fecility) {
   return Padding(
-    padding: EdgeInsets.only(left: 22),
+    padding: const EdgeInsets.only(left: 22),
     child: Wrap(
       spacing: 8,
       runSpacing: 8,

@@ -476,7 +476,7 @@ class AuthController extends GetxController {
           //
           Get.offAll(() => BottomNavbar());
         } else {
-          Get.offAll(() => SaveUsername());
+          Get.offAll(() => const SaveUsername());
           //saveUserNameNum();
         }
       } else {
@@ -536,7 +536,6 @@ class AuthController extends GetxController {
 
       await uploadImageToFirebase(image!);
     } else {
-      print("No picture taken");
       errorSnackBar(message: "Picture not taken");
     }
   }
@@ -575,7 +574,7 @@ class AuthController extends GetxController {
       final fileUrl = await result.ref.getDownloadURL();
       imgUrl = fileUrl;
       update();
-      print("Uploaded image URL: $imgUrl");
+
       successSnackbar("Success", 'Image successfully saved');
       isLoading(false);
     } catch (e) {
@@ -664,7 +663,6 @@ class AuthController extends GetxController {
 
   @override
   void onInit() {
-    // TODO: implement onInit
     getUserData();
     super.onInit();
   }

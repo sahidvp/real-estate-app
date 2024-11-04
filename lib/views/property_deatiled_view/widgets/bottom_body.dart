@@ -8,24 +8,24 @@ import 'package:real_estate/utils/imagespath.dart';
 import 'package:real_estate/views/razorpay_payment.dart/payment.dart';
 import 'package:real_estate/views/userprofile/screens/my_properties/widgets/edit_remove.dart';
 
-Container bottomBody(
-    double screenHeight, double screenWidth, String totalPrice, String userId,dynamic property) {
+Container bottomBody(double screenHeight, double screenWidth, String totalPrice,
+    String userId, dynamic property) {
   return Container(
       decoration: BoxDecoration(
           border:
               Border(top: BorderSide(color: AppColors.fieldcolor, width: 2)),
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(15), topRight: Radius.circular(15))),
       height: screenHeight * .08,
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 13),
+        padding: const EdgeInsets.symmetric(horizontal: 13),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Padding(
-              padding: EdgeInsets.only(top: 10),
+              padding: const EdgeInsets.only(top: 10),
               child: Column(children: [
-                Text(
+                const Text(
                   "Total price",
                   style: AppTextStyles.minitext3,
                 ),
@@ -40,8 +40,15 @@ Container bottomBody(
                     width: screenWidth * .3,
                     child: ElevatedButton(
                       onPressed: () {
-                        Get.to(() => PaymentScreen(property: property,));
+                        Get.to(() => PaymentScreen(
+                              property: property,
+                            ));
                       },
+                      style: ElevatedButton.styleFrom(
+                          shape: const RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20))),
+                          backgroundColor: AppColors.primary),
                       child: Row(children: [
                         Expanded(
                           child: SvgPicture.asset(
@@ -50,14 +57,9 @@ Container bottomBody(
                           ),
                         )
                       ]),
-                      style: ElevatedButton.styleFrom(
-                          shape: const RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20))),
-                          backgroundColor: AppColors.primary),
                     ),
                   )
-                : editRemove(screenWidth, "Edit",property)
+                : editRemove(screenWidth, "Edit", property)
           ],
         ),
       ));

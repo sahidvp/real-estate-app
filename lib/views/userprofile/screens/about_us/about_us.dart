@@ -8,6 +8,8 @@ import 'build_screens/build_overview.dart';
 import 'build_screens/build_userguide.dart';
 
 class AboutMainScreen extends StatelessWidget {
+  const AboutMainScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +25,7 @@ class AboutMainScreen extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => AboutOverviewScreen()));
+                      builder: (context) => const AboutOverviewScreen()));
             },
           ),
           ListTile(
@@ -33,7 +35,7 @@ class AboutMainScreen extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => AboutFeaturesScreen()));
+                      builder: (context) => const AboutFeaturesScreen()));
             },
           ),
           ListTile(
@@ -43,7 +45,7 @@ class AboutMainScreen extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => AboutUserGuideScreen()));
+                      builder: (context) => const AboutUserGuideScreen()));
             },
           ),
         ],

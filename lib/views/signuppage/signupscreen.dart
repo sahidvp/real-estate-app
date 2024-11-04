@@ -97,11 +97,11 @@ class SignupScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ArrowButton(),
+                  const ArrowButton(),
                   SizedBox(height: sb * 2),
-                  RichTexts(textspans: Logintext.signupText),
+                  const RichTexts(textspans: Logintext.signupText),
                   SizedBox(height: sb),
-                  Text(
+                  const Text(
                     "Enter your details to sign up",
                     style: AppTextStyles.minitext,
                   ),

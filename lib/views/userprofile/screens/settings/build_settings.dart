@@ -22,13 +22,13 @@ class MySettings extends StatelessWidget {
               icon: Icons.privacy_tip,
               title: "privacy poicy",
               onTap: () {
-                Get.to(() => PrivacyPolicy());
+                Get.to(() => const PrivacyPolicy());
               }),
           buildMenuItem(
               icon: Icons.article,
               title: "Terms and condition",
               onTap: () {
-                Get.to(() => Terms());
+                Get.to(() => const Terms());
               }),
           buildMenuItem(
             icon: Icons.logout,

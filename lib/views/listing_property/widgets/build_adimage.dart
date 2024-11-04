@@ -47,7 +47,7 @@ class _AddImageState extends State<AddImage> {
   Future<File?> _cropImage(File imageFile) async {
     CroppedFile? croppedFile = await ImageCropper().cropImage(
       sourcePath: imageFile.path,
-      aspectRatio: CropAspectRatio(ratioX: 1, ratioY: 1),
+      aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
       uiSettings: [
         AndroidUiSettings(
           toolbarTitle: 'Crop Image',
@@ -75,7 +75,7 @@ class _AddImageState extends State<AddImage> {
           color: AppColors.fieldcolor,
         ),
         const SizedBox(height: 15),
-        Align(
+        const Align(
           child: Text(
             "Add photos (min 4)",
             style: TextStyle(fontSize: 25, color: AppColors.primary),
@@ -125,7 +125,7 @@ class _AddImageState extends State<AddImage> {
 
       setState(() {});
     } catch (e) {
-      print(_images.length);
+     
       errorSnackBar(
           message: "Error in removing image,try again after few seconds");
     }

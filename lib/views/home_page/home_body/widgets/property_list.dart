@@ -26,7 +26,7 @@ class PropertyList extends StatelessWidget {
                       color: AppColors.primary,
                       size: sb,
                     ),
-                    Text(
+                    const Text(
                       "Choose location",
                       style: AppTextStyles.headline1,
                     )
@@ -37,7 +37,7 @@ class PropertyList extends StatelessWidget {
                 ? Center(
                     child: Padding(
                         padding: EdgeInsets.symmetric(vertical: sb),
-                        child: Text(
+                        child: const Text(
                           "No properties near you",
                           style: AppTextStyles.tokenText,
                         )),

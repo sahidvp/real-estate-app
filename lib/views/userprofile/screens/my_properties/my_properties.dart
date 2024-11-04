@@ -20,8 +20,8 @@ class MyProperties extends StatelessWidget {
       appBar: appBar("My properties"),
       body: Obx(() {
         if (controller.myProperties.isEmpty) {
-          return Center(
-            child: Text(
+          return const Center(
+            child:  Text(
               "No properties added yet",
               style: AppTextStyles.tokenText,
             ),
@@ -32,12 +32,12 @@ class MyProperties extends StatelessWidget {
             itemBuilder: (context, index) {
               final property = controller.myProperties[index];
               return Padding(
-                padding: EdgeInsets.all(15),
+                padding: const EdgeInsets.all(15),
                 child: GestureDetector(
                   onTap: () =>
                       Get.to(() => PropertyDetailsView(property: property)),
                   child: Container(
-                    padding: EdgeInsets.all(15),
+                    padding: const EdgeInsets.all(15),
                     decoration: BoxDecoration(
                       boxShadow: [AppDecoration.boxShadow],
                       color: Colors.white,

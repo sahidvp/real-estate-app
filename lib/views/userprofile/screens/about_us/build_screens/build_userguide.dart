@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:real_estate/views/userprofile/widgets/app_bar.dart';
 
 class AboutUserGuideScreen extends StatelessWidget {
+  const AboutUserGuideScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

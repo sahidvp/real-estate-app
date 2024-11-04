@@ -5,11 +5,11 @@ import 'package:real_estate/utils/colors.dart';
 AppBar tokensAppbar() {
   return AppBar(
     backgroundColor: AppColors.primary,
-    leading: Padding(padding: EdgeInsets.all(10), child: ArrowButton()),
-    title: Text("My tokens"),
+    leading: const Padding(padding: EdgeInsets.all(10), child: ArrowButton()),
+    title: const Text("My tokens"),
     centerTitle: true,
     elevation: 1,
-    bottom: TabBar(
+    bottom: const TabBar(
       labelColor: Colors.white,
       unselectedLabelColor: Colors.grey,
       indicatorColor: Colors.black,

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class AboutOverviewScreen extends StatelessWidget {
+  const AboutOverviewScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

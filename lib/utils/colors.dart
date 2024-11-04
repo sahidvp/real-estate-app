@@ -113,6 +113,6 @@ class AppDecoration {
     color: Colors.black.withOpacity(0.3), // Shadow color
     spreadRadius: 1, // Spread radius
     blurRadius: 10, // Blur radius
-    offset: Offset(0, 5), // Offset in x and y direction
+    offset: const Offset(0, 5), // Offset in x and y direction
   );
 }

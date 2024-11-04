@@ -25,13 +25,13 @@ InkWell messageBubble(String username, String? imageUrl, String friendID,
       );
     },
     child: Padding(
-      padding: EdgeInsets.all(5),
+      padding: const EdgeInsets.all(5),
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: Colors.white,
         ),
-        padding: EdgeInsets.all(15),
+        padding: const EdgeInsets.all(15),
         child: Row(
           children: [
             imageUrl == null
@@ -65,14 +65,14 @@ InkWell messageBubble(String username, String? imageUrl, String friendID,
                         auth.currentUser!.uid, friendID)),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return Text(
+                        return const Text(
                           "Loading...",
                           style: AppTextStyles.locationtext,
                         );
                       }
 
                       if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-                        return Text(
+                        return const Text(
                           "No messages yet",
                           style: AppTextStyles.locationtext,
                         );
@@ -106,7 +106,7 @@ InkWell messageBubble(String username, String? imageUrl, String friendID,
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),
-                          SizedBox(width: 8),
+                          const SizedBox(width: 8),
                           Text(
                             formattedTime,
                             style: AppTextStyles.locationtext

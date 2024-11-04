@@ -47,7 +47,7 @@ class _EditImageState extends State<EditImage> {
   Future<File?> _cropImage(File imageFile) async {
     CroppedFile? croppedFile = await ImageCropper().cropImage(
       sourcePath: imageFile.path,
-      aspectRatio: CropAspectRatio(ratioX: 1, ratioY: 1),
+      aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
       uiSettings: [
         AndroidUiSettings(
           toolbarTitle: 'Crop Image',
@@ -75,7 +75,7 @@ class _EditImageState extends State<EditImage> {
           color: AppColors.fieldcolor,
         ),
         const SizedBox(height: 15),
-        Align(
+        const Align(
           child: Text(
             "Edit photos (min 4)",
             style: TextStyle(fontSize: 25, color: AppColors.primary),

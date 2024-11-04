@@ -17,7 +17,7 @@ class AddLocation extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(height: sb * .5),
-          Divider(),
+          const Divider(),
           SizedBox(height: sb * .5),
          //    buildCscpicker(propertyCntr),
           SizedBox(height: sb * .5),
@@ -37,7 +37,7 @@ class AddLocation extends StatelessWidget {
                 : Text(
                     "${propertyCntr.location["city"]} ,${propertyCntr.location["state"]} ,${propertyCntr.location["country"]}",
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 25,
                         color: AppColors.primary),

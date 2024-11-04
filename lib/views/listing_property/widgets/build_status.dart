@@ -23,7 +23,7 @@ Obx buildStatus(
           borderRadius: BorderRadius.circular(15),
           border: Border.all(color: Colors.black.withAlpha(150)),
         ),
-        child: Text(
+        child: const Text(
           "No options available",
           style: AppTextStyles.minitext3,
         ),
@@ -31,7 +31,7 @@ Obx buildStatus(
     }
 
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 10),
       width: double.infinity,
       decoration: BoxDecoration(
         color: AppColors.fieldcolor,
@@ -42,10 +42,10 @@ Obx buildStatus(
       ),
       child: DropdownButton<String>(
         underline: const SizedBox.shrink(),
-        icon: SizedBox.shrink(),
+        icon: const SizedBox.shrink(),
         value: selectedValue.value,
         hint: Row(children: [
-          Icon(
+          const Icon(
             IconsaxPlusLinear.arrow_right_3,
             color: Colors.black,
           ),
@@ -61,13 +61,13 @@ Obx buildStatus(
           return DropdownMenuItem<String>(
             value: value,
             child: Padding(
-              padding: EdgeInsets.only(left: 20.0),
+              padding: const EdgeInsets.only(left: 20.0),
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: Padding(
-                    padding: EdgeInsets.only(left: 20.0),
+                    padding: const EdgeInsets.only(left: 20.0),
                     child: Container(
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15)),

@@ -2,20 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:real_estate/commonwidgdets/backbutton.dart';
 import 'package:real_estate/commonwidgdets/heart_button.dart';
 import 'package:real_estate/controller/addproperty_controller.dart';
-import 'package:real_estate/controller/firbase/firebase_constant.dart';
-import 'package:real_estate/controller/homepage_controller.dart';
+
 import 'package:real_estate/utils/colors.dart';
-import 'package:real_estate/utils/imagespath.dart';
+
 
 SliverAppBar silverAppbar(
     AddpropertyController controller, String propImg, property) {
     
   return SliverAppBar(
     surfaceTintColor: Colors.transparent,
-    leading: ArrowButton(),
+    leading: const ArrowButton(),
     actions: [
       Container(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
             color: AppColors.fieldcolor,
             shape: BoxShape.circle,
@@ -43,7 +42,7 @@ SliverAppBar silverAppbar(
       ),
     ),
     // TabBar inside the SliverAppBar
-    bottom: TabBar(
+    bottom: const TabBar(
       labelStyle: AppTextStyles.propertyText,
       indicatorWeight: 4,
       indicatorSize: TabBarIndicatorSize.tab,

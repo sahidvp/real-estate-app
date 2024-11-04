@@ -84,7 +84,7 @@ class Loginscreen extends StatelessWidget {
             SizedBox(
               height: screenWidth * .05,
             ),
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Iconcontainer(
@@ -107,7 +107,7 @@ class Loginscreen extends StatelessWidget {
             GestureDetector(
               onTap: () {
                 controller.toggleTextTap();
-                Get.to(SignupScreen());
+                Get.to(const SignupScreen());
               },
               child: Align(
                 alignment: Alignment.center,

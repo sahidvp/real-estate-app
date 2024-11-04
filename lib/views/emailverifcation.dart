@@ -52,7 +52,7 @@ class _EmailVerificationPageState extends State<EmailVerificationPage> {
         child: Obx(() {
           // Display different UI based on email verification status
           if (ctrl.isEmailVerified.value) {
-            return Center(
+            return const Center(
               child: Text(
                 "Email Successfully Verified",
                 style: AppTextStyles.minitext,
@@ -64,7 +64,7 @@ class _EmailVerificationPageState extends State<EmailVerificationPage> {
                 children: [
                   const SizedBox(height: 35),
                   const SizedBox(height: 30),
-                  Center(
+                  const Center(
                     child: Text(
                       'Check your Email',
                       style: AppTextStyles.headline1,
@@ -87,12 +87,12 @@ class _EmailVerificationPageState extends State<EmailVerificationPage> {
                   const SizedBox(height: 40),
                   Center(
                     child: ctrl.emailVerified.value
-                        ? Text(
+                        ? const Text(
                             "verified",
                             style:AppTextStyles.headline6,
                           )
                         : showProgressIndicator
-                            ? CircularProgressIndicator(
+                            ? const CircularProgressIndicator(
                                 color: AppColors.primary,
                               )
                             : GestureDetector(
@@ -100,7 +100,7 @@ class _EmailVerificationPageState extends State<EmailVerificationPage> {
                                   restartTimer();
                                   ctrl.checkEmailVerified();
                                 },
-                                child: Icon(
+                                child: const Icon(
                                   Icons.refresh_rounded,
                                   size: 30,
                                   color: AppColors.primary,
@@ -137,7 +137,7 @@ class _EmailVerificationPageState extends State<EmailVerificationPage> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor:AppColors.primary
                       ),
-                      child: Text(
+                      child: const Text(
                         'Resend',
                         style:AppTextStyles.headline6,
                       ),

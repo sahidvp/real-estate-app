@@ -80,7 +80,7 @@ class HomeBodyone extends StatelessWidget {
   final RxInt selectedIndex;
   final Function(int) onSelected;
 
-  HomeBodyone({
+  const HomeBodyone({
     super.key,
     required this.sb,
     required this.category,
@@ -90,7 +90,7 @@ class HomeBodyone extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: sb * .5,
       width: double.infinity,
       child: ListView.builder(

@@ -82,7 +82,7 @@ class _GetCurrentlocationScreenState extends State<GetCurrentlocationScreen> {
         padding: const EdgeInsets.only(bottom: 150),
         child: FloatingActionButton(
           backgroundColor: Colors.white,
-          child: Icon(IconsaxPlusBold.gps),
+          child: const Icon(IconsaxPlusBold.gps),
           onPressed: () async {
             Position position = await _determinePosition();
 
@@ -131,8 +131,9 @@ class _GetCurrentlocationScreenState extends State<GetCurrentlocationScreen> {
             "${place.street}, ${place.subLocality}, ${place.locality}, ${place.subAdministrativeArea}, ${place.administrativeArea}, ${place.country}";
         // "${place.street}, ${place.locality},${place.subAdministrativeArea}, ${place.administrativeArea}, ${place.country}";
 
-        if (isHomeScreen)
+        if (isHomeScreen) {
           mCntrl.updateLocation("${place.subLocality}, ${place.locality}");
+        }
 
         // Store city, state, and country in the location map
         pCntrl.location["country"] = place.country ?? "";

@@ -148,7 +148,7 @@ class ChatBubble extends StatelessWidget {
               builder: (BuildContext context,
                   AsyncSnapshot<QuerySnapshot> snapshot) {
                 if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-                  return Center(
+                  return const Center(
                       child: Text("Start a new\nconversation",
                           style: AppTextStyles.headline1));
                 }
@@ -192,7 +192,7 @@ class ChatBubble extends StatelessWidget {
                             child: Center(
                               child: Text(
                                 formattedDate,
-                                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+                                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
                               ),
                             ),
                           ),
@@ -221,7 +221,7 @@ class ChatBubble extends StatelessWidget {
                                         MediaQuery.of(context).size.width *
                                             0.7),
                                 child: document['image_url'] != ""
-                                    ? Container(
+                                    ? SizedBox(
                                         height: 200, // Adjust image height
                                         width: MediaQuery.of(context).size.width * 0.7,
                                         child: Image.network(
