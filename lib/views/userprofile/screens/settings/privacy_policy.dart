@@ -34,10 +34,10 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
           },
         ),
       )
-      ..loadRequest(Uri.parse(
-          'https://www.freeprivacypolicy.com/live/3d442564-0ebe-481a-a152-0043f32dc3a5'));
+      ..loadRequest(Uri.parse("https://sites.google.com/view/vpestate/home"));
   }
 
+// 'https://www.freeprivacypolicy.com/live/3d442564-0ebe-481a-a152-0043f32dc3a5'
   @override
   Widget build(BuildContext context) {
     return Scaffold(
