@@ -6,13 +6,13 @@ import 'package:real_estate/utils/colors.dart';
 
 class CustomFormField extends StatelessWidget {
   const CustomFormField({
-    Key? key,
+    super.key,
     required this.controller,
     required this.labelText,
     this.labelIcon,
     this.isPassword = false,
     required this.validator,
-  }) : super(key: key);
+  });
 
   final TextEditingController controller;
   final String labelText;

@@ -18,7 +18,7 @@ class ArrowButton extends StatelessWidget {
       ),
       child: IconButton(
         onPressed: () {
-          Get.back();
+          navigator?.pop();
         },
         icon: Icon(
           IconsaxPlusLinear.arrow_left,

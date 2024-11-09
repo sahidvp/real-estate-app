@@ -172,6 +172,7 @@ class SignupScreen extends StatelessWidget {
                     controller: controller,
                     buttonname: "Register",
                     onPressed: () async {
+                     
                       if (controller.signupformKey.currentState!.validate()) {
                         await controller.signUp(
                           userName: controller.fullNameController.text,
@@ -182,16 +183,7 @@ class SignupScreen extends StatelessWidget {
                           context: context,
                         );
                       }
-                      // if (!isAgreedTermsAndConditions!) {
-                      //   Get.snackbar(
-                      //       "Error", "Please agree to the terms and conditions",
-                      //       colorText: AppThemeData.red,
-                      //       snackPosition: SnackPosition.BOTTOM);
-                      //   return;
-                      // }
-                      // if (auth.currentUser != null) {
-                      //   Get.to(() => const EmailVerificationPage());
-                      // }
+                      
                     },
                   )
                 ],

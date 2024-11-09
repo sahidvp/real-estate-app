@@ -18,8 +18,8 @@ class ToggleButton extends StatelessWidget {
     required this.selectedIndex,
     required this.singleselection,
     required this.cntrl,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -1,6 +1,5 @@
-
-
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'widgets/image_view.dart';
 
 Container tabGallery(List<String> imageUrls) {
@@ -32,13 +31,13 @@ Container tabGallery(List<String> imageUrls) {
                 itemBuilder: (context, index) {
                   return GestureDetector(
                     onTap: () {
-                      
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (_) =>
-                              FullScreenImage(imageUrl: imageUrls[index]),
-                        ),
-                      );
+                      // Navigator.of(context).push(
+                      //   MaterialPageRoute(
+                      //     builder: (_) =>
+                      //         FullScreenImage(imageUrl: imageUrls[index]),
+                      //   ),
+                      // );
+                      Get.to(FullScreenImage(imageUrl: imageUrls[index]));
                     },
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(25),
@@ -48,7 +47,7 @@ Container tabGallery(List<String> imageUrls) {
                         loadingBuilder: (context, child, loadingProgress) {
                           if (loadingProgress == null) return child;
                           return const Center(
-                            child:  CircularProgressIndicator(),
+                            child: CircularProgressIndicator(),
                           );
                         },
                         errorBuilder: (context, error, stackTrace) =>

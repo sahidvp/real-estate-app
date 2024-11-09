@@ -18,7 +18,7 @@ import 'package:real_estate/views/userprofile/widgets/build_itemlist.dart';
 import 'package:real_estate/views/userprofile/widgets/user_image.dart';
 
 class UserProfile extends StatelessWidget {
-  const UserProfile({Key? key}) : super(key: key);
+  const UserProfile({super.key});
 
   Future<String> _fetchVersionInfo() async {
     final packageInfo = await PackageInfo.fromPlatform();

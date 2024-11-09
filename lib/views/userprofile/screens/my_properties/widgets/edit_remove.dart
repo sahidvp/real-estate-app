@@ -57,13 +57,14 @@ AlertDialog removelDialog(
     content: const Text("Are you sure you want to remove this property?"),
     actions: [
       TextButton(
-        onPressed: () => Navigator.of(context).pop(), // Dismiss the dialog
+        //
+        onPressed: () => Get.back(), // Dismiss the dialog
         child: const Text("Cancel", style: TextStyle(color: Colors.grey)),
       ),
       TextButton(
         onPressed: () {
           controller.deleteProperty(property.id);
-          Navigator.of(context).pop(); // Dismiss the dialog
+          Get.back(); // Dismiss the dialog
         },
         child: const Text("Remove", style: TextStyle(color: Colors.red)),
       ),

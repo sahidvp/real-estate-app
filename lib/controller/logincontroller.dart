@@ -100,21 +100,21 @@ class AuthController extends GetxController {
   }) async {
     loading.value = true;
 
-    if (userName.isEmpty || userEmail.isEmpty) {
-      errorSnackBar(message: "Please enter your name and email");
-      loading.value = false;
-      return null;
-    }
+    // if (userName.isEmpty || userEmail.isEmpty) {
+    //   errorSnackBar(message: "Please enter your name and email");
+    //   loading.value = false;
+    //   return null;
+    // }
     // Check if password and confirmPassword match
-    if (password != confirmPassword) {
-      errorSnackBar(message: "Passwords do not match.");
-      loading.value = false;
-      return null;
-    } else if (password.isEmpty) {
-      errorSnackBar(title: "", message: "Please enter a password");
-      loading.value = false;
-      return null;
-    }
+    // if (password != confirmPassword) {
+    //   errorSnackBar(message: "Passwords do not match.");
+    //   loading.value = false;
+    //   return null;
+    // } else if (password.isEmpty) {
+    //   errorSnackBar(title: "", message: "Please enter a password");
+    //   loading.value = false;
+    //   return null;
+    // }
 
     try {
       UserCredential userCredential = await FirebaseAuth.instance
@@ -640,7 +640,7 @@ class AuthController extends GetxController {
     if (uid == "") {
       errorSnackBar(
           title: "Error", message: "Something went wrong. Please try again");
-      Get.back();
+      // Get.back();
       return;
     }
     try {
@@ -657,7 +657,7 @@ class AuthController extends GetxController {
         ];
       }
     } catch (e) {
-      errorSnackBar(title: 'Error', message: e.toString());
+     errorSnackBar(title: 'Error', message: e.toString());
     }
   }
 

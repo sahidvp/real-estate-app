@@ -125,7 +125,6 @@ class _AddImageState extends State<AddImage> {
 
       setState(() {});
     } catch (e) {
-     
       errorSnackBar(
           message: "Error in removing image,try again after few seconds");
     }

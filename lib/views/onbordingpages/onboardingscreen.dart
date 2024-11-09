@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:real_estate/controller/addproperty_controller.dart';
 import 'package:real_estate/controller/firbase/firebase_constant.dart';
 import 'package:real_estate/model/onbordingpage/images.dart';
 import 'package:real_estate/model/onbordingpage/pageview.dart';
@@ -18,11 +19,8 @@ class OnboardingScreen extends GetView {
         stream: auth.authStateChanges(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.active) {
-
             if (snapshot.hasData) {
-
               return BottomNavbar();
-              
             } else {
               return Scaffold(
                 body: PageView.builder(

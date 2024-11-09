@@ -13,14 +13,14 @@ class OnboardingPage extends StatelessWidget {
   final bool showBackButton; // New parameter to control back button visibility
 
   const OnboardingPage({
-    Key? key,
+    super.key,
     required this.pageController,
     required this.imagePath,
     required this.textSpans,
     required this.onNext,
     required this.buttontext,
     required this.showBackButton, // Add this to the constructor
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

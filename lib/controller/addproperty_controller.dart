@@ -404,7 +404,7 @@ class AddpropertyController extends GetxController {
         onInit();
         fetchMyProperties();
       }
-      Get.back();
+     // Get.back();
       Get.off(() => const MyProperties());
 
       editMode = false;
