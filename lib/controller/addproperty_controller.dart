@@ -733,11 +733,11 @@ class AddpropertyController extends GetxController {
 
   @override
   void onInit() {
-    
-
     fetchRecentProperties();
+     fetchProperties();  
+    
     fetchNearbyProperties(location["city"]);
-    fetchProperties();
+   
     fetchSavedProperties(auth.currentUser!.uid);
     filteredProperties.value = properties;
     fetchMyProperties();

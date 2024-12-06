@@ -17,8 +17,6 @@ class HomeScreen extends StatelessWidget {
     final AddpropertyController controller =
         Get.put(AddpropertyController()); // Instantiate the controller
 
-   
-
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -33,29 +31,24 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  
                   Obx(() {
-                    
-                    if (controller.isLoading.value) {
-                      return const Center(
-                          child:
-                              CircularProgressIndicator()); 
+                    if (controller.recentProperties.isEmpty) {
+                      return const Center(child: CircularProgressIndicator());
+                    } else {
+                      return CarousalSlider(
+                          sb: sb, properties: controller.recentProperties);
                     }
-                    return CarousalSlider(
-                        sb: sb, properties: controller.recentProperties);
                   }),
                   textNearYou(),
-
                   Obx(() {
                     // Observe properties
                     if (controller.isLoading.value) {
                       return const Center(
                           child: SizedBox.shrink()); // Loading indicator
-                    }
-                    return PropertyList(
-                        sb: sb,
-                        properties:
-                            controller.nearbyProperties); // Pass properties
+                    } else {
+                      return PropertyList(
+                          sb: sb, properties: controller.nearbyProperties);
+                    } // Pass properties
                   }),
                 ],
               ),
